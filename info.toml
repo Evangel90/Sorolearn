@@ -222,3 +222,29 @@ hint = """
 `unlock_time` is a UNIX timestamp, but the code compares it with the ledger
 *sequence number*. Use `env.ledger().timestamp()` instead."""
 
+# -------------------------------------------------------------- quizzes
+
+[[exercises]]
+name = "quiz1"
+dir = "quizzes"
+hint = """
+In `vote`:
+  1. `voter.require_auth();`
+  2. If `storage.has(&DataKey::Voted(voter.clone()))`, return
+     `Err(PollError::AlreadyVoted)`.
+  3. Otherwise mark the voter (`set(&DataKey::Voted(..), &true)`), read the
+     tally with `.unwrap_or(0)`, store tally + 1, and return `Ok(())`.
+`votes` reads the tally with a default of 0. `has_voted` is a `has` check."""
+
+[[exercises]]
+name = "quiz2"
+dir = "quizzes"
+hint = """
+- Constructor: store `token` and `unlock_time` in instance storage.
+- A small helper `fn token_client(env: &Env) -> token::TokenClient<'_>`
+  outside the contractimpl block saves repetition.
+- deposit: require_auth, validate amount, transfer from -> contract,
+  update `DataKey::Savings(from)`, then `Deposited { from, amount }.publish(&env)`.
+- withdraw: require_auth, compare `env.ledger().timestamp()` with the unlock
+  time, read the savings, zero them, transfer contract -> owner, return the amount."""
+
