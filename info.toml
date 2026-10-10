@@ -248,3 +248,16 @@ hint = """
 - withdraw: require_auth, compare `env.ledger().timestamp()` with the unlock
   time, read the savings, zero them, transfer contract -> owner, return the amount."""
 
+# ------------------------------------------------- security: review the AI
+#
+# Each contract below is plausible AI-generated code with one planted
+# vulnerability. `exploit_` tests reproduce the attack; fix the contract.
+
+[[exercises]]
+name = "audit_auth"
+dir = "11_security"
+hint = """
+Who loses points in a transfer? That address must authorize it. Look at
+which address `transfer` calls `require_auth()` on. Authorizing the
+*recipient* lets anyone name themselves as `to` and pull funds from any `from`."""
+
