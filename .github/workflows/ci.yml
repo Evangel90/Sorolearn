@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            .
+            .sorolearn/exercises -> ../target
+      - name: Build CLI
+        run: cargo build --locked
+      - name: Every solution passes, every exercise fails
+        run: cargo run --locked -- dev check
