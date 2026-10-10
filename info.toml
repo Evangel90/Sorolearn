@@ -49,3 +49,22 @@ hint = """
 its functions and generates the `GreeterClient` used by the tests.
 Look at intro1: what is written right above `impl HelloContract`?"""
 
+# ------------------------------------------------------------ functions
+
+[[exercises]]
+name = "functions1"
+dir = "01_functions"
+hint = """
+Replace each `todo!()` with an expression. `a + b` adds two numbers, and
+the remainder operator `%` tells you whether a number is divisible by 2."""
+
+[[exercises]]
+name = "functions2"
+dir = "01_functions"
+hint = """
+1. The client has no `square` method because `square` is not exported.
+   Which keyword makes a function part of the public contract interface?
+2. `usize` cannot cross the contract boundary. The test passes `u64`
+   values, so use `u64` for `cube`'s argument and return type (and drop
+   the casts)."""
+
