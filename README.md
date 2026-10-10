@@ -6,7 +6,10 @@ Small, hands-on exercises for [Soroban](https://developers.stellar.org/docs/buil
 smart contracts on Stellar, inspired by [Rustlings](https://github.com/rust-lang/rustlings). Every exercise
 is a tiny, broken contract with tests: fix the code, save, and Sorolearn tells you instantly whether you got it.
 It ends with a **security track** where you review plausible, AI-style contracts with planted vulnerabilities
-and make the exploit tests fail.
+and make the exploit tests fail, and an optional **on-chain graduation**: deploy your contract to Stellar testnet,
+where a registry contract examines it and records you as a graduate.
+
+**🎓 Graduates (live from testnet):** https://evangel90.github.io/Sorolearn/
 
 ```
 ✓ Exercise storage1 passed!
@@ -34,8 +37,10 @@ The same dev container also works locally with VS Code's *Dev Containers* extens
 
 ### 💻 Locally: fully offline after a one-time setup
 
-You need [Rust](https://rustup.rs) 1.91 or newer. Nothing else: no Stellar CLI, no account, no blockchain
-connection. Contracts are tested against Soroban's built-in simulated environment.
+You need [Rust](https://rustup.rs) 1.91 or newer. The course itself needs nothing else (no Stellar CLI, no
+account, no blockchain connection): contracts are tested against Soroban's built-in simulated environment.
+Only the optional graduation step talks to Stellar testnet, and needs the
+[Stellar CLI](https://developers.stellar.org/docs/tools/cli/install-cli) (pre-installed in Codespaces).
 
 ```bash
 git clone https://github.com/Evangel90/Sorolearn.git sorolearn
@@ -72,6 +77,8 @@ Each topic folder has a `README.md` with the background you need, plus links to 
 | `sorolearn reset <name>` | Restore an exercise to its original state |
 | `sorolearn verify` | Check all exercises in order |
 | `sorolearn setup` | One-time download + pre-build (enables offline use) |
+| `sorolearn build-wasm <name>` | Compile an exercise to a deployable `.wasm` |
+| `sorolearn graduate [identity]` | Deploy your quiz1 to testnet and take the on-chain exam |
 
 ## Curriculum
 
@@ -90,6 +97,18 @@ Each topic folder has a `README.md` with the background you need, plus links to 
 | 10 | Time | time1 | ledger timestamp vs sequence |
 | ⭐ | Quizzes | quiz1 (poll), quiz2 (time-locked vault) | putting it all together |
 | 🔍 | **Security: review the AI** | audit_auth, audit_init, audit_amount, audit_storage, audit_token | spotting and fixing the bugs AI-generated contracts actually ship with |
+| 🎓 | **Graduation (testnet)** | `sorolearn graduate` | Stellar CLI, accounts, Wasm builds, upload & deploy, an on-chain exam |
+
+### On-chain graduation
+
+Finishing the course locally is self-reported. Graduating is not: `sorolearn graduate` builds your `quiz1` poll
+to WebAssembly, uploads it to **Stellar testnet** and calls the **Sorolearn registry** contract
+(`CD23Z2JCHQHLJOXWAWOV4NFMAL3N5YRDCGLBGHLKD62X5QUCHDYPFWYY`). The registry deploys a fresh copy of your code,
+**examines it with cross-contract calls** (votes, tries to double-vote, checks the tally), and only then records
+you and emits a `Graduated` event. Anyone can verify a graduate on-chain or on the
+[graduates page](https://evangel90.github.io/Sorolearn/). The command prints every Stellar CLI step it runs;
+`exercises/12_testnet/README.md` walks through doing them by hand. The registry's source and tests are in
+`registry/`.
 
 ### The security track
 
@@ -116,6 +135,8 @@ exercises/<topic>/   the files you edit (+ README.md per topic)
 solutions/<topic>/   reference solutions
 src/                 the sorolearn CLI
 exercises.lock       pinned dependency versions for the exercise crates
+registry/            the on-chain graduation registry contract (+ tests)
+docs/                the graduates page (GitHub Pages, reads testnet directly)
 .devcontainer/       Codespaces / Dev Containers setup
 .sorolearn/          generated Cargo workspace, build cache and progress (git-ignored)
 ```
