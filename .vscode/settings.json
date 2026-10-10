@@ -1,0 +1,8 @@
+{
+  // Exercises are single files compiled through a generated workspace in
+  // .sorolearn/ (created on the first `sorolearn` run). Linking it gives
+  // rust-analyzer completions and inline errors inside exercise files.
+  "rust-analyzer.linkedProjects": ["Cargo.toml", ".sorolearn/exercises/Cargo.toml"],
+  // Keep rust-analyzer's builds separate so they never block `sorolearn`.
+  "rust-analyzer.cargo.targetDir": true
+}
