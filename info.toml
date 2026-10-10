@@ -281,3 +281,13 @@ hint = """
 `from_balance - amount` and `to_balance + amount` do with it?
 Return `CreditsError::InvalidAmount` unless `amount > 0`."""
 
+[[exercises]]
+name = "audit_storage"
+dir = "11_security"
+hint = """
+Two problems:
+1. Temporary storage is deleted for good when its TTL expires. Use
+   `env.storage().persistent()` for savings (in `save` *and* `savings`).
+2. Persistent entries are archived when their TTL runs out. After writing,
+   call `.extend_ttl(&key, SAVINGS_TTL_THRESHOLD, SAVINGS_TTL)`."""
+
