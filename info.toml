@@ -181,3 +181,12 @@ hint = """
    (`let admin: Address = env.storage().instance().get(&DataKey::Admin).unwrap();`)
    and call `admin.require_auth();` before storing the fee."""
 
+# --------------------------------------------------------------- events
+
+[[exercises]]
+name = "events1"
+dir = "07_events"
+hint = """
+Build the event and publish it:
+    Tipped { from, to, amount }.publish(&env);"""
+
