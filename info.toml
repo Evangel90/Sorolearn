@@ -261,3 +261,14 @@ Who loses points in a transfer? That address must authorize it. Look at
 which address `transfer` calls `require_auth()` on. Authorizing the
 *recipient* lets anyone name themselves as `to` and pull funds from any `from`."""
 
+[[exercises]]
+name = "audit_init"
+dir = "11_security"
+hint = """
+`initialize` is a public function anyone can call, as often as they like.
+Make it fail if an admin is already stored:
+    if env.storage().instance().has(&DataKey::Admin) {
+        panic_with_error!(&env, OracleError::AlreadyInitialized);
+    }
+(Notice the AI even declared `AlreadyInitialized`, then never used it.)"""
+
