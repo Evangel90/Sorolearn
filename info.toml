@@ -291,3 +291,11 @@ Two problems:
 2. Persistent entries are archived when their TTL runs out. After writing,
    call `.extend_ttl(&key, SAVINGS_TTL_THRESHOLD, SAVINGS_TTL)`."""
 
+[[exercises]]
+name = "audit_token"
+dir = "11_security"
+hint = """
+`deposit` calls `transfer` on whatever `token` address the caller passes in,
+and credits the balance as if real USDC arrived. Any contract can have a
+`transfer` function. Compare `token` with the address stored at deployment
+(`DataKey::Token`) and return `VaultError::UnsupportedToken` if they differ."""
