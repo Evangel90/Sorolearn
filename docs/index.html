@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sorolearn Graduates</title>
+<meta name="description" content="Learners who passed the Sorolearn on-chain exam on Stellar testnet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f7f4; --surface: #ffffff; --text: #1b1d21; --muted: #5d6470;
+    --border: #e3e3dc; --accent: #5b3df5; --accent-soft: #ece8ff; --ok: #12805c; --bad: #b42318;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101114; --surface: #17191d; --text: #eceef2; --muted: #9aa2ae;
+      --border: #2a2e35; --accent: #9b8cff; --accent-soft: #241f45; --ok: #3ecf9a; --bad: #ff7b72;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #101114; --surface: #17191d; --text: #eceef2; --muted: #9aa2ae;
+    --border: #2a2e35; --accent: #9b8cff; --accent-soft: #241f45; --ok: #3ecf9a; --bad: #ff7b72;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.55 Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+  }
+  main { max-width: 880px; margin: 0 auto; padding: 48px 16px 64px; }
+  h1 { font-size: clamp(28px, 5vw, 40px); line-height: 1.15; margin: 0 0 8px; letter-spacing: -0.02em; }
+  .lede { color: var(--muted); margin: 0 0 28px; max-width: 60ch; }
+  a { color: var(--accent); }
+  code, .mono { font-family: var(--mono); font-size: 0.88em; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
+  .stats { display: flex; gap: 32px; flex-wrap: wrap; align-items: baseline; }
+  .stat-num { font-size: 40px; font-weight: 700; line-height: 1; }
+  .stat-label { color: var(--muted); font-size: 14px; }
+  .registry { font-family: var(--mono); font-size: 13px; word-break: break-all; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; }
+  tr:last-child td { border-bottom: none; }
+  td.num { font-weight: 700; color: var(--accent); width: 3em; }
+  .table-wrap { overflow-x: auto; }
+  .empty, .status { color: var(--muted); }
+  .error { color: var(--bad); }
+  form { display: flex; gap: 8px; flex-wrap: wrap; }
+  input {
+    flex: 1 1 320px; min-width: 0; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--bg); color: var(--text); font-family: var(--mono); font-size: 14px;
+  }
+  button {
+    padding: 10px 16px; border-radius: 10px; border: none; background: var(--accent); color: #fff;
+    font: inherit; font-weight: 600; cursor: pointer;
+  }
+  .verdict { margin-top: 12px; font-weight: 600; }
+  .verdict.ok { color: var(--ok); }
+  .verdict.no { color: var(--bad); }
+  pre { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 12px; overflow-x: auto; font-family: var(--mono); font-size: 13px; margin: 8px 0 0; }
+  h2 { font-size: 18px; margin: 0 0 12px; }
+  .pill { display: inline-block; background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 2px 10px; font-size: 12px; font-weight: 600; margin-bottom: 14px; }
+  footer { color: var(--muted); font-size: 14px; margin-top: 32px; }
+</style>
+</head>
+<body>
+<main>
+  <span class="pill">Stellar testnet · live on-chain data</span>
+  <h1>Sorolearn graduates</h1>
+  <p class="lede">
+    Every learner here deployed their own Soroban poll contract to Stellar testnet, where the Sorolearn
+    registry contract examined it with real cross-contract calls before recording them. Nothing on this page
+    comes from a server: it is read directly from the registry contract.
+  </p>
+
+  <section class="card stats">
+    <div><div class="stat-num" id="count">–</div><div class="stat-label">graduates</div></div>
+    <div style="flex:1 1 280px">
+      <div class="stat-label">Registry contract</div>
+      <div class="registry"><a id="registry-link" target="_blank" rel="noopener"></a></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Verify an address</h2>
+    <form id="verify">
+      <input id="address" placeholder="G… Stellar address" autocomplete="off" spellcheck="false" aria-label="Stellar address">
+      <button type="submit">Check</button>
+    </form>
+    <div id="verdict" class="verdict" role="status"></div>
+  </section>
+
+  <section class="card">
+    <h2>All graduates</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Learner</th><th>Graduated</th><th>Exam contract</th></tr></thead>
+        <tbody id="rows"><tr><td colspan="4" class="status">Loading from testnet…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Graduate yourself</h2>
+    Finish the exercises, then:
+    <pre>sorolearn graduate</pre>
+    <p class="status" style="margin:10px 0 0">
+      Start at <a href="https://github.com/Evangel90/Sorolearn">github.com/Evangel90/Sorolearn</a>.
+      Runs locally or in GitHub Codespaces.
+    </p>
+  </section>
+
+  <footer>
+    Testnet is reset periodically; records live until the next reset.
+  </footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@stellar/stellar-sdk@17.1.0/dist/stellar-sdk.min.js"></script>
+<script>
+  const S = window.StellarSdk;
+  const RPC = "https://soroban-testnet.stellar.org";
+  const REGISTRY = "CD23Z2JCHQHLJOXWAWOV4NFMAL3N5YRDCGLBGHLKD62X5QUCHDYPFWYY";
+  // Any existing account works as the source of a read-only simulation.
+  const SOURCE = "GBB3BD3VJK7LNLPLTZOG44Y6QYED4ZW6MKDOJYKVDZOVSFO33MPSDTLH";
+  const EXPLORER = "https://stellar.expert/explorer/testnet";
+
+  // Simulate a registry call and decode only its return value (no transaction is sent).
+  async function call(method, ...args) {
+    const tx = new S.TransactionBuilder(new S.Account(SOURCE, "0"), {
+      fee: "100", networkPassphrase: S.Networks.TESTNET,
+    }).addOperation(new S.Contract(REGISTRY).call(method, ...args)).setTimeout(30).build();
+    const res = await fetch(RPC, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "simulateTransaction", params: { transaction: tx.toXDR() } }),
+    });
+    const json = await res.json();
+    const err = json.error || json.result.error;
+    if (err) throw new Error(typeof err === "string" ? err : JSON.stringify(err));
+    return S.scValToNative(S.xdr.ScVal.fromXDR(json.result.results[0].xdr, "base64"));
+  }
+
+  const u32 = (n) => S.nativeToScVal(n, { type: "u32" });
+  const short = (a) => a.slice(0, 6) + "…" + a.slice(-6);
+  function el(tag, props = {}, ...kids) {
+    const node = Object.assign(document.createElement(tag), props);
+    node.append(...kids);
+    return node;
+  }
+  const link = (href, text) => el("a", { href, textContent: text, target: "_blank", rel: "noopener", className: "mono" });
+
+  document.getElementById("registry-link").href = `${EXPLORER}/contract/${REGISTRY}`;
+  document.getElementById("registry-link").textContent = REGISTRY;
+
+  async function load() {
+    const rows = document.getElementById("rows");
+    try {
+      const count = await call("count");
+      document.getElementById("count").textContent = count;
+      const all = [];
+      for (let start = 1; start <= count; start += 50) {
+        all.push(...await call("graduates", u32(start), u32(50)));
+      }
+      rows.replaceChildren();
+      if (all.length === 0) {
+        rows.append(el("tr", {}, el("td", { colSpan: 4, className: "empty", textContent: "No graduates yet. Be the first!" })));
+        return;
+      }
+      all.reverse().forEach((g, i) => {
+        const when = new Date(Number(g.timestamp) * 1000);
+        rows.append(el("tr", {},
+          el("td", { className: "num", textContent: all.length - i }),
+          el("td", {}, link(`${EXPLORER}/account/${g.learner}`, short(g.learner))),
+          el("td", { textContent: when.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) }),
+          el("td", {}, link(`${EXPLORER}/contract/${g.exam_contract}`, short(g.exam_contract))),
+        ));
+      });
+    } catch (e) {
+      rows.replaceChildren(el("tr", {}, el("td", { colSpan: 4, className: "error",
+        textContent: "Could not read the registry from testnet (it may have been reset). " + e.message })));
+    }
+  }
+
+  document.getElementById("verify").addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const out = document.getElementById("verdict");
+    const addr = document.getElementById("address").value.trim();
+    out.className = "verdict";
+    if (!S.StrKey.isValidEd25519PublicKey(addr) && !S.StrKey.isValidContract(addr)) {
+      out.textContent = "That is not a valid Stellar address.";
+      out.classList.add("no");
+      return;
+    }
+    out.textContent = "Checking on-chain…";
+    try {
+      const g = await call("graduation", new S.Address(addr).toScVal());
+      if (g) {
+        const when = new Date(Number(g.timestamp) * 1000).toLocaleString();
+        out.textContent = `✓ Graduate, verified on-chain (${when}).`;
+        out.classList.add("ok");
+      } else {
+        out.textContent = "✗ Not a Sorolearn graduate (yet).";
+        out.classList.add("no");
+      }
+    } catch (e) {
+      out.textContent = "Lookup failed: " + e.message;
+      out.classList.add("no");
+    }
+  });
+
+  load();
+</script>
+</body>
+</html>
