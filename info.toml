@@ -144,3 +144,21 @@ hint = """
 2. In `cache` and `cached`, use `env.storage().temporary()` instead of
    `env.storage().persistent()`."""
 
+# --------------------------------------------------------------- errors
+
+[[exercises]]
+name = "errors1"
+dir = "05_errors"
+hint = """
+- In `divide`, check `if b == 0 { return Err(MathError::DivisionByZero); }`
+  before dividing.
+- `a.checked_add(b)` returns `None` on overflow. Convert that Option into a
+  Result with `.ok_or(MathError::Overflow)`."""
+
+[[exercises]]
+name = "errors2"
+dir = "05_errors"
+hint = """
+Replace the `panic!` with `panic_with_error!(&env, WalletError::InsufficientFunds);`
+and add `panic_with_error` to the `use soroban_sdk::{...}` list."""
+
