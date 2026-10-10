@@ -17,7 +17,6 @@ use soroban_sdk::{contract, contracterror, contractimpl, contracttype, token, Ad
 #[repr(u32)]
 pub enum VaultError {
     InsufficientBalance = 1,
-    UnsupportedToken = 2,
 }
 
 #[contracttype]

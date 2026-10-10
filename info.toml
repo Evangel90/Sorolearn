@@ -266,11 +266,12 @@ name = "audit_init"
 dir = "11_security"
 hint = """
 `initialize` is a public function anyone can call, as often as they like.
-Make it fail if an admin is already stored:
+Make it fail if an admin is already stored. Declare an error
+(`#[contracterror]` enum with `AlreadyInitialized = 1`) and abort with it:
     if env.storage().instance().has(&DataKey::Admin) {
         panic_with_error!(&env, OracleError::AlreadyInitialized);
     }
-(Notice the AI even declared `AlreadyInitialized`, then never used it.)"""
+Remember to import `contracterror` and `panic_with_error`."""
 
 [[exercises]]
 name = "audit_amount"
@@ -279,7 +280,8 @@ hint = """
 `amount` is an `i128`, so it can be negative. What does
 `from_balance < amount` say about -1_000_000? And what do
 `from_balance - amount` and `to_balance + amount` do with it?
-Return `CreditsError::InvalidAmount` unless `amount > 0`."""
+Add an `InvalidAmount = 2` variant to `CreditsError` and return it
+unless `amount > 0`."""
 
 [[exercises]]
 name = "audit_storage"
@@ -298,4 +300,4 @@ hint = """
 `deposit` calls `transfer` on whatever `token` address the caller passes in,
 and credits the balance as if real USDC arrived. Any contract can have a
 `transfer` function. Compare `token` with the address stored at deployment
-(`DataKey::Token`) and return `VaultError::UnsupportedToken` if they differ."""
+(`DataKey::Token`). If they differ, return a new `VaultError::UnsupportedToken = 2`."""

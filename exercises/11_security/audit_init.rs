@@ -12,16 +12,7 @@
 
 #![no_std]
 
-use soroban_sdk::{
-    contract, contracterror, contractimpl, contracttype, panic_with_error, Address, Env,
-};
-
-#[contracterror]
-#[derive(Copy, Clone, Debug, Eq, PartialEq, PartialOrd, Ord)]
-#[repr(u32)]
-pub enum OracleError {
-    AlreadyInitialized = 1,
-}
+use soroban_sdk::{contract, contractimpl, contracttype, Address, Env};
 
 #[contracttype]
 #[derive(Clone)]

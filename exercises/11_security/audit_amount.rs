@@ -17,7 +17,6 @@ use soroban_sdk::{contract, contracterror, contractimpl, contracttype, Address, 
 #[repr(u32)]
 pub enum CreditsError {
     InsufficientBalance = 1,
-    InvalidAmount = 2,
 }
 
 #[contracttype]
