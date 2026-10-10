@@ -272,3 +272,12 @@ Make it fail if an admin is already stored:
     }
 (Notice the AI even declared `AlreadyInitialized`, then never used it.)"""
 
+[[exercises]]
+name = "audit_amount"
+dir = "11_security"
+hint = """
+`amount` is an `i128`, so it can be negative. What does
+`from_balance < amount` say about -1_000_000? And what do
+`from_balance - amount` and `to_balance + amount` do with it?
+Return `CreditsError::InvalidAmount` unless `amount > 0`."""
+
