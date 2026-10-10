@@ -11,6 +11,8 @@ use std::path::{Path, PathBuf};
 use std::process::{Command, Stdio};
 
 pub const TARGET_DIR: &str = ".sorolearn/target";
+/// Committed lockfile for the exercise crates (see `ensure_workspace`).
+const LOCKFILE: &str = "exercises.lock";
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum Source {
@@ -60,6 +62,12 @@ debug = 0
     );
     write_if_changed(&root.join("Cargo.toml"), &workspace)?;
 
+    // Seed the generated workspace with the committed lockfile, so every
+    // learner builds exactly the same dependency versions.
+    let lock = root.join("Cargo.lock");
+    if !lock.exists() && Path::new(LOCKFILE).exists() {
+        fs::copy(LOCKFILE, &lock)?;
+    }
 
     // Absolute paths make compiler errors point straight at the learner's file.
     // The workspace is regenerated on every run, so moving the repo is fine.
@@ -101,14 +109,31 @@ fn write_if_changed(path: &Path, contents: &str) -> std::io::Result<()> {
 }
 
 /// Compile the exercise and run its tests.
+///
+/// After `setup` has run once, everything is built with `--offline`: no
+/// network access is needed. If the local cache turns out to be incomplete
+/// (e.g. it was cleaned), we fall back to setup and retry once.
 pub fn run(ex: &Exercise, source: Source) -> Outcome {
-    cargo_test(ex, source)
+    if !is_ready() && !setup() {
+        return Outcome {
+            success: false,
+            output: "Setup failed: see the messages above. Then run `sorolearn setup` again.".into(),
+        };
+    }
+    let outcome = cargo_test(ex, source);
+    if !outcome.success && outcome.output.contains("--offline") {
+        let _ = fs::remove_file(READY_MARKER);
+        if setup() {
+            return cargo_test(ex, source);
+        }
+    }
+    outcome
 }
 
 fn cargo_test(ex: &Exercise, source: Source) -> Outcome {
     let manifest = source.workspace_dir().join("Cargo.toml");
     let result = cargo()
-        .args(["test", "--quiet", "--color", "always", "--manifest-path"])
+        .args(["test", "--offline", "--quiet", "--color", "always", "--manifest-path"])
         .arg(&manifest)
         .args(["-p", &ex.name])
         .stdin(Stdio::null())
@@ -131,6 +156,68 @@ fn cargo() -> Command {
     let mut cmd = Command::new("cargo");
     cmd.env("CARGO_TARGET_DIR", TARGET_DIR);
     cmd
+}
+
+const READY_MARKER: &str = ".sorolearn/ready";
+/// soroban-sdk's minimum supported Rust version is 1.91.
+const MIN_RUST_MINOR: u32 = 91;
+
+pub fn is_ready() -> bool {
+    Path::new(READY_MARKER).exists()
+}
+
+/// One-time online step: download the Soroban SDK and pre-compile it, so that
+/// every later run works fully offline and starts fast.
+pub fn setup() -> bool {
+    let manifest = Source::Exercises.workspace_dir().join("Cargo.toml");
+    println!("Setting up sorolearn (one time only, needs internet)...");
+
+    let rustc = Command::new("rustc").arg("--version").output();
+    let version = match rustc {
+        Ok(out) if out.status.success() => String::from_utf8_lossy(&out.stdout).into_owned(),
+        _ => {
+            eprintln!("  rust:     not found. Install it from https://rustup.rs");
+            return false;
+        }
+    };
+    print!("  rust:     {version}");
+    // "rustc 1.95.0 (...)" -> (1, 95)
+    let minor = version
+        .split_whitespace()
+        .nth(1)
+        .and_then(|v| v.split('.').nth(1))
+        .and_then(|m| m.parse::<u32>().ok());
+    if minor.is_some_and(|m| m < MIN_RUST_MINOR) {
+        eprintln!("  rust:     soroban-sdk needs Rust 1.{MIN_RUST_MINOR} or newer. Run `rustup update stable`.");
+        return false;
+    }
+
+    println!("  download: fetching soroban-sdk {SOROBAN_SDK_VERSION} and dependencies");
+    let fetched = cargo()
+        .args(["fetch", "--manifest-path"])
+        .arg(&manifest)
+        .status()
+        .is_ok_and(|s| s.success());
+    if !fetched {
+        eprintln!("  download failed. Check your internet connection and try again.");
+        return false;
+    }
+
+    println!("  compile:  building the SDK (takes a minute or two, only once)");
+    let built = cargo()
+        .args(["test", "--offline", "--no-run", "--quiet", "--manifest-path"])
+        .arg(&manifest)
+        .args(["-p", "intro1"])
+        .status()
+        .is_ok_and(|s| s.success());
+    if !built {
+        eprintln!("  compile failed. See the errors above.");
+        return false;
+    }
+
+    let _ = fs::write(READY_MARKER, "");
+    println!("  done:     sorolearn now works fully offline.\n");
+    true
 }
 
 /// Snapshot the pristine exercises so `sorolearn reset` can restore them.

@@ -19,6 +19,8 @@ USAGE:
     sorolearn hint [NAME]     Show the hint for an exercise (default: current)
     sorolearn reset NAME      Restore an exercise to its original state
     sorolearn verify          Check every exercise, in order
+    sorolearn setup           Download + pre-build everything (runs automatically
+                              the first time; afterwards sorolearn works offline)
     sorolearn help            Show this message
 
 DEVELOPER:
@@ -64,6 +66,7 @@ fn main() -> ExitCode {
         }),
         ["reset", name] => with_exercise(&info, name, |i| reset(&info, &mut state, i)),
         ["verify"] => verify(&info, &mut state),
+        ["setup"] => runner::setup(),
         ["dev", "check"] => dev_check(&info),
         ["help"] | ["--help"] | ["-h"] => {
             print!("{USAGE}");
