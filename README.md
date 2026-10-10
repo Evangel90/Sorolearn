@@ -1,0 +1,136 @@
+# Sorolearn 🦀✨
+
+**AI can write your Soroban contract. Sorolearn teaches you to tell when it's wrong.**
+
+Small, hands-on exercises for [Soroban](https://developers.stellar.org/docs/build/smart-contracts/overview)
+smart contracts on Stellar, inspired by [Rustlings](https://github.com/rust-lang/rustlings). Every exercise
+is a tiny, broken contract with tests: fix the code, save, and Sorolearn tells you instantly whether you got it.
+It ends with a **security track** where you review plausible, AI-style contracts with planted vulnerabilities
+and make the exploit tests fail.
+
+```
+✓ Exercise storage1 passed!
+
+Progress: [##############--------------------------] 11/28
+Current exercise: exercises/04_storage/storage2.rs
+Topic notes:      exercises/04_storage/README.md
+
+n:next  h:hint  l:list  r:rerun  q:quit
+```
+
+## Two ways to run it
+
+### ☁️ In the browser: nothing to install
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/sixthsensestudio/Sorolearn)
+
+Click the button, wait for the codespace to finish setting up, then run `sorolearn` in the terminal.
+Rust, the CLI and a pre-compiled Soroban SDK are installed automatically (see `.devcontainer/`).
+
+> Maintainers: enable **Settings → Codespaces → Prebuilds** for the default branch, so new codespaces
+> start with the SDK already compiled (seconds instead of minutes).
+
+The same dev container also works locally with VS Code's *Dev Containers* extension and Docker.
+
+### 💻 Locally: fully offline after a one-time setup
+
+You need [Rust](https://rustup.rs) 1.91 or newer. Nothing else: no Stellar CLI, no account, no blockchain
+connection. Contracts are tested against Soroban's built-in simulated environment.
+
+```bash
+git clone https://github.com/sixthsensestudio/Sorolearn.git sorolearn
+cd sorolearn
+cargo install --path .     # installs the `sorolearn` command
+sorolearn setup            # one time, needs internet: downloads + pre-compiles the Soroban SDK (~1-2 min)
+sorolearn                  # start learning, works offline from here on
+```
+
+(`cargo run --release` works too, without installing anything.)
+
+After `setup`, every build runs with `cargo --offline` against a committed lockfile (`exercises.lock`), so
+Sorolearn works on a plane, behind a firewall, or at a hackathon with flaky Wi-Fi. If you skip
+`setup`, it runs automatically the first time you start Sorolearn.
+
+## How it works
+
+1. Sorolearn shows the current exercise, e.g. `exercises/04_storage/storage1.rs`.
+2. Open it in your editor. Read the comments, make it compile and the tests pass.
+3. Save. Sorolearn re-runs the tests automatically.
+4. When it passes, type `n` + Enter to move on.
+
+Each topic folder has a `README.md` with the background you need, plus links to the official docs.
+**Don't edit the tests** at the bottom of each file: they are the spec.
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `sorolearn` | Watch mode (recommended) |
+| `sorolearn list` | All exercises and your progress |
+| `sorolearn run [name]` | Compile & test one exercise |
+| `sorolearn hint [name]` | Show a hint |
+| `sorolearn reset <name>` | Restore an exercise to its original state |
+| `sorolearn verify` | Check all exercises in order |
+| `sorolearn setup` | One-time download + pre-build (enables offline use) |
+
+## Curriculum
+
+| # | Topic | Exercises | You'll learn |
+|---|---|---|---|
+| 00 | Intro | intro1-2 | `#[contract]`, `#[contractimpl]`, `Env`, test clients |
+| 01 | Functions | functions1-2 | exported functions, allowed argument types |
+| 02 | Types | symbols1, vecs1, maps1, bytes1 | `Symbol`, `Vec`, `Map`, `Bytes`, `String` |
+| 03 | Custom types | types1-2 | `#[contracttype]` structs and enums |
+| 04 | Storage | storage1-3 | instance / persistent / temporary storage, `DataKey`, TTL |
+| 05 | Errors | errors1-2 | `#[contracterror]`, `Result`, `panic_with_error!`, checked math |
+| 06 | Auth | auth1-2 | `require_auth`, admin pattern, `__constructor` |
+| 07 | Events | events1 | `#[contractevent]`, topics vs data |
+| 08 | Tokens | tokens1 | `TokenClient`, Stellar Asset Contract, contracts holding funds |
+| 09 | Cross-contract | cross1 | calling other contracts |
+| 10 | Time | time1 | ledger timestamp vs sequence |
+| ⭐ | Quizzes | quiz1 (poll), quiz2 (time-locked vault) | putting it all together |
+| 🔍 | **Security: review the AI** | audit_auth, audit_init, audit_amount, audit_storage, audit_token | spotting and fixing the bugs AI-generated contracts actually ship with |
+
+### The security track
+
+AI tools write Soroban contracts that compile and look right, but miss things that cost real money. Each
+`11_security` exercise is a plausible AI-style contract with one planted vulnerability. Its `happy_path`
+tests pass. Its `exploit_` test reproduces an attack and fails until you fix the contract:
+
+| Exercise | Vulnerability |
+|---|---|
+| `audit_auth` | `require_auth` on the wrong address: anyone can drain any account |
+| `audit_init` | re-callable `initialize`: attacker takes over the admin role |
+| `audit_amount` | negative `i128` amounts pass the balance check: free money |
+| `audit_storage` | balances in temporary storage + no TTL extension: savings vanish |
+| `audit_token` | trusting a caller-supplied token contract: vault drained with a fake token |
+
+Reference solutions live in `solutions/`. That's a deliberate choice (Rustlings does the same): after you
+pass an exercise, comparing your fix with the reference is part of learning. Try not to peek before then!
+
+## Project layout
+
+```
+info.toml            exercise order + hints
+exercises/<topic>/   the files you edit (+ README.md per topic)
+solutions/<topic>/   reference solutions
+src/                 the sorolearn CLI
+exercises.lock       pinned dependency versions for the exercise crates
+.devcontainer/       Codespaces / Dev Containers setup
+.sorolearn/          generated Cargo workspace, build cache and progress (git-ignored)
+```
+
+Each exercise is a single `.rs` file. The CLI generates a hidden workspace in `.sorolearn/` with one
+package per exercise (`[lib] path = "…/exercises/…"`), all sharing one target dir, so the SDK is
+built only once.
+
+## Contributing exercises
+
+1. Write the solution in `solutions/<topic>/<name>.rs` (a `#![no_std]` contract + `#[cfg(test)] mod tests`).
+2. Copy it to `exercises/<topic>/<name>.rs` and break it in an instructive way.
+3. Add an `[[exercises]]` entry with a hint to `info.toml`.
+4. Run `cargo run -- dev check`: every solution must pass and every exercise must fail.
+
+All exercises target `soroban-sdk` 29.0.0 (protocol 29, which testnet and mainnet currently run).
+After changing the SDK version in `src/info.rs`, delete `exercises.lock`, run `sorolearn setup`, and copy
+`.sorolearn/exercises/Cargo.lock` back to `exercises.lock`.
