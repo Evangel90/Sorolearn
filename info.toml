@@ -1,0 +1,51 @@
+welcome_message = """
+  ____                  _
+ / ___|  ___  _ __ ___ | |    ___  __ _ _ __ _ __
+ \\___ \\ / _ \\| '__/ _ \\| |   / _ \\/ _` | '__| '_ \\
+  ___) | (_) | | | (_) | |__|  __/ (_| | |  | | | |
+ |____/ \\___/|_|  \\___/|_____\\___|\\__,_|_|  |_| |_|
+
+Welcome to Sorolearn: small exercises that teach you to write
+Soroban smart contracts on Stellar.
+
+How it works:
+  1. Open the exercise shown below in your editor.
+  2. Make it compile and make its tests pass.
+  3. Save. Sorolearn re-runs the tests automatically.
+  4. When it passes, type `n` + Enter for the next exercise.
+
+Each topic folder has a README.md with background reading.
+Stuck? Type `h` + Enter for a hint.
+"""
+
+final_message = """
+🎉 You finished every Sorolearn exercise!
+
+You can now write, test, and *review* Soroban contracts: storage, auth,
+errors, events, tokens, cross-contract calls, time, and the security bugs
+AI-generated contracts actually ship with.
+
+Where to go next:
+  - Install the Stellar CLI and deploy a contract to testnet:
+    https://developers.stellar.org/docs/build/smart-contracts/getting-started
+  - Read real-world examples: https://github.com/stellar/soroban-examples
+  - Build something and ship it!
+"""
+
+# ---------------------------------------------------------------- intro
+
+[[exercises]]
+name = "intro1"
+dir = "00_intro"
+skip_check_unsolved = true
+hint = """
+This exercise already passes. Read the comments, then type `n` + Enter."""
+
+[[exercises]]
+name = "intro2"
+dir = "00_intro"
+hint = """
+`#[contract]` declares the contract type, but a second attribute exports
+its functions and generates the `GreeterClient` used by the tests.
+Look at intro1: what is written right above `impl HelloContract`?"""
+
