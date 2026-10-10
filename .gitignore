@@ -1,3 +1,4 @@
 /target
 /.sorolearn
 /registry/target
+/registry/test_snapshots
