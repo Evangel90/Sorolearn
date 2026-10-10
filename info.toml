@@ -190,3 +190,15 @@ hint = """
 Build the event and publish it:
     Tipped { from, to, amount }.publish(&env);"""
 
+# --------------------------------------------------------------- tokens
+
+[[exercises]]
+name = "tokens1"
+dir = "08_tokens"
+hint = """
+1. `from.require_auth();`
+2. Load the token address: `env.storage().instance().get(&DataKey::Token).unwrap()`
+3. Create a client: `token::TokenClient::new(&env, &token_address)`
+4. Transfer to the contract:
+   `token.transfer(&from, &env.current_contract_address(), &amount);`"""
+
