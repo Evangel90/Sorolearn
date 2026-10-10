@@ -191,6 +191,23 @@ fn dev_check(info: &Info) -> bool {
             ok = false;
             continue;
         }
+        // Security exercises must fail for the right reason: the contract
+        // compiles and "works", and only the exploit is still possible.
+        let is_audit = std::fs::read_to_string(ex.path()).is_ok_and(|src| src.contains("fn exploit_"));
+        if is_audit {
+            let happy = runner::run_filtered(ex, Source::Exercises, "happy_path");
+            if !happy.success {
+                println!("{} exercise {}: happy_path tests must pass as given:\n{}", ui::red("✗"), ex.name, happy.output);
+                ok = false;
+                continue;
+            }
+            let exploit = runner::run_filtered(ex, Source::Exercises, "exploit_");
+            if exploit.success || !exploit.output.contains("exploit_") {
+                println!("{} exercise {}: exploit_ tests must fail until fixed", ui::red("✗"), ex.name);
+                ok = false;
+                continue;
+            }
+        }
         println!("{} {}", ui::green("✓"), ex.name);
     }
     ok

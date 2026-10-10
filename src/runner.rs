@@ -120,24 +120,31 @@ pub fn run(ex: &Exercise, source: Source) -> Outcome {
             output: "Setup failed: see the messages above. Then run `sorolearn setup` again.".into(),
         };
     }
-    let outcome = cargo_test(ex, source);
+    let outcome = cargo_test(ex, source, None);
     if !outcome.success && outcome.output.contains("--offline") {
         let _ = fs::remove_file(READY_MARKER);
         if setup() {
-            return cargo_test(ex, source);
+            return cargo_test(ex, source, None);
         }
     }
     outcome
 }
 
-fn cargo_test(ex: &Exercise, source: Source) -> Outcome {
+/// Run only the tests whose name contains `filter` (used by `dev check`).
+pub fn run_filtered(ex: &Exercise, source: Source, filter: &str) -> Outcome {
+    cargo_test(ex, source, Some(filter))
+}
+
+fn cargo_test(ex: &Exercise, source: Source, filter: Option<&str>) -> Outcome {
     let manifest = source.workspace_dir().join("Cargo.toml");
-    let result = cargo()
-        .args(["test", "--offline", "--quiet", "--color", "always", "--manifest-path"])
+    let mut cmd = cargo();
+    cmd.args(["test", "--offline", "--quiet", "--color", "always", "--manifest-path"])
         .arg(&manifest)
-        .args(["-p", &ex.name])
-        .stdin(Stdio::null())
-        .output();
+        .args(["-p", &ex.name]);
+    if let Some(filter) = filter {
+        cmd.args(["--", filter]);
+    }
+    let result = cmd.stdin(Stdio::null()).output();
 
     match result {
         Ok(out) => {
