@@ -22,7 +22,7 @@ n:next  h:hint  l:list  r:rerun  q:quit
 
 ### ☁️ In the browser: nothing to install
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/sixthsensestudio/Sorolearn)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Evangel90/Sorolearn)
 
 Click the button, wait for the codespace to finish setting up, then run `sorolearn` in the terminal.
 Rust, the CLI and a pre-compiled Soroban SDK are installed automatically (see `.devcontainer/`).
@@ -38,7 +38,7 @@ You need [Rust](https://rustup.rs) 1.91 or newer. Nothing else: no Stellar CLI, 
 connection. Contracts are tested against Soroban's built-in simulated environment.
 
 ```bash
-git clone https://github.com/sixthsensestudio/Sorolearn.git sorolearn
+git clone https://github.com/Evangel90/Sorolearn.git sorolearn
 cd sorolearn
 cargo install --path .     # installs the `sorolearn` command
 sorolearn setup            # one time, needs internet: downloads + pre-compiles the Soroban SDK (~1-2 min)
