@@ -1,0 +1,6 @@
+
+  Welcome to Sorolearn! Everything is installed and pre-built.
+
+  Start learning:   sorolearn
+  Then open the exercise it shows (exercises/...) in the editor.
+

@@ -1,0 +1,20 @@
+{
+  "name": "Sorolearn",
+  "image": "mcr.microsoft.com/devcontainers/rust:1-bookworm",
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8gb"
+  },
+  // Runs during Codespaces prebuilds too, so the SDK is already compiled
+  // when someone opens a codespace.
+  "updateContentCommand": "bash .devcontainer/setup.sh",
+  "postAttachCommand": "cat .devcontainer/welcome.txt",
+  "customizations": {
+    "codespaces": {
+      "openFiles": ["README.md"]
+    },
+    "vscode": {
+      "extensions": ["rust-lang.rust-analyzer", "tamasfe.even-better-toml"]
+    }
+  }
+}
