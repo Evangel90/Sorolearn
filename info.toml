@@ -102,3 +102,20 @@ hint = """
   mutable: `mut a: Bytes`.
 - soroban_sdk::String has a `len()` method that returns a u32."""
 
+# --------------------------------------------------------- custom types
+
+[[exercises]]
+name = "types1"
+dir = "03_custom_types"
+hint = """
+Add `#[contracttype]` above the `#[derive(...)]` on `Profile`, and import
+`contracttype` from soroban_sdk."""
+
+[[exercises]]
+name = "types2"
+dir = "03_custom_types"
+hint = """
+A `match` must cover every variant. Add arms for
+`Shape::Rectangle(width, height)` and `Shape::Triangle(base, height)`.
+A triangle's area is base * height / 2."""
+
