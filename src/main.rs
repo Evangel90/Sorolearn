@@ -1,3 +1,4 @@
+mod graduate;
 mod info;
 mod runner;
 mod state;
@@ -19,6 +20,10 @@ USAGE:
     sorolearn hint [NAME]     Show the hint for an exercise (default: current)
     sorolearn reset NAME      Restore an exercise to its original state
     sorolearn verify          Check every exercise, in order
+    sorolearn graduate [ID]   Deploy your quiz1 poll to Stellar testnet and get it
+                              examined by the on-chain registry (needs the
+                              Stellar CLI; ID = testnet identity, default `sorolearn`)
+    sorolearn build-wasm NAME Compile an exercise to a deployable .wasm (Stellar CLI)
     sorolearn setup           Download + pre-build everything (runs automatically
                               the first time; afterwards sorolearn works offline)
     sorolearn help            Show this message
@@ -67,6 +72,9 @@ fn main() -> ExitCode {
         ["reset", name] => with_exercise(&info, name, |i| reset(&info, &mut state, i)),
         ["verify"] => verify(&info, &mut state),
         ["setup"] => runner::setup(),
+        ["build-wasm", name] => with_exercise(&info, name, |i| graduate::build_wasm_command(&info.exercises[i])),
+        ["graduate"] => graduate::graduate(&info, "sorolearn"),
+        ["graduate", identity] => graduate::graduate(&info, identity),
         ["dev", "check"] => dev_check(&info),
         ["help"] | ["--help"] | ["-h"] => {
             print!("{USAGE}");

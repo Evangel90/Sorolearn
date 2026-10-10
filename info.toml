@@ -25,6 +25,10 @@ You can now write, test, and *review* Soroban contracts: storage, auth,
 errors, events, tokens, cross-contract calls, time, and the security bugs
 AI-generated contracts actually ship with.
 
+Graduate on-chain: run `sorolearn graduate`. It deploys your quiz1 poll to
+Stellar testnet, where the Sorolearn registry contract examines it and
+records you as a graduate. See exercises/12_testnet/README.md.
+
 Where to go next:
   - Install the Stellar CLI and deploy a contract to testnet:
     https://developers.stellar.org/docs/build/smart-contracts/getting-started
