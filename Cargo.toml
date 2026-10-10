@@ -1,0 +1,14 @@
+[package]
+name = "sorolearn"
+version = "0.1.0"
+edition = "2021"
+description = "Small exercises to get you used to writing Soroban smart contracts on Stellar"
+license = "MIT"
+default-run = "sorolearn"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+toml = "0.8"
+
+[profile.release]
+strip = true
