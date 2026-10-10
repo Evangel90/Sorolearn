@@ -202,3 +202,14 @@ hint = """
 4. Transfer to the contract:
    `token.transfer(&from, &env.current_contract_address(), &amount);`"""
 
+# ------------------------------------------------------- cross contract
+
+[[exercises]]
+name = "cross1"
+dir = "09_cross_contract"
+hint = """
+Create a client for the calculator:
+    let client = calculator::CalculatorClient::new(&env, &calculator);
+Then call `client.add(&a, &b)` and add `c` to the result with a second
+call. Client methods take references."""
+
