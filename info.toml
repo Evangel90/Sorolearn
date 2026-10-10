@@ -119,3 +119,28 @@ A `match` must cover every variant. Add arms for
 `Shape::Rectangle(width, height)` and `Shape::Triangle(base, height)`.
 A triangle's area is base * height / 2."""
 
+# -------------------------------------------------------------- storage
+
+[[exercises]]
+name = "storage1"
+dir = "04_storage"
+hint = """
+`count` is only a local variable: the new value is never written back.
+After incrementing, call `env.storage().instance().set(&COUNTER, &count);`"""
+
+[[exercises]]
+name = "storage2"
+dir = "04_storage"
+hint = """
+Write: env.storage().persistent().set(&DataKey::Score(player), &score);
+Read:  env.storage().persistent().get(&DataKey::Score(player)).unwrap_or(0)"""
+
+[[exercises]]
+name = "storage3"
+dir = "04_storage"
+hint = """
+1. After the `set` in `save_note`, call
+   env.storage().persistent().extend_ttl(&key, TTL_THRESHOLD, TTL_EXTEND_TO);
+2. In `cache` and `cached`, use `env.storage().temporary()` instead of
+   `env.storage().persistent()`."""
+
