@@ -68,3 +68,37 @@ hint = """
    values, so use `u64` for `cube`'s argument and return type (and drop
    the casts)."""
 
+# ---------------------------------------------------------------- types
+
+[[exercises]]
+name = "symbols1"
+dir = "02_types"
+hint = """
+"transfer_from" has 13 characters, too many for `symbol_short!`.
+Build it at runtime with `Symbol::new(&env, "transfer_from")`, and rename
+`_env` to `env` since you are now using it."""
+
+[[exercises]]
+name = "vecs1"
+dir = "02_types"
+hint = """
+- `Vec::new` needs the environment: `Vec::new(&env)`.
+- For `sum`, iterate with `for value in values.iter() { ... }` and keep a
+  running total (`let mut total = 0;`)."""
+
+[[exercises]]
+name = "maps1"
+dir = "02_types"
+hint = """
+Read the current count with `counts.get(word.clone())`, which returns an
+Option. `.unwrap_or(0)` turns "missing" into 0. Then store the new value
+with `counts.set(word, current + 1)`."""
+
+[[exercises]]
+name = "bytes1"
+dir = "02_types"
+hint = """
+- `append` modifies `a` in place, so the parameter must be declared
+  mutable: `mut a: Bytes`.
+- soroban_sdk::String has a `len()` method that returns a u32."""
+
