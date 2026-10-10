@@ -162,3 +162,22 @@ hint = """
 Replace the `panic!` with `panic_with_error!(&env, WalletError::InsufficientFunds);`
 and add `panic_with_error` to the `use soroban_sdk::{...}` list."""
 
+# ----------------------------------------------------------------- auth
+
+[[exercises]]
+name = "auth1"
+dir = "06_auth"
+hint = """
+Call `user.require_auth();` at the start of `set_nickname`, before
+writing anything to storage."""
+
+[[exercises]]
+name = "auth2"
+dir = "06_auth"
+hint = """
+1. Rename `init` to `__constructor` so it runs at deployment with the
+   arguments passed to `env.register(FeeConfig, (&admin,))`.
+2. In `set_fee`, load the admin from instance storage
+   (`let admin: Address = env.storage().instance().get(&DataKey::Admin).unwrap();`)
+   and call `admin.require_auth();` before storing the fee."""
+
