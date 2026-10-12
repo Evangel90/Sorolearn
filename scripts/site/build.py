@@ -26,7 +26,7 @@ PLAYER_HEAD = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/asciine
 PLAYER_JS = """<script src="https://cdn.jsdelivr.net/npm/asciinema-player@3.17.0/dist/bundle/asciinema-player.min.js"></script>
 <script>
   AsciinemaPlayer.create("assets/demo.cast", document.getElementById("demo"), {
-    cols: 100, rows: 30, idleTimeLimit: 2, poster: "npt:0:16.9", fit: "width", theme: "asciinema", preload: true, terminalFontFamily: "JetBrains Mono, Menlo, monospace"
+    cols: 100, rows: 30, idleTimeLimit: 2, autoPlay: true, loop: true, poster: "npt:0:16.9", fit: "width", theme: "asciinema", preload: true, terminalFontFamily: "JetBrains Mono, Menlo, monospace"
   });
 </script>
 """
