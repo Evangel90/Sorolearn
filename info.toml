@@ -87,6 +87,32 @@ hint = """
 - `can_submit`: pick the threshold with `match level(op) { ... }`, and count the
   master key: if a signer equals `account.master_key`, add `account.master_weight`."""
 
+# --------------------------------------------- stellar: transactions
+
+[[exercises]]
+name = "transactions1"
+dir = "02_stellar_transactions"
+stellar = true
+hint = """
+- The sequence number must be `current_sequence + 1`.
+- The fee is BASE_FEE *per operation*: `BASE_FEE * operations.len() as u32`.
+- Return `Err(TxError::NonPositiveAmount)` if any payment has `stroops <= 0`.
+- `memo.try_into()` fails for memos over 28 bytes: map that error to
+  `TxError::MemoTooLong` with `.map_err(|_| TxError::MemoTooLong)?` instead of unwrapping."""
+
+[[exercises]]
+name = "transactions2"
+dir = "02_stellar_transactions"
+stellar = true
+hint = """
+- Hash a `TransactionSignaturePayload`, not the bare transaction:
+    let payload = TransactionSignaturePayload {
+        network_id: Hash(network_id(passphrase)),
+        tagged_transaction: TransactionSignaturePayloadTaggedTransaction::Tx(tx.clone()),
+    };
+  then sha256 its XDR (`payload.to_xdr(Limits::none())`).
+- The hint is the *last* 4 bytes of the public key: `public_key[28..]`."""
+
 # ------------------------------------------------------------ functions
 
 [[exercises]]
