@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sorolearn</title>
-<meta name="description" content="Small exercises to get you used to building on Stellar and writing Soroban smart contracts.">
+<meta name="description" content="Learn Soroban by fixing it: 35 hands-on exercises from your first smart contract to auditing AI-written code and an exam graded on Stellar testnet.">
 <meta name="theme-color" content="#08090a">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,108 +27,173 @@
 <main>
 
 <section class="hero">
-  <a class="badge" href="curriculum/"><span class="dot"></span>soroban-sdk 29 <span class="sep">·</span> Protocol 29 <span class="sep">·</span> 35 exercises <span class="arrow">→</span></a>
+  <a class="badge" href="curriculum/"><span class="dot"></span>Built for Stellar <span class="sep">·</span> soroban-sdk 29 <span class="sep">·</span> Protocol 29 <span class="arrow">→</span></a>
   <h1 class="display gradient-text">Learn Soroban by fixing it.</h1>
-  <p class="sub">Small, broken smart contracts with tests. Fix them, save, and watch them turn green.
-  Then learn the Stellar network underneath, review AI-written code, and ship to testnet.</p>
+  <p class="sub">Sorolearn turns developers into Stellar builders. 35 hands-on exercises take you from your first
+  smart contract to auditing AI-written code and passing an exam that runs on Stellar testnet itself.</p>
   <div class="buttons">
-    <a class="btn primary" href="setup/">Get started <span class="arrow">→</span></a>
-    <a class="btn" href="https://codespaces.new/Evangel90/Sorolearn">Open in Codespaces</a>
+    <a class="btn primary" href="setup/">Start learning <span class="arrow">→</span></a>
+    <a class="btn" href="https://codespaces.new/Evangel90/Sorolearn">Try it in your browser</a>
   </div>
-  <p class="fineprint">Free and open source · Works offline after a one-time setup</p>
+  <p class="fineprint">Free and open source · No install needed in Codespaces · Works offline after setup</p>
 
   <div class="window">
-    <div class="window-bar"><i></i><i></i><i></i><span>sorolearn — watch mode</span></div>
-    <div class="player" id="demo" aria-label="Terminal recording: Sorolearn watch mode catches an exploit, the fix is saved, the exercise passes"></div>
+    <div class="window-bar"><i></i><i></i><i></i><span>sorolearn: watch mode</span></div>
+    <div class="player" id="demo" aria-label="Terminal recording: Sorolearn watch mode catches an exploit in an AI-written contract, the fix is saved, and the exercise passes"></div>
   </div>
+  <p class="caption">An AI-written token contract lets anyone drain anyone. Sorolearn's exploit test catches it, a one-line
+  fix lands, and the exercise turns green.</p>
 </section>
 
 <section class="stats-strip" aria-label="Sorolearn in numbers">
-  <div><strong>35</strong><span>exercises</span></div>
-  <div><strong>16</strong><span>topics</span></div>
-  <div><strong>5</strong><span>security audits</span></div>
-  <div><strong>4</strong><span>testnet labs</span></div>
-  <div><strong>1</strong><span>on-chain exam</span></div>
+  <div><strong>35</strong><span>hands-on exercises</span></div>
+  <div><strong>5</strong><span>real-world exploits to fix</span></div>
+  <div><strong>4</strong><span>testnet deployment labs</span></div>
+  <div><strong>1</strong><span>exam graded on-chain</span></div>
+  <div><strong>0</strong><span>backend servers</span></div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <p class="eyebrow">The problem</p>
+    <h2>Getting from "Hello, Soroban" to shipping safely is too hard.</h2>
+  </div>
+  <div class="pillars">
+    <div class="pillar">
+      <h3>Reading docs isn't building</h3>
+      <p>Tutorials show working code. Developers learn by breaking and fixing it, with something
+      that tells them the moment they get it right.</p>
+    </div>
+    <div class="pillar">
+      <h3>AI writes contracts that compile and still lose funds</h3>
+      <p>A missing <code>require_auth</code>, a negative amount, storage that quietly expires. The skill that
+      matters now is knowing when generated code is wrong.</p>
+    </div>
+    <div class="pillar">
+      <h3>Certificates prove nothing</h3>
+      <p>A PDF says you finished. A contract you deployed, examined by another contract on Stellar,
+      proves you can build.</p>
+    </div>
+  </div>
 </section>
 
 <section class="section">
   <div class="section-head">
     <p class="eyebrow">The course</p>
-    <h2>Four movements, one broken program at a time.</h2>
-    <p class="lede">Every exercise compiles against the real SDK and is checked by real tests. You always know
-    exactly what's wrong, and exactly when it's fixed.</p>
+    <h2>From first contract to testnet in four movements.</h2>
+    <p class="lede">Every exercise is a small, broken program with tests. Save the file and Sorolearn re-runs them
+    instantly, so you always know what's wrong and exactly when it's fixed.</p>
   </div>
   <div class="movements">
     <div class="movement">
       <span class="num">1.0</span>
       <h3>Write contracts</h3>
       <p>Functions, types, storage and TTL, errors, auth, events, tokens, cross-contract calls and time.</p>
-      <ul><li>01 → 10 · quizzes</li><li>23 exercises</li></ul>
+      <ul><li>topics 01 → 10 · 2 quizzes</li><li>23 exercises</li></ul>
     </div>
     <div class="movement">
       <span class="num">2.0</span>
       <h3>Understand Stellar</h3>
-      <p>The network underneath: accounts and keys, multisig, transactions and signatures, classic assets.</p>
-      <ul><li>11 → 13</li><li>checked against the Stellar CLI</li></ul>
+      <p>The network under your contracts: accounts and keys, multisig, transactions and signatures, classic assets.</p>
+      <ul><li>topics 11 → 13</li><li>checked against the Stellar CLI</li></ul>
     </div>
     <div class="movement">
       <span class="num">3.0</span>
       <h3>Review the AI</h3>
-      <p>Plausible, AI-style contracts with one planted vulnerability each. An exploit test proves the attack.</p>
-      <ul><li>14 · security</li><li>5 audits</li></ul>
+      <p>Plausible, AI-style contracts with one planted vulnerability each. An exploit test proves the attack works until you fix it.</p>
+      <ul><li>topic 14</li><li>5 security audits</li></ul>
     </div>
     <div class="movement">
       <span class="num">4.0</span>
       <h3>Ship to testnet</h3>
       <p>Deploy what you wrote, call it from real accounts, watch its events, then pass the on-chain exam.</p>
-      <ul><li>15 · deploy</li><li>4 labs + graduation</li></ul>
+      <ul><li>topic 15</li><li>4 labs + graduation</li></ul>
     </div>
   </div>
 </section>
 
 <section class="section">
   <div class="section-head">
-    <p class="eyebrow">Why Sorolearn</p>
-    <h2>AI can write your contract.<br><span class="muted">Can you tell when it's wrong?</span></h2>
+    <p class="eyebrow">Built on Stellar, end to end</p>
+    <h2>Not a tutorial about Stellar.<br><span class="muted">A course that runs on it.</span></h2>
   </div>
   <div class="bento">
     <div class="tile wide">
-      <span class="label">14_security/audit_auth.rs</span>
-      <h3>Review the AI</h3>
-      <p>It compiles. It calls <code>require_auth</code>. The happy path passes. And anyone can drain anyone,
-      because it asks the <em>recipient</em> to sign. Five audits like this, each with an exploit test.</p>
-      <div class="diff"><div class="dim">pub fn transfer(env: Env, from: Address, to: Address, amount: i128) {</div><div class="del">-    to.require_auth();</div><div class="add">+    from.require_auth();</div><div class="dim">    let from_balance = Self::balance(env.clone(), from.clone());</div></div>
+      <span class="label">registry · <a href="https://stellar.expert/explorer/testnet/contract/CD23Z2JCHQHLJOXWAWOV4NFMAL3N5YRDCGLBGHLKD62X5QUCHDYPFWYY">CD23Z2…FWYY on stellar.expert</a></span>
+      <h3>An exam graded by a smart contract</h3>
+      <p><code>sorolearn graduate</code> uploads your contract to Stellar testnet. A registry contract deploys a
+      fresh copy, examines it with cross-contract calls, and only then records you and emits a
+      <code>Graduated</code> event. No one self-reports; anyone can verify. <a href="graduates/">See the graduates →</a></p>
+      <div class="mini-term"><span class="p">$</span> sorolearn graduate
+[5/6] Upload the contract code to testnet
+[6/6] Ask the registry to examine your contract and record you
+<span class="ok">✓ You are Sorolearn graduate #2!</span></div>
     </div>
     <div class="tile narrow">
-      <span class="label">watch mode</span>
-      <h3>One key away</h3>
-      <p>Save to re-run the tests. Keys work instantly.</p>
-      <div class="keys"><span class="key">n<small>next</small></span><span class="key">h<small>hint</small></span><span class="key">l<small>list</small></span><span class="key">q<small>quit</small></span></div>
+      <span class="label">topic 15</span>
+      <h3>Real deployments</h3>
+      <p>Deploy your own counter, enforce admin auth from real accounts, stream events, and hold a classic asset you
+      issued inside your contract through the Stellar Asset Contract.</p>
     </div>
     <div class="tile narrow">
-      <span class="label">offline first</span>
-      <h3>No network needed</h3>
-      <p>One setup, then every build runs offline against a pinned lockfile. Or skip installing: open it in Codespaces.</p>
-      <div class="mini-term"><span class="p">$</span> sorolearn setup
-<span class="ok">done:</span> works fully offline</div>
+      <span class="label">topics 11 → 13</span>
+      <h3>The network, verified</h3>
+      <p>Keys, StrKeys, reserves, multisig, transaction hashing and signing, built with the real Stellar types. The
+      expected hash matches <code>stellar tx hash</code> byte for byte.</p>
     </div>
     <div class="tile wide">
-      <span class="label">registry · CD23Z2…FWYY</span>
-      <h3>Graduate on-chain</h3>
-      <p>A registry contract on Stellar testnet deploys a fresh copy of your contract, examines it with
-      cross-contract calls, and records you. Nobody self-reports. <a href="graduates/">See the graduates →</a></p>
-      <div class="mini-term"><span class="p">$</span> sorolearn graduate
-[6/6] Ask the registry to examine your contract and record you
-<span class="ok">✓ You are Sorolearn graduate #3!</span></div>
+      <span class="label">topic 14 · audit_auth.rs</span>
+      <h3>Security, the way it actually fails</h3>
+      <p>It compiles. It calls <code>require_auth</code>. The happy path passes. And anyone can drain anyone,
+      because it asks the <em>recipient</em> to sign. Five audits like this: wrong signer, re-initialization,
+      negative amounts, expiring storage, a fake token.</p>
+      <div class="diff"><div class="dim">pub fn transfer(env: Env, from: Address, to: Address, amount: i128) {</div><div class="del">-    to.require_auth();</div><div class="add">+    from.require_auth();</div><div class="dim">    let from_balance = Self::balance(env.clone(), from.clone());</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <p class="eyebrow">Engineered like a product</p>
+    <h2>Every exercise is proven, on every push.</h2>
+  </div>
+  <div class="checks">
+    <div class="check"><span>✓</span><div><h3>Solutions pass, exercises fail</h3><p>CI builds all 35 reference solutions and confirms each exercise fails until it's fixed.</p></div></div>
+    <div class="check"><span>✓</span><div><h3>Audits fail for the right reason</h3><p>Each security exercise must compile and pass its happy path. Only the exploit test may fail.</p></div></div>
+    <div class="check"><span>✓</span><div><h3>Current to the network</h3><p>Pinned to soroban-sdk 29 for protocol 29, the version testnet and mainnet run today.</p></div></div>
+    <div class="check"><span>✓</span><div><h3>Offline by design</h3><p>One setup, then every build runs offline against a committed lockfile. Workshop Wi-Fi can't stop it.</p></div></div>
+    <div class="check"><span>✓</span><div><h3>Zero-install option</h3><p>One click opens a prebuilt Codespace with Rust, the Stellar CLI and a compiled SDK.</p></div></div>
+    <div class="check"><span>✓</span><div><h3>Instant feedback</h3><p>Watch mode re-runs on save and responds to single keys: <code>n</code> next, <code>h</code> hint.</p></div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <p class="eyebrow">Who it's for</p>
+    <h2>Built to grow the Stellar developer ecosystem.</h2>
+  </div>
+  <div class="pillars">
+    <div class="pillar">
+      <h3>Developers new to Stellar</h3>
+      <p>Rust or Solidity background? Go from zero to a deployed, auth-checked contract on testnet in one guided path.</p>
+    </div>
+    <div class="pillar">
+      <h3>Hackathon builders</h3>
+      <p>Learn the patterns and the pitfalls before the clock starts, then ship with the exact CLI commands you practiced.</p>
+    </div>
+    <div class="pillar">
+      <h3>Educators and communities</h3>
+      <p>Run a workshop in a browser tab or fully offline. Open source and MIT licensed: add your own exercises in minutes.</p>
     </div>
   </div>
 </section>
 
 <section class="cta">
   <h2 class="gradient-text" style="font-size:clamp(36px,6vw,56px)">Start fixing.</h2>
-  <p class="lede" style="margin:0 auto 32px">Clone it and run <code>sorolearn</code>, or open it in your browser.</p>
+  <p class="lede" style="margin:0 auto 32px">Clone it and run <code>sorolearn</code>, or open it in your browser. Your first contract is
+  one save away.</p>
   <div class="buttons">
-    <a class="btn primary" href="setup/">Get started <span class="arrow">→</span></a>
+    <a class="btn primary" href="setup/">Start learning <span class="arrow">→</span></a>
     <a class="btn" href="https://github.com/Evangel90/Sorolearn">View on GitHub</a>
   </div>
 </section>

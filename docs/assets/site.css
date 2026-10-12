@@ -266,3 +266,23 @@ td { color: var(--text-2); }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* -------------------------------------------------- landing: copy blocks */
+.caption { max-width: 640px; margin: 18px auto 0; font-size: 13.5px; color: var(--faint); }
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.pillar { border: 1px solid var(--border); border-radius: 16px; padding: 28px; background: linear-gradient(180deg, rgba(255,255,255,0.025), transparent 70%); }
+.pillar h3 { font-size: 18px; line-height: 1.3; margin-bottom: 12px; }
+.pillar p { color: var(--muted); font-size: 15px; margin: 0; }
+.checks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 28px; }
+.check { display: flex; gap: 14px; }
+.check > span {
+  flex: none; width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center;
+  background: rgba(76, 195, 138, 0.12); color: var(--ok); font-size: 13px; font-weight: 700; margin-top: 2px;
+}
+.check h3 { font-size: 15.5px; margin-bottom: 4px; }
+.check p { color: var(--muted); font-size: 14.5px; margin: 0; }
+.tile .label a { color: var(--faint); text-decoration: underline; text-underline-offset: 3px; }
+.tile .label a:hover { color: var(--text); }
+@media (max-width: 900px) {
+  .pillars, .checks { grid-template-columns: 1fr; }
+}
