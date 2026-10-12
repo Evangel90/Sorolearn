@@ -21,7 +21,8 @@ Stuck? Type `h` + Enter for a hint.
 final_message = """
 🎉 You finished every Sorolearn exercise!
 
-You can now write, test, and *review* Soroban contracts: storage, auth,
+You know how Stellar works (accounts, keys, multisig, transactions,
+signatures, assets) and can write, test, and *review* Soroban contracts: storage, auth,
 errors, events, tokens, cross-contract calls, time, and the security bugs
 AI-generated contracts actually ship with.
 
@@ -52,6 +53,39 @@ hint = """
 `#[contract]` declares the contract type, but a second attribute exports
 its functions and generates the `GreeterClient` used by the tests.
 Look at intro1: what is written right above `impl HelloContract`?"""
+
+# ------------------------------------------------- stellar: accounts
+
+[[exercises]]
+name = "accounts1"
+dir = "01_stellar_accounts"
+stellar = true
+hint = """
+- xlm_to_stroops: multiply by STROOPS_PER_XLM.
+- format_xlm: the fractional part needs all 7 digits, so pad it with zeros:
+  `{:07}` instead of `{}`.
+- minimum_balance: the formula is (2 + subentries) × BASE_RESERVE.
+- spendable: balance minus the minimum balance, but never below zero (`.max(0)`)."""
+
+[[exercises]]
+name = "accounts2"
+dir = "01_stellar_accounts"
+stellar = true
+hint = """
+- The address is the *public key*, which you derive from the seed:
+    let public_key = SigningKey::from_bytes(seed).verifying_key();
+    format!("{}", ed25519::PublicKey(public_key.to_bytes()))
+- The secret is the seed itself, encoded: `format!("{}", ed25519::PrivateKey(*seed))`.
+- `kind` needs arms for `Strkey::Contract(_)` and `Strkey::MuxedAccountEd25519(_)`."""
+
+[[exercises]]
+name = "accounts3"
+dir = "01_stellar_accounts"
+stellar = true
+hint = """
+- `level`: BumpSequence and AllowTrust are Low; SetOptions and AccountMerge are High.
+- `can_submit`: pick the threshold with `match level(op) { ... }`, and count the
+  master key: if a signer equals `account.master_key`, add `account.master_weight`."""
 
 # ------------------------------------------------------------ functions
 
