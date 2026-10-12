@@ -21,10 +21,10 @@ Stuck? Press `h` for a hint.
 final_message = """
 🎉 You finished every Sorolearn exercise!
 
-You know how Stellar works (accounts, keys, multisig, transactions,
-signatures, assets) and can write, test, and *review* Soroban contracts: storage, auth,
-errors, events, tokens, cross-contract calls, time, and the security bugs
-AI-generated contracts actually ship with.
+You can write, test and *review* Soroban contracts (storage, auth, errors,
+events, tokens, cross-contract calls, time, and the security bugs AI-written
+contracts actually ship with), and you know the Stellar network underneath
+them: accounts, keys, multisig, transactions, signatures and assets.
 
 Graduate on-chain: run `sorolearn graduate`. It deploys your quiz1 poll to
 Stellar testnet, where the Sorolearn registry contract examines it and
