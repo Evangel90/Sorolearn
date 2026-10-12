@@ -34,10 +34,9 @@ PLAYER_JS = """<script src="https://cdn.jsdelivr.net/npm/asciinema-player@3.17.0
 home = f"""
 <section class="hero">
   <a class="badge" href="curriculum/"><span class="dot"></span>Built for Stellar <span class="sep">·</span> soroban-sdk 29 <span class="sep">·</span> Protocol 29 <span class="arrow">→</span></a>
-  <h1 class="display"><span class="gradient-text">AI writes it.</span><br><span class="second-line">Can you fix it?</span></h1>
-  <p class="sub">Most Soroban code will be written with AI. Sorolearn gives beginners the foundation to understand it,
-  review it and catch its mistakes: 35 hands-on exercises, from your first contract to fixing AI-written exploits
-  and passing an exam graded on Stellar testnet.</p>
+  <h1 class="display"><span class="gradient-text">When AI fails,</span><br><span class="second-line">can you fix it?</span></h1>
+  <p class="sub">AI will write most Soroban code. Sorolearn gives beginners the foundation to catch its mistakes:
+  35 hands-on exercises, from your first contract to an exam graded on Stellar testnet.</p>
   <div class="buttons">
     <a class="btn primary" href="setup/">Start learning <span class="arrow">→</span></a>
     <a class="btn" href="{CODESPACES}">Try it in your browser</a>
@@ -208,7 +207,7 @@ home = f"""
   </div>
 </section>
 """
-write("index.html", page("Sorolearn", "AI writes it. Can you fix it? 35 hands-on Soroban exercises, from your first smart contract to fixing AI-written exploits and an exam graded on Stellar testnet.",
+write("index.html", page("Sorolearn", "When AI fails, can you fix it? AI will write most Soroban code. Sorolearn gives beginners the foundation to catch its mistakes: 35 hands-on exercises, from your first contract to an exam graded on Stellar testnet.",
                          None, "", home, PLAYER_HEAD, PLAYER_JS))
 
 # ----------------------------------------------------------------- setup
