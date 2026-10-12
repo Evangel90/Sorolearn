@@ -55,7 +55,7 @@ Sorolearn works on a plane, behind a firewall, or at a hackathon with flaky Wi-F
 1. Sorolearn shows the current exercise, e.g. `exercises/04_storage/storage1.rs`.
 2. Open it in your editor. Read the comments, make it compile and the tests pass.
 3. Save. Sorolearn re-runs the tests automatically.
-4. When it passes, type `n` + Enter to move on.
+4. When it passes, press `n` to move on (no Enter needed).
 
 Each topic folder has a `README.md` with the background you need, plus links to the official docs.
 **Don't edit the tests** at the bottom of each file: they are the spec.

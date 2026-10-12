@@ -7,8 +7,8 @@
 // the file you are working on and re-runs the tests every time you save.
 //
 // This first exercise already passes, so you can see what success looks like.
-// Read through it, then go back to the terminal and press `n` + Enter to move
-// on to the next exercise.
+// Read through it, then go back to the terminal and press `n` to move on to
+// the next exercise.
 
 // Soroban contracts do not use Rust's standard library: they compile to tiny
 // WebAssembly binaries that run inside the Stellar network. `no_std` keeps

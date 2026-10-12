@@ -12,10 +12,10 @@ How it works:
   1. Open the exercise shown below in your editor.
   2. Make it compile and make its tests pass.
   3. Save. Sorolearn re-runs the tests automatically.
-  4. When it passes, type `n` + Enter for the next exercise.
+  4. When it passes, press `n` for the next exercise.
 
 Each topic folder has a README.md with background reading.
-Stuck? Type `h` + Enter for a hint.
+Stuck? Press `h` for a hint.
 """
 
 final_message = """
@@ -44,7 +44,7 @@ name = "intro1"
 dir = "00_intro"
 skip_check_unsolved = true
 hint = """
-This exercise already passes. Read the comments, then type `n` + Enter."""
+This exercise already passes. Read the comments, then press `n`."""
 
 [[exercises]]
 name = "intro2"
