@@ -50,7 +50,7 @@ pub fn watch(info: &Info, state: &mut State) -> bool {
 
     if state.done.is_empty() {
         ui::clear_screen();
-        println!("{}\n", info.welcome_message.trim());
+        println!("{}", ui::banner(info.welcome_message.trim_end()));
         let start = if single_keys { "Press any key to start..." } else { "Press Enter to start..." };
         println!("{}", ui::dim(start));
         match rx.recv() {
@@ -94,6 +94,8 @@ pub fn watch(info: &Info, state: &mut State) -> bool {
                     println!("{}", ui::yellow("Solve this exercise first (or press h for a hint)."));
                     prompt(passed, single_keys);
                 }
+                // Enter or space in single-key mode: nothing to do.
+                "" if single_keys => {}
                 "" => prompt(passed, single_keys),
                 // A stray key shouldn't print anything; a mistyped line deserves feedback.
                 _ if single_keys => {}

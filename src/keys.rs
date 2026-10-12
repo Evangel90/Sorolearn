@@ -102,6 +102,9 @@ impl KeyDecoder {
             // Ctrl-C and Ctrl-D quit.
             3 | 4 => Some("q".into()),
             b if b.is_ascii_alphabetic() => Some((b.to_ascii_lowercase() as char).to_string()),
+            // Enter, space and other printable keys aren't commands, but they are
+            // key presses: "Press any key to start" must react to them.
+            b'\r' | b'\n' | 0x20..=0x7e => Some(String::new()),
             _ => None,
         }
     }
@@ -128,7 +131,12 @@ mod tests {
     }
 
     #[test]
-    fn ctrl_c_quits_and_enter_is_ignored() {
-        assert_eq!(decode(b"\r\n\x03"), ["q"]);
+    fn ctrl_c_quits() {
+        assert_eq!(decode(b"\x03"), ["q"]);
+    }
+
+    #[test]
+    fn enter_and_space_are_key_presses_without_a_command() {
+        assert_eq!(decode(b"\r \n1"), ["", "", "", ""]);
     }
 }
