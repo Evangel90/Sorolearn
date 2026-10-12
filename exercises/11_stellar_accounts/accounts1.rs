@@ -1,7 +1,8 @@
 // accounts1.rs
 //
-// Before writing contracts, meet the network they run on. The Stellar lessons
-// are plain Rust: no contract, just the rules of the Stellar ledger.
+// You've been writing contracts. Now meet the network they run on. These
+// Stellar lessons are plain Rust: no contract, just the rules of the ledger
+// that your contracts, accounts and tokens live on.
 //
 // Accounts hold lumens (XLM), Stellar's native asset. On the network, amounts
 // are integers counted in *stroops*: 1 XLM = 10,000,000 stroops. (Never use

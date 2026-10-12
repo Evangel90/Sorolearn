@@ -1,7 +1,7 @@
-// tokens2.rs
+// assets2.rs
 //
-// Classic Stellar assets (like the ones from the assets lessons) are usable
-// from Soroban through their *Stellar Asset Contract* (SAC). Same asset, same
+// Classic Stellar assets, like the ones from assets1, are usable from Soroban
+// through their *Stellar Asset Contract* (SAC). Same asset, same
 // balances: the SAC is just its contract interface.
 //
 // Issuers of regulated assets (stablecoins, securities) set the
@@ -46,9 +46,6 @@ impl Payroll {
         employer.require_auth();
         let token: Address = env.storage().instance().get(&DataKey::Token).unwrap();
 
-        if !token::StellarAssetClient::new(&env, &token).authorized(&employee) {
-            return Err(PayrollError::EmployeeNotAuthorized);
-        }
         token::TokenClient::new(&env, &token).transfer(&employer, &employee, &amount);
         Ok(())
     }

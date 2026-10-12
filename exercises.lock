@@ -221,6 +221,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "assets2"
+version = "0.0.0"
+dependencies = [
+ "soroban-sdk",
+]
+
+[[package]]
 name = "audit_amount"
 version = "0.0.0"
 dependencies = [
@@ -2099,13 +2106,6 @@ checksum = "fd3ca314f692efd6c868f8408f53fe444634a845f96c028b97d35f6a1f79f0ee"
 
 [[package]]
 name = "tokens1"
-version = "0.0.0"
-dependencies = [
- "soroban-sdk",
-]
-
-[[package]]
-name = "tokens2"
 version = "0.0.0"
 dependencies = [
  "soroban-sdk",

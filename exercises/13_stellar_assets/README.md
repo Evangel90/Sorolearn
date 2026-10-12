@@ -10,7 +10,15 @@ asset by opening a **trustline**.
   **clawback**. That's how regulated assets work.
 
 Every classic asset also has a **Stellar Asset Contract (SAC)**, so Soroban contracts can use it
-like any token. You'll use one with AUTH_REQUIRED in `11_tokens/tokens2`.
+like any token (that's what `TokenClient` talked to in `08_tokens`). In `assets2` a contract pays
+out a regulated asset that has AUTH_REQUIRED set.
+
+## Regulated assets (assets2)
+
+Classic assets can require issuer approval (**AUTH_REQUIRED**). Through the SAC, check it with
+`StellarAssetClient::authorized(&id)`; the issuer (the SAC admin) approves holders with
+`set_authorized(&id, &true)`. In tests, turn the flag on with
+`asset.issuer().set_flag(IssuerFlags::RequiredFlag)`.
 
 ## Further reading
 

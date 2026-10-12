@@ -1,7 +1,8 @@
 # Stellar: accounts
 
-Soroban contracts run on **Stellar**, so it pays to know the network itself. These lessons
-are plain Rust (no contract) and run fully offline.
+Your contracts run on **Stellar**. Now that you can write them, learn the network underneath:
+who calls them, how transactions are signed, and how assets work. These lessons are plain Rust
+(no contract) and run fully offline.
 
 - **Accounts are key pairs.** An ed25519 secret seed signs; the public key identifies the
   account. Keys are shown as *StrKeys*: `G…` accounts, `S…` secrets, `C…` contracts,

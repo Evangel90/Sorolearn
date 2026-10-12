@@ -54,89 +54,18 @@ hint = """
 its functions and generates the `GreeterClient` used by the tests.
 Look at intro1: what is written right above `impl HelloContract`?"""
 
-# ------------------------------------------------- stellar: accounts
-
-[[exercises]]
-name = "accounts1"
-dir = "01_stellar_accounts"
-stellar = true
-hint = """
-- xlm_to_stroops: multiply by STROOPS_PER_XLM.
-- format_xlm: the fractional part needs all 7 digits, so pad it with zeros:
-  `{:07}` instead of `{}`.
-- minimum_balance: the formula is (2 + subentries) × BASE_RESERVE.
-- spendable: balance minus the minimum balance, but never below zero (`.max(0)`)."""
-
-[[exercises]]
-name = "accounts2"
-dir = "01_stellar_accounts"
-stellar = true
-hint = """
-- The address is the *public key*, which you derive from the seed:
-    let public_key = SigningKey::from_bytes(seed).verifying_key();
-    format!("{}", ed25519::PublicKey(public_key.to_bytes()))
-- The secret is the seed itself, encoded: `format!("{}", ed25519::PrivateKey(*seed))`.
-- `kind` needs arms for `Strkey::Contract(_)` and `Strkey::MuxedAccountEd25519(_)`."""
-
-[[exercises]]
-name = "accounts3"
-dir = "01_stellar_accounts"
-stellar = true
-hint = """
-- `level`: BumpSequence and AllowTrust are Low; SetOptions and AccountMerge are High.
-- `can_submit`: pick the threshold with `match level(op) { ... }`, and count the
-  master key: if a signer equals `account.master_key`, add `account.master_weight`."""
-
-# --------------------------------------------- stellar: transactions
-
-[[exercises]]
-name = "transactions1"
-dir = "02_stellar_transactions"
-stellar = true
-hint = """
-- The sequence number must be `current_sequence + 1`.
-- The fee is BASE_FEE *per operation*: `BASE_FEE * operations.len() as u32`.
-- Return `Err(TxError::NonPositiveAmount)` if any payment has `stroops <= 0`.
-- `memo.try_into()` fails for memos over 28 bytes: map that error to
-  `TxError::MemoTooLong` with `.map_err(|_| TxError::MemoTooLong)?` instead of unwrapping."""
-
-[[exercises]]
-name = "transactions2"
-dir = "02_stellar_transactions"
-stellar = true
-hint = """
-- Hash a `TransactionSignaturePayload`, not the bare transaction:
-    let payload = TransactionSignaturePayload {
-        network_id: Hash(network_id(passphrase)),
-        tagged_transaction: TransactionSignaturePayloadTaggedTransaction::Tx(tx.clone()),
-    };
-  then sha256 its XDR (`payload.to_xdr(Limits::none())`).
-- The hint is the *last* 4 bytes of the public key: `public_key[28..]`."""
-
-# --------------------------------------------------- stellar: assets
-
-[[exercises]]
-name = "assets1"
-dir = "03_stellar_assets"
-stellar = true
-hint = """
-- Codes may be up to 12 characters, letters and digits only:
-  `code.len() > 12 || !code.chars().all(|c| c.is_ascii_alphanumeric())`.
-- Codes of 5-12 characters become `Asset::CreditAlphanum12(AlphaNum12 { asset_code: AssetCode12(padded), issuer })`.
-- When printing, drop the zero padding: `.trim_end_matches('\\0')`."""
-
 # ------------------------------------------------------------ functions
 
 [[exercises]]
 name = "functions1"
-dir = "04_functions"
+dir = "01_functions"
 hint = """
 Replace each `todo!()` with an expression. `a + b` adds two numbers, and
 the remainder operator `%` tells you whether a number is divisible by 2."""
 
 [[exercises]]
 name = "functions2"
-dir = "04_functions"
+dir = "01_functions"
 hint = """
 1. The client has no `square` method because `square` is not exported.
    Which keyword makes a function part of the public contract interface?
@@ -148,7 +77,7 @@ hint = """
 
 [[exercises]]
 name = "symbols1"
-dir = "05_types"
+dir = "02_types"
 hint = """
 "transfer_from" has 13 characters, too many for `symbol_short!`.
 Build it at runtime with `Symbol::new(&env, "transfer_from")`, and rename
@@ -156,7 +85,7 @@ Build it at runtime with `Symbol::new(&env, "transfer_from")`, and rename
 
 [[exercises]]
 name = "vecs1"
-dir = "05_types"
+dir = "02_types"
 hint = """
 - `Vec::new` needs the environment: `Vec::new(&env)`.
 - For `sum`, iterate with `for value in values.iter() { ... }` and keep a
@@ -164,7 +93,7 @@ hint = """
 
 [[exercises]]
 name = "maps1"
-dir = "05_types"
+dir = "02_types"
 hint = """
 Read the current count with `counts.get(word.clone())`, which returns an
 Option. `.unwrap_or(0)` turns "missing" into 0. Then store the new value
@@ -172,7 +101,7 @@ with `counts.set(word, current + 1)`."""
 
 [[exercises]]
 name = "bytes1"
-dir = "05_types"
+dir = "02_types"
 hint = """
 - `append` modifies `a` in place, so the parameter must be declared
   mutable: `mut a: Bytes`.
@@ -182,14 +111,14 @@ hint = """
 
 [[exercises]]
 name = "types1"
-dir = "06_custom_types"
+dir = "03_custom_types"
 hint = """
 Add `#[contracttype]` above the `#[derive(...)]` on `Profile`, and import
 `contracttype` from soroban_sdk."""
 
 [[exercises]]
 name = "types2"
-dir = "06_custom_types"
+dir = "03_custom_types"
 hint = """
 A `match` must cover every variant. Add arms for
 `Shape::Rectangle(width, height)` and `Shape::Triangle(base, height)`.
@@ -199,21 +128,21 @@ A triangle's area is base * height / 2."""
 
 [[exercises]]
 name = "storage1"
-dir = "07_storage"
+dir = "04_storage"
 hint = """
 `count` is only a local variable: the new value is never written back.
 After incrementing, call `env.storage().instance().set(&COUNTER, &count);`"""
 
 [[exercises]]
 name = "storage2"
-dir = "07_storage"
+dir = "04_storage"
 hint = """
 Write: env.storage().persistent().set(&DataKey::Score(player), &score);
 Read:  env.storage().persistent().get(&DataKey::Score(player)).unwrap_or(0)"""
 
 [[exercises]]
 name = "storage3"
-dir = "07_storage"
+dir = "04_storage"
 hint = """
 1. After the `set` in `save_note`, call
    env.storage().persistent().extend_ttl(&key, TTL_THRESHOLD, TTL_EXTEND_TO);
@@ -224,7 +153,7 @@ hint = """
 
 [[exercises]]
 name = "errors1"
-dir = "08_errors"
+dir = "05_errors"
 hint = """
 - In `divide`, check `if b == 0 { return Err(MathError::DivisionByZero); }`
   before dividing.
@@ -233,7 +162,7 @@ hint = """
 
 [[exercises]]
 name = "errors2"
-dir = "08_errors"
+dir = "05_errors"
 hint = """
 Replace the `panic!` with `panic_with_error!(&env, WalletError::InsufficientFunds);`
 and add `panic_with_error` to the `use soroban_sdk::{...}` list."""
@@ -242,14 +171,14 @@ and add `panic_with_error` to the `use soroban_sdk::{...}` list."""
 
 [[exercises]]
 name = "auth1"
-dir = "09_auth"
+dir = "06_auth"
 hint = """
 Call `user.require_auth();` at the start of `set_nickname`, before
 writing anything to storage."""
 
 [[exercises]]
 name = "auth2"
-dir = "09_auth"
+dir = "06_auth"
 hint = """
 1. Rename `init` to `__constructor` so it runs at deployment with the
    arguments passed to `env.register(FeeConfig, (&admin,))`.
@@ -261,7 +190,7 @@ hint = """
 
 [[exercises]]
 name = "events1"
-dir = "10_events"
+dir = "07_events"
 hint = """
 Build the event and publish it:
     Tipped { from, to, amount }.publish(&env);"""
@@ -270,7 +199,7 @@ Build the event and publish it:
 
 [[exercises]]
 name = "tokens1"
-dir = "11_tokens"
+dir = "08_tokens"
 hint = """
 1. `from.require_auth();`
 2. Load the token address: `env.storage().instance().get(&DataKey::Token).unwrap()`
@@ -278,21 +207,11 @@ hint = """
 4. Transfer to the contract:
    `token.transfer(&from, &env.current_contract_address(), &amount);`"""
 
-[[exercises]]
-name = "tokens2"
-dir = "11_tokens"
-hint = """
-Before transferring, ask the Stellar Asset Contract whether the issuer has
-approved the employee:
-    if !token::StellarAssetClient::new(&env, &token).authorized(&employee) {
-        return Err(PayrollError::EmployeeNotAuthorized);
-    }"""
-
 # ------------------------------------------------------- cross contract
 
 [[exercises]]
 name = "cross1"
-dir = "12_cross_contract"
+dir = "09_cross_contract"
 hint = """
 Create a client for the calculator:
     let client = calculator::CalculatorClient::new(&env, &calculator);
@@ -303,7 +222,7 @@ call. Client methods take references."""
 
 [[exercises]]
 name = "time1"
-dir = "13_time"
+dir = "10_time"
 hint = """
 `unlock_time` is a UNIX timestamp, but the code compares it with the ledger
 *sequence number*. Use `env.ledger().timestamp()` instead."""
@@ -333,6 +252,87 @@ hint = """
   update `DataKey::Savings(from)`, then `Deposited { from, amount }.publish(&env)`.
 - withdraw: require_auth, compare `env.ledger().timestamp()` with the unlock
   time, read the savings, zero them, transfer contract -> owner, return the amount."""
+
+# ------------------------------------------------- stellar: accounts
+
+[[exercises]]
+name = "accounts1"
+dir = "11_stellar_accounts"
+stellar = true
+hint = """
+- xlm_to_stroops: multiply by STROOPS_PER_XLM.
+- format_xlm: the fractional part needs all 7 digits, so pad it with zeros:
+  `{:07}` instead of `{}`.
+- minimum_balance: the formula is (2 + subentries) × BASE_RESERVE.
+- spendable: balance minus the minimum balance, but never below zero (`.max(0)`)."""
+
+[[exercises]]
+name = "accounts2"
+dir = "11_stellar_accounts"
+stellar = true
+hint = """
+- The address is the *public key*, which you derive from the seed:
+    let public_key = SigningKey::from_bytes(seed).verifying_key();
+    format!("{}", ed25519::PublicKey(public_key.to_bytes()))
+- The secret is the seed itself, encoded: `format!("{}", ed25519::PrivateKey(*seed))`.
+- `kind` needs arms for `Strkey::Contract(_)` and `Strkey::MuxedAccountEd25519(_)`."""
+
+[[exercises]]
+name = "accounts3"
+dir = "11_stellar_accounts"
+stellar = true
+hint = """
+- `level`: BumpSequence and AllowTrust are Low; SetOptions and AccountMerge are High.
+- `can_submit`: pick the threshold with `match level(op) { ... }`, and count the
+  master key: if a signer equals `account.master_key`, add `account.master_weight`."""
+
+# --------------------------------------------- stellar: transactions
+
+[[exercises]]
+name = "transactions1"
+dir = "12_stellar_transactions"
+stellar = true
+hint = """
+- The sequence number must be `current_sequence + 1`.
+- The fee is BASE_FEE *per operation*: `BASE_FEE * operations.len() as u32`.
+- Return `Err(TxError::NonPositiveAmount)` if any payment has `stroops <= 0`.
+- `memo.try_into()` fails for memos over 28 bytes: map that error to
+  `TxError::MemoTooLong` with `.map_err(|_| TxError::MemoTooLong)?` instead of unwrapping."""
+
+[[exercises]]
+name = "transactions2"
+dir = "12_stellar_transactions"
+stellar = true
+hint = """
+- Hash a `TransactionSignaturePayload`, not the bare transaction:
+    let payload = TransactionSignaturePayload {
+        network_id: Hash(network_id(passphrase)),
+        tagged_transaction: TransactionSignaturePayloadTaggedTransaction::Tx(tx.clone()),
+    };
+  then sha256 its XDR (`payload.to_xdr(Limits::none())`).
+- The hint is the *last* 4 bytes of the public key: `public_key[28..]`."""
+
+# --------------------------------------------------- stellar: assets
+
+[[exercises]]
+name = "assets1"
+dir = "13_stellar_assets"
+stellar = true
+hint = """
+- Codes may be up to 12 characters, letters and digits only:
+  `code.len() > 12 || !code.chars().all(|c| c.is_ascii_alphanumeric())`.
+- Codes of 5-12 characters become `Asset::CreditAlphanum12(AlphaNum12 { asset_code: AssetCode12(padded), issuer })`.
+- When printing, drop the zero padding: `.trim_end_matches('\\0')`."""
+
+[[exercises]]
+name = "assets2"
+dir = "13_stellar_assets"
+hint = """
+Before transferring, ask the Stellar Asset Contract whether the issuer has
+approved the employee:
+    if !token::StellarAssetClient::new(&env, &token).authorized(&employee) {
+        return Err(PayrollError::EmployeeNotAuthorized);
+    }"""
 
 # ------------------------------------------------- security: review the AI
 #
