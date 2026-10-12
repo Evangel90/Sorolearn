@@ -34,9 +34,10 @@ PLAYER_JS = """<script src="https://cdn.jsdelivr.net/npm/asciinema-player@3.17.0
 home = f"""
 <section class="hero">
   <a class="badge" href="curriculum/"><span class="dot"></span>Built for Stellar <span class="sep">·</span> soroban-sdk 29 <span class="sep">·</span> Protocol 29 <span class="arrow">→</span></a>
-  <h1 class="display gradient-text">Learn Soroban by fixing it.</h1>
-  <p class="sub">Sorolearn turns developers into Stellar builders. 35 hands-on exercises take you from your first
-  smart contract to auditing AI-written code and passing an exam that runs on Stellar testnet itself.</p>
+  <h1 class="display"><span class="gradient-text">AI can write the code.</span><br><span class="second-line">Can you fix it when it fails?</span></h1>
+  <p class="sub">Most Soroban code will be written with AI. Sorolearn gives beginners the foundation to understand it,
+  review it and catch its mistakes: 35 hands-on exercises, from your first contract to fixing AI-written exploits
+  and passing an exam graded on Stellar testnet.</p>
   <div class="buttons">
     <a class="btn primary" href="setup/">Start learning <span class="arrow">→</span></a>
     <a class="btn" href="{CODESPACES}">Try it in your browser</a>
@@ -61,24 +62,24 @@ home = f"""
 
 <section class="section">
   <div class="section-head">
-    <p class="eyebrow">The problem</p>
-    <h2>Getting from "Hello, Soroban" to shipping safely is too hard.</h2>
+    <p class="eyebrow">Why Sorolearn</p>
+    <h2>You won't write every line by hand.<br><span class="muted">You still need to know when it's wrong.</span></h2>
   </div>
   <div class="pillars">
     <div class="pillar">
-      <h3>Reading docs isn't building</h3>
-      <p>Tutorials show working code. Developers learn by breaking and fixing it, with something
-      that tells them the moment they get it right.</p>
+      <h3>AI writes the first draft now</h3>
+      <p>Ask for a token, a vault or a vote and you get a contract that compiles, looks right and
+      passes the obvious tests, in seconds.</p>
     </div>
     <div class="pillar">
-      <h3>AI writes contracts that compile and still lose funds</h3>
-      <p>A missing <code>require_auth</code>, a negative amount, storage that quietly expires. The skill that
-      matters now is knowing when generated code is wrong.</p>
+      <h3>It fails where it costs money</h3>
+      <p>A <code>require_auth</code> on the wrong address. A negative amount. Storage that quietly expires.
+      Bugs like these only get caught by someone who understands the platform.</p>
     </div>
     <div class="pillar">
-      <h3>Certificates prove nothing</h3>
-      <p>A PDF says you finished. A contract you deployed, examined by another contract on Stellar,
-      proves you can build.</p>
+      <h3>Fixing code builds that understanding</h3>
+      <p>Every exercise is broken on purpose. Repairing it teaches the same skill as reviewing AI output:
+      reading a contract and knowing exactly why it fails.</p>
     </div>
   </div>
 </section>
@@ -195,7 +196,7 @@ home = f"""
 </section>
 
 <section class="cta">
-  <h2 class="gradient-text" style="font-size:clamp(36px,6vw,56px)">Start fixing.</h2>
+  <h2 class="gradient-text" style="font-size:clamp(36px,6vw,56px)">Learn Soroban by fixing it.</h2>
   <p class="lede" style="margin:0 auto 32px">Clone it and run <code>sorolearn</code>, or open it in your browser. Your first contract is
   one save away.</p>
   <div class="buttons">
@@ -204,7 +205,7 @@ home = f"""
   </div>
 </section>
 """
-write("index.html", page("Sorolearn", "Learn Soroban by fixing it: 35 hands-on exercises from your first smart contract to auditing AI-written code and an exam graded on Stellar testnet.",
+write("index.html", page("Sorolearn", "AI can write the code. Can you fix it when it fails? 35 hands-on Soroban exercises, from your first smart contract to fixing AI-written exploits and an exam graded on Stellar testnet.",
                          None, "", home, PLAYER_HEAD, PLAYER_JS))
 
 # ----------------------------------------------------------------- setup

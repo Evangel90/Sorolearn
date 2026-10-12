@@ -25,7 +25,7 @@
 }
 
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: clip; }
 body {
   margin: 0;
   background: var(--bg);
@@ -33,7 +33,7 @@ body {
   font: 16px/1.6 var(--sans);
   font-feature-settings: "cv11", "ss01";
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 a { color: var(--text); text-decoration: none; }
 p a, li a, td a, .prose a { color: var(--accent); }
@@ -108,19 +108,20 @@ td { color: var(--text-2); }
 /* --------------------------------------------------------------- hero */
 .hero { text-align: center; padding: 96px 0 40px; }
 .hero::before {
-  content: ""; position: absolute; inset: -120px -50vw auto; height: 720px; z-index: -1; pointer-events: none;
+  content: ""; position: absolute; top: -120px; left: 50%; width: 100vw; transform: translateX(-50%); height: 720px; z-index: -1; pointer-events: none;
   background:
     radial-gradient(ellipse 50% 40% at 50% 0%, rgba(139, 123, 255, 0.22), transparent 70%),
     radial-gradient(ellipse 30% 30% at 70% 20%, rgba(94, 106, 210, 0.15), transparent 70%);
 }
 .badge {
-  display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px 5px 8px; border-radius: 999px;
+  display: inline-flex; flex-wrap: wrap; justify-content: center; max-width: 100%; align-items: center; gap: 8px; padding: 5px 12px 5px 8px; border-radius: 999px;
   border: 1px solid var(--border-strong); background: rgba(255, 255, 255, 0.03);
   font-size: 13px; color: var(--text-2); margin-bottom: 28px;
 }
 .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 10px var(--ok); }
 .badge .sep { color: var(--faint); }
-.display { font-size: clamp(44px, 8.5vw, 88px); line-height: 1.0; letter-spacing: -0.045em; margin: 0 auto 24px; max-width: 14ch; font-weight: 600; }
+.display { font-size: clamp(40px, 7vw, 76px); line-height: 1.04; letter-spacing: -0.045em; margin: 0 auto 24px; max-width: 18ch; font-weight: 600; }
+.display .second-line { color: var(--muted); }
 .hero .sub { color: var(--muted); font-size: clamp(17px, 2vw, 20px); line-height: 1.55; max-width: 620px; margin: 0 auto 36px; }
 .hero .buttons { justify-content: center; }
 .hero .fineprint { margin-top: 18px; font-size: 13px; color: var(--faint); }

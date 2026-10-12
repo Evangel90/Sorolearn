@@ -1,6 +1,9 @@
 # Sorolearn 🦀✨
 
-**AI can write your Soroban contract. Sorolearn teaches you to tell when it's wrong.**
+**AI can write the code. Can you fix it when it fails?**
+
+Most Soroban code will be written with AI. Sorolearn gives beginners the foundation to understand it,
+review it and catch its mistakes, by fixing small, broken contracts until the tests pass.
 
 Small, hands-on exercises for [Stellar](https://stellar.org) and its
 [Soroban](https://developers.stellar.org/docs/build/smart-contracts/overview) smart contracts, inspired by [Rustlings](https://github.com/rust-lang/rustlings). Every exercise
