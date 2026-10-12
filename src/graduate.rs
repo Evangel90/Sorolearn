@@ -129,7 +129,7 @@ fn explain_failure(stderr: &str) -> String {
 /// `sorolearn build-wasm NAME`: compile an exercise to a deployable `.wasm`.
 pub fn build_wasm_command(ex: &Exercise) -> bool {
     if !quiet(Command::new("stellar").arg("--version")) {
-        eprintln!("{}", ui::red("The Stellar CLI is not installed. See exercises/12_testnet/README.md."));
+        eprintln!("{}", ui::red("The Stellar CLI is not installed. See exercises/15_testnet/README.md."));
         return false;
     }
     if !show(Command::new("rustup").args(["target", "add", "wasm32v1-none"])) {

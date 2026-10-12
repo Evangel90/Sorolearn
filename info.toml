@@ -27,7 +27,7 @@ AI-generated contracts actually ship with.
 
 Graduate on-chain: run `sorolearn graduate`. It deploys your quiz1 poll to
 Stellar testnet, where the Sorolearn registry contract examines it and
-records you as a graduate. See exercises/12_testnet/README.md.
+records you as a graduate. See exercises/15_testnet/README.md.
 
 Where to go next:
   - Install the Stellar CLI and deploy a contract to testnet:
@@ -57,14 +57,14 @@ Look at intro1: what is written right above `impl HelloContract`?"""
 
 [[exercises]]
 name = "functions1"
-dir = "01_functions"
+dir = "04_functions"
 hint = """
 Replace each `todo!()` with an expression. `a + b` adds two numbers, and
 the remainder operator `%` tells you whether a number is divisible by 2."""
 
 [[exercises]]
 name = "functions2"
-dir = "01_functions"
+dir = "04_functions"
 hint = """
 1. The client has no `square` method because `square` is not exported.
    Which keyword makes a function part of the public contract interface?
@@ -76,7 +76,7 @@ hint = """
 
 [[exercises]]
 name = "symbols1"
-dir = "02_types"
+dir = "05_types"
 hint = """
 "transfer_from" has 13 characters, too many for `symbol_short!`.
 Build it at runtime with `Symbol::new(&env, "transfer_from")`, and rename
@@ -84,7 +84,7 @@ Build it at runtime with `Symbol::new(&env, "transfer_from")`, and rename
 
 [[exercises]]
 name = "vecs1"
-dir = "02_types"
+dir = "05_types"
 hint = """
 - `Vec::new` needs the environment: `Vec::new(&env)`.
 - For `sum`, iterate with `for value in values.iter() { ... }` and keep a
@@ -92,7 +92,7 @@ hint = """
 
 [[exercises]]
 name = "maps1"
-dir = "02_types"
+dir = "05_types"
 hint = """
 Read the current count with `counts.get(word.clone())`, which returns an
 Option. `.unwrap_or(0)` turns "missing" into 0. Then store the new value
@@ -100,7 +100,7 @@ with `counts.set(word, current + 1)`."""
 
 [[exercises]]
 name = "bytes1"
-dir = "02_types"
+dir = "05_types"
 hint = """
 - `append` modifies `a` in place, so the parameter must be declared
   mutable: `mut a: Bytes`.
@@ -110,14 +110,14 @@ hint = """
 
 [[exercises]]
 name = "types1"
-dir = "03_custom_types"
+dir = "06_custom_types"
 hint = """
 Add `#[contracttype]` above the `#[derive(...)]` on `Profile`, and import
 `contracttype` from soroban_sdk."""
 
 [[exercises]]
 name = "types2"
-dir = "03_custom_types"
+dir = "06_custom_types"
 hint = """
 A `match` must cover every variant. Add arms for
 `Shape::Rectangle(width, height)` and `Shape::Triangle(base, height)`.
@@ -127,21 +127,21 @@ A triangle's area is base * height / 2."""
 
 [[exercises]]
 name = "storage1"
-dir = "04_storage"
+dir = "07_storage"
 hint = """
 `count` is only a local variable: the new value is never written back.
 After incrementing, call `env.storage().instance().set(&COUNTER, &count);`"""
 
 [[exercises]]
 name = "storage2"
-dir = "04_storage"
+dir = "07_storage"
 hint = """
 Write: env.storage().persistent().set(&DataKey::Score(player), &score);
 Read:  env.storage().persistent().get(&DataKey::Score(player)).unwrap_or(0)"""
 
 [[exercises]]
 name = "storage3"
-dir = "04_storage"
+dir = "07_storage"
 hint = """
 1. After the `set` in `save_note`, call
    env.storage().persistent().extend_ttl(&key, TTL_THRESHOLD, TTL_EXTEND_TO);
@@ -152,7 +152,7 @@ hint = """
 
 [[exercises]]
 name = "errors1"
-dir = "05_errors"
+dir = "08_errors"
 hint = """
 - In `divide`, check `if b == 0 { return Err(MathError::DivisionByZero); }`
   before dividing.
@@ -161,7 +161,7 @@ hint = """
 
 [[exercises]]
 name = "errors2"
-dir = "05_errors"
+dir = "08_errors"
 hint = """
 Replace the `panic!` with `panic_with_error!(&env, WalletError::InsufficientFunds);`
 and add `panic_with_error` to the `use soroban_sdk::{...}` list."""
@@ -170,14 +170,14 @@ and add `panic_with_error` to the `use soroban_sdk::{...}` list."""
 
 [[exercises]]
 name = "auth1"
-dir = "06_auth"
+dir = "09_auth"
 hint = """
 Call `user.require_auth();` at the start of `set_nickname`, before
 writing anything to storage."""
 
 [[exercises]]
 name = "auth2"
-dir = "06_auth"
+dir = "09_auth"
 hint = """
 1. Rename `init` to `__constructor` so it runs at deployment with the
    arguments passed to `env.register(FeeConfig, (&admin,))`.
@@ -189,7 +189,7 @@ hint = """
 
 [[exercises]]
 name = "events1"
-dir = "07_events"
+dir = "10_events"
 hint = """
 Build the event and publish it:
     Tipped { from, to, amount }.publish(&env);"""
@@ -198,7 +198,7 @@ Build the event and publish it:
 
 [[exercises]]
 name = "tokens1"
-dir = "08_tokens"
+dir = "11_tokens"
 hint = """
 1. `from.require_auth();`
 2. Load the token address: `env.storage().instance().get(&DataKey::Token).unwrap()`
@@ -210,7 +210,7 @@ hint = """
 
 [[exercises]]
 name = "cross1"
-dir = "09_cross_contract"
+dir = "12_cross_contract"
 hint = """
 Create a client for the calculator:
     let client = calculator::CalculatorClient::new(&env, &calculator);
@@ -221,7 +221,7 @@ call. Client methods take references."""
 
 [[exercises]]
 name = "time1"
-dir = "10_time"
+dir = "13_time"
 hint = """
 `unlock_time` is a UNIX timestamp, but the code compares it with the ledger
 *sequence number*. Use `env.ledger().timestamp()` instead."""
@@ -259,7 +259,7 @@ hint = """
 
 [[exercises]]
 name = "audit_auth"
-dir = "11_security"
+dir = "14_security"
 hint = """
 Who loses points in a transfer? That address must authorize it. Look at
 which address `transfer` calls `require_auth()` on. Authorizing the
@@ -267,7 +267,7 @@ which address `transfer` calls `require_auth()` on. Authorizing the
 
 [[exercises]]
 name = "audit_init"
-dir = "11_security"
+dir = "14_security"
 hint = """
 `initialize` is a public function anyone can call, as often as they like.
 Make it fail if an admin is already stored. Declare an error
@@ -279,7 +279,7 @@ Remember to import `contracterror` and `panic_with_error`."""
 
 [[exercises]]
 name = "audit_amount"
-dir = "11_security"
+dir = "14_security"
 hint = """
 `amount` is an `i128`, so it can be negative. What does
 `from_balance < amount` say about -1_000_000? And what do
@@ -289,7 +289,7 @@ unless `amount > 0`."""
 
 [[exercises]]
 name = "audit_storage"
-dir = "11_security"
+dir = "14_security"
 hint = """
 Two problems:
 1. Temporary storage is deleted for good when its TTL expires. Use
@@ -299,7 +299,7 @@ Two problems:
 
 [[exercises]]
 name = "audit_token"
-dir = "11_security"
+dir = "14_security"
 hint = """
 `deposit` calls `transfer` on whatever `token` address the caller passes in,
 and credits the balance as if real USDC arrived. Any contract can have a

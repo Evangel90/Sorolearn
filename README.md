@@ -50,7 +50,7 @@ Sorolearn works on a plane, behind a firewall, or at a hackathon with flaky Wi-F
 
 ## How it works
 
-1. Sorolearn shows the current exercise, e.g. `exercises/04_storage/storage1.rs`.
+1. Sorolearn shows the current exercise, e.g. `exercises/07_storage/storage1.rs`.
 2. Open it in your editor. Read the comments, make it compile and the tests pass.
 3. Save. Sorolearn re-runs the tests automatically.
 4. When it passes, type `n` + Enter to move on.
@@ -99,13 +99,13 @@ to WebAssembly, uploads it to **Stellar testnet** and calls the **Sorolearn regi
 **examines it with cross-contract calls** (votes, tries to double-vote, checks the tally), and only then records
 you and emits a `Graduated` event. Anyone can verify a graduate on-chain or on the
 [graduates page](https://evangel90.github.io/Sorolearn/). The command prints every Stellar CLI step it runs;
-`exercises/12_testnet/README.md` walks through doing them by hand. The registry's source and tests are in
+`exercises/15_testnet/README.md` walks through doing them by hand. The registry's source and tests are in
 `registry/`.
 
 ### The security track
 
 AI tools write Soroban contracts that compile and look right, but miss things that cost real money. Each
-`11_security` exercise is a plausible AI-style contract with one planted vulnerability. Its `happy_path`
+`14_security` exercise is a plausible AI-style contract with one planted vulnerability. Its `happy_path`
 tests pass. Its `exploit_` test reproduces an attack and fails until you fix the contract:
 
 | Exercise | Vulnerability |
