@@ -2,3 +2,4 @@
 /.sorolearn
 /registry/target
 /registry/test_snapshots
+__pycache__/
