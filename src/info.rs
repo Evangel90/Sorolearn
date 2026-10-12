@@ -21,6 +21,9 @@ pub struct Exercise {
     /// Set for exercises that already pass before the learner touches them.
     #[serde(default)]
     pub skip_check_unsolved: bool,
+    /// Stellar-network lessons also get the Stellar key, signing and hashing crates.
+    #[serde(default)]
+    pub stellar: bool,
 }
 
 impl Exercise {

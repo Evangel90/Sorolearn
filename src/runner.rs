@@ -13,6 +13,7 @@ use std::process::{Command, Stdio};
 pub const TARGET_DIR: &str = ".sorolearn/target";
 /// Committed lockfile for the exercise crates (see `ensure_workspace`).
 const LOCKFILE: &str = "exercises.lock";
+const STELLAR_DEPS: &str = "stellar-strkey = { workspace = true }\ned25519-dalek = { workspace = true }\nsha2 = { workspace = true }\n";
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum Source {
@@ -55,6 +56,10 @@ members = ["crates/*"]
 
 [workspace.dependencies]
 soroban-sdk = "={SOROBAN_SDK_VERSION}"
+# Used by the Stellar network lessons (keys, signing, hashing).
+stellar-strkey = "=0.0.16"
+ed25519-dalek = "=2.2.0"
+sha2 = "=0.10.9"
 
 [profile.dev]
 debug = 0
@@ -89,12 +94,13 @@ doctest = false
 
 [dependencies]
 soroban-sdk = {{ workspace = true }}
-
+{stellar}
 [dev-dependencies]
 soroban-sdk = {{ workspace = true, features = ["testutils"] }}
 "#,
             name = ex.name,
-            lib = lib_path.display()
+            lib = lib_path.display(),
+            stellar = if ex.stellar { STELLAR_DEPS } else { "" },
         );
         write_if_changed(&dir.join("Cargo.toml"), &manifest)?;
     }

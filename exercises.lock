@@ -3,6 +3,36 @@
 version = 4
 
 [[package]]
+name = "accounts1"
+version = "0.0.0"
+dependencies = [
+ "ed25519-dalek",
+ "sha2",
+ "soroban-sdk",
+ "stellar-strkey 0.0.16",
+]
+
+[[package]]
+name = "accounts2"
+version = "0.0.0"
+dependencies = [
+ "ed25519-dalek",
+ "sha2",
+ "soroban-sdk",
+ "stellar-strkey 0.0.16",
+]
+
+[[package]]
+name = "accounts3"
+version = "0.0.0"
+dependencies = [
+ "ed25519-dalek",
+ "sha2",
+ "soroban-sdk",
+ "stellar-strkey 0.0.16",
+]
+
+[[package]]
 name = "ahash"
 version = "0.8.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -179,6 +209,51 @@ name = "arrayvec"
 version = "0.7.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d3fb67a6e08acf24fdeccbac2cb6ac4305825bd1f117462e0e6f2f193345ad56"
+
+[[package]]
+name = "assets1"
+version = "0.0.0"
+dependencies = [
+ "ed25519-dalek",
+ "sha2",
+ "soroban-sdk",
+ "stellar-strkey 0.0.16",
+]
+
+[[package]]
+name = "audit_amount"
+version = "0.0.0"
+dependencies = [
+ "soroban-sdk",
+]
+
+[[package]]
+name = "audit_auth"
+version = "0.0.0"
+dependencies = [
+ "soroban-sdk",
+]
+
+[[package]]
+name = "audit_init"
+version = "0.0.0"
+dependencies = [
+ "soroban-sdk",
+]
+
+[[package]]
+name = "audit_storage"
+version = "0.0.0"
+dependencies = [
+ "soroban-sdk",
+]
+
+[[package]]
+name = "audit_token"
+version = "0.0.0"
+dependencies = [
+ "soroban-sdk",
+]
 
 [[package]]
 name = "auth1"
@@ -2027,6 +2102,33 @@ name = "tokens1"
 version = "0.0.0"
 dependencies = [
  "soroban-sdk",
+]
+
+[[package]]
+name = "tokens2"
+version = "0.0.0"
+dependencies = [
+ "soroban-sdk",
+]
+
+[[package]]
+name = "transactions1"
+version = "0.0.0"
+dependencies = [
+ "ed25519-dalek",
+ "sha2",
+ "soroban-sdk",
+ "stellar-strkey 0.0.16",
+]
+
+[[package]]
+name = "transactions2"
+version = "0.0.0"
+dependencies = [
+ "ed25519-dalek",
+ "sha2",
+ "soroban-sdk",
+ "stellar-strkey 0.0.16",
 ]
 
 [[package]]
