@@ -15,6 +15,13 @@ Contracts can own tokens: their address is `env.current_contract_address()`.
 In tests, create a token with `env.register_stellar_asset_contract_v2(admin)` and mint
 with `token::StellarAssetClient::new(&env, &address).mint(&to, &amount)`.
 
+## Regulated assets (tokens2)
+
+Classic assets can require issuer approval (**AUTH_REQUIRED**). Through the SAC, check it with
+`StellarAssetClient::authorized(&id)`; the issuer (the SAC admin) approves holders with
+`set_authorized(&id, &true)`. In tests, turn the flag on with
+`asset.issuer().set_flag(IssuerFlags::RequiredFlag)`.
+
 ## Further reading
 
 - [Tokens](https://developers.stellar.org/docs/tokens)

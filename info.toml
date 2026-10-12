@@ -278,6 +278,16 @@ hint = """
 4. Transfer to the contract:
    `token.transfer(&from, &env.current_contract_address(), &amount);`"""
 
+[[exercises]]
+name = "tokens2"
+dir = "11_tokens"
+hint = """
+Before transferring, ask the Stellar Asset Contract whether the issuer has
+approved the employee:
+    if !token::StellarAssetClient::new(&env, &token).authorized(&employee) {
+        return Err(PayrollError::EmployeeNotAuthorized);
+    }"""
+
 # ------------------------------------------------------- cross contract
 
 [[exercises]]
