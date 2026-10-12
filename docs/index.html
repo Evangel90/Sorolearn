@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sorolearn</title>
+<meta name="description" content="Small exercises to get you used to building on Stellar and writing Soroban smart contracts.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/asciinema-player@3.17.0/dist/bundle/asciinema-player.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href=""><img class="mark" src="assets/favicon.svg" alt="" width="28" height="28">Sorolearn</a>
+    <nav class="site-nav" aria-label="Main"><a href="setup/">Setup</a><a href="usage/">Usage</a><a href="curriculum/">Curriculum</a><a href="graduates/">Graduates</a><a href="https://github.com/Evangel90/Sorolearn">GitHub</a></nav>
+  </div>
+</header>
+<main>
+
+<section class="hero">
+  <div class="hero-text">
+    <span class="pill">Stellar · Soroban · Rust</span>
+    <h1>Sorolearn</h1>
+    <p class="tagline">Small exercises to get you used to building on Stellar and writing Soroban smart contracts.</p>
+    <p class="lede">Every exercise is a tiny piece of broken code with tests. Fix it, save, and Sorolearn tells you
+    instantly whether you got it. Start with the network itself, then write, test and <em>review</em> contracts.</p>
+    <div class="buttons">
+      <a class="btn primary" href="setup/">Get started</a>
+      <a class="btn" href="https://codespaces.new/Evangel90/Sorolearn">Open in Codespaces</a>
+    </div>
+    <p class="muted"><strong>AI can write your Soroban contract. Sorolearn teaches you to tell when it's wrong.</strong></p>
+  </div>
+  <div>
+    <div class="player" id="demo" aria-label="Terminal recording: Sorolearn watch mode catches an exploit, the fix is saved, the exercise passes"></div>
+  </div>
+</section>
+
+<section class="grid" aria-label="Features">
+  <div class="card">
+    <h3>Stellar first</h3>
+    <p>Accounts, keys and StrKeys, reserves, multisig, transactions, network-specific signatures and
+    classic assets, built with the real Stellar types and checked against the Stellar CLI.</p>
+  </div>
+  <div class="card">
+    <h3>Soroban by fixing it</h3>
+    <p>Contract functions, types, storage and TTL, errors, auth, events, tokens, cross-contract calls and
+    ledger time. Each exercise compiles against <code>soroban-sdk</code> 29.</p>
+  </div>
+  <div class="card">
+    <h3>Review the AI</h3>
+    <p>A security track of plausible, AI-style contracts with one planted vulnerability each. The happy path
+    passes; an exploit test proves the attack. Fix the contract.</p>
+  </div>
+  <div class="card">
+    <h3>Graduate on-chain</h3>
+    <p><code>sorolearn graduate</code> deploys your contract to testnet, where a registry contract examines it
+    with cross-contract calls and records you. <a href="graduates/">See the graduates.</a></p>
+  </div>
+  <div class="card">
+    <h3>Offline or in the browser</h3>
+    <p>Run it locally (fully offline after a one-time setup) or open it in GitHub Codespaces with Rust, the
+    Stellar CLI and a pre-built SDK ready to go.</p>
+  </div>
+  <div class="card">
+    <h3>Watch mode &amp; hints</h3>
+    <p>Sorolearn re-runs the tests every time you save. Stuck? Type <code>h</code> for a hint, read the topic
+    README, then compare with the reference solution once you pass.</p>
+  </div>
+</section>
+
+<section class="prose">
+  <h2>Quick start</h2>
+<pre><code>git clone https://github.com/Evangel90/Sorolearn.git sorolearn
+cd sorolearn
+cargo install --path .
+sorolearn setup   <span class="comment"># once: downloads and pre-builds the SDK</span>
+sorolearn         <span class="comment"># start watch mode</span></code></pre>
+  <p>Need Rust? See <a href="setup/">Setup</a>. Want to skip installing anything?
+  <a href="https://codespaces.new/Evangel90/Sorolearn">Open it in GitHub Codespaces</a>.</p>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="inner">
+    <span>Sorolearn: small exercises for Stellar &amp; Soroban. MIT licensed.</span>
+    <span><a href="https://github.com/Evangel90/Sorolearn">Source on GitHub</a> · Inspired by <a href="https://rustlings.rust-lang.org">Rustlings</a></span>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/asciinema-player@3.17.0/dist/bundle/asciinema-player.min.js"></script>
+<script>
+  AsciinemaPlayer.create("assets/demo.cast", document.getElementById("demo"), {
+    cols: 100, rows: 30, idleTimeLimit: 2, poster: "npt:0:18.3", fit: "width", theme: "asciinema", preload: true
+  });
+</script>
+</body>
+</html>
