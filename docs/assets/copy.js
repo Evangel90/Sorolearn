@@ -69,16 +69,37 @@
     pre.insertBefore(buttons, pre.firstChild);
 
     const tooltip = button.querySelector(".tooltiptext");
-    button.addEventListener("click", async () => {
+    const copyBlock = async () => {
       const ok = await writeClipboard(commandText(pre.querySelector("code") || pre));
       tooltip.textContent = ok ? "Copied!" : "Copy failed";
       button.classList.toggle("copied", ok);
+      pre.classList.add("copied");
       button.firstElementChild.outerHTML = ok ? CHECK_ICON : COPY_ICON;
       flash(button, null, () => {
         tooltip.textContent = "";
+        pre.classList.remove("copied");
         button.firstElementChild.outerHTML = COPY_ICON;
       });
+    };
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      copyBlock();
     });
+    // Clicking anywhere on the command copies it, unless the reader is
+    // selecting part of the text.
+    pre.classList.add("click-to-copy");
+    pre.title = "Click to copy";
+    pre.addEventListener("click", () => {
+      if (String(window.getSelection() || "").length > 0) return;
+      copyBlock();
+    });
+  });
+
+  // Inline snippets that are CLI commands copy on click too.
+  const COMMAND = /^(sorolearn|cargo|rustup|stellar|git|brew|python3)(\s|$)/;
+  document.querySelectorAll("main code").forEach((code) => {
+    if (code.closest("pre") || code.closest(".player, .window")) return;
+    if (COMMAND.test(code.textContent.trim())) code.classList.add("cmd");
   });
 
   document.querySelectorAll("code.cmd").forEach((code) => {

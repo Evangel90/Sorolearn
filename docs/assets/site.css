@@ -295,7 +295,9 @@ pre > .code-buttons {
   position: absolute; top: 13.5px; right: 10px; z-index: 1;
   visibility: hidden; opacity: 0; transition: visibility 0.1s, opacity 0.1s;
 }
-pre:hover > .buttons, pre > .code-buttons:focus-within { visibility: visible; opacity: 1; }
+pre:hover > .code-buttons, pre > .code-buttons:focus-within, pre.copied > .code-buttons { visibility: visible; opacity: 1; }
+pre.click-to-copy { cursor: pointer; }
+pre.click-to-copy:hover { border-color: var(--border-strong); }
 @media (hover: none) { pre > .code-buttons { visibility: visible; opacity: 1; } }
 pre > .code-buttons .clip-button {
   position: relative; display: grid; place-items: center; width: 28px; height: 28px; padding: 0;
