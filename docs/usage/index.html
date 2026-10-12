@@ -25,7 +25,7 @@
 
 <h2>Watch mode</h2>
 <pre><code>sorolearn</code></pre>
-<p>Sorolearn shows the current exercise, for example <code>exercises/07_storage/storage1.rs</code>. Open it in
+<p>Sorolearn shows the current exercise, for example <code>exercises/04_storage/storage1.rs</code>. Open it in
 your editor, read the comments, and make the code compile and the tests pass. Every time you save, Sorolearn
 re-runs the tests. When the exercise passes, type <code>n</code> + Enter for the next one.</p>
 <div class="table-wrap"><table>
@@ -45,13 +45,13 @@ re-runs the tests. When the exercise passes, type <code>n</code> + Enter for the
   <li>Reference solutions live in <code>solutions/</code>. Compare once you've passed, not before.</li>
 </ul>
 
-<h2>Three kinds of exercises</h2>
+<h2>Kinds of exercises</h2>
+<h3>Soroban contracts</h3>
+<p>Small <code>#![no_std]</code> contracts tested against Soroban's simulated environment: no network needed.</p>
 <h3>Stellar lessons</h3>
 <p>Plain Rust against the real Stellar types: derive keys and addresses, apply reserve and multisig rules,
 build, hash and sign transactions, parse assets. Expected values (like a transaction hash) were checked
 against the Stellar CLI.</p>
-<h3>Soroban contracts</h3>
-<p>Small <code>#![no_std]</code> contracts tested against Soroban's simulated environment: no network needed.</p>
 <h3>Security: review the AI</h3>
 <p>Each contract looks fine and its <code>happy_path</code> tests pass. An <code>exploit_</code> test reproduces
 a real attack. Fix the contract so the attack fails.</p>

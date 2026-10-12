@@ -26,7 +26,8 @@
     <h1>Sorolearn</h1>
     <p class="tagline">Small exercises to get you used to building on Stellar and writing Soroban smart contracts.</p>
     <p class="lede">Every exercise is a tiny piece of broken code with tests. Fix it, save, and Sorolearn tells you
-    instantly whether you got it. Start with the network itself, then write, test and <em>review</em> contracts.</p>
+    instantly whether you got it. Write contracts, learn the Stellar network underneath them, review AI-written code,
+    then deploy your own contracts to Stellar testnet.</p>
     <div class="buttons">
       <a class="btn primary" href="setup/">Get started</a>
       <a class="btn" href="https://codespaces.new/Evangel90/Sorolearn">Open in Codespaces</a>
@@ -40,14 +41,14 @@
 
 <section class="grid" aria-label="Features">
   <div class="card">
-    <h3>Stellar first</h3>
-    <p>Accounts, keys and StrKeys, reserves, multisig, transactions, network-specific signatures and
-    classic assets, built with the real Stellar types and checked against the Stellar CLI.</p>
-  </div>
-  <div class="card">
-    <h3>Soroban by fixing it</h3>
+    <h3>Soroban first</h3>
     <p>Contract functions, types, storage and TTL, errors, auth, events, tokens, cross-contract calls and
     ledger time. Each exercise compiles against <code>soroban-sdk</code> 29.</p>
+  </div>
+  <div class="card">
+    <h3>Then the Stellar network</h3>
+    <p>What your contracts run on: accounts, keys and StrKeys, reserves, multisig, transactions, network-specific signatures and
+    classic assets, built with the real Stellar types and checked against the Stellar CLI.</p>
   </div>
   <div class="card">
     <h3>Review the AI</h3>
@@ -55,9 +56,9 @@
     passes; an exploit test proves the attack. Fix the contract.</p>
   </div>
   <div class="card">
-    <h3>Graduate on-chain</h3>
-    <p><code>sorolearn graduate</code> deploys your contract to testnet, where a registry contract examines it
-    with cross-contract calls and records you. <a href="graduates/">See the graduates.</a></p>
+    <h3>Deploy for real, then graduate</h3>
+    <p>Testnet labs deploy the contracts you wrote, call them from real accounts, watch their events and put
+    your own asset in them. Then <code>sorolearn graduate</code> takes an on-chain exam. <a href="graduates/">See the graduates.</a></p>
   </div>
   <div class="card">
     <h3>Offline or in the browser</h3>

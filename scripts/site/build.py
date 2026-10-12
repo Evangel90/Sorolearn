@@ -38,7 +38,8 @@ home = f"""
     <h1>Sorolearn</h1>
     <p class="tagline">Small exercises to get you used to building on Stellar and writing Soroban smart contracts.</p>
     <p class="lede">Every exercise is a tiny piece of broken code with tests. Fix it, save, and Sorolearn tells you
-    instantly whether you got it. Start with the network itself, then write, test and <em>review</em> contracts.</p>
+    instantly whether you got it. Write contracts, learn the Stellar network underneath them, review AI-written code,
+    then deploy your own contracts to Stellar testnet.</p>
     <div class="buttons">
       <a class="btn primary" href="setup/">Get started</a>
       <a class="btn" href="{CODESPACES}">Open in Codespaces</a>
@@ -52,14 +53,14 @@ home = f"""
 
 <section class="grid" aria-label="Features">
   <div class="card">
-    <h3>Stellar first</h3>
-    <p>Accounts, keys and StrKeys, reserves, multisig, transactions, network-specific signatures and
-    classic assets, built with the real Stellar types and checked against the Stellar CLI.</p>
-  </div>
-  <div class="card">
-    <h3>Soroban by fixing it</h3>
+    <h3>Soroban first</h3>
     <p>Contract functions, types, storage and TTL, errors, auth, events, tokens, cross-contract calls and
     ledger time. Each exercise compiles against <code>soroban-sdk</code> 29.</p>
+  </div>
+  <div class="card">
+    <h3>Then the Stellar network</h3>
+    <p>What your contracts run on: accounts, keys and StrKeys, reserves, multisig, transactions, network-specific signatures and
+    classic assets, built with the real Stellar types and checked against the Stellar CLI.</p>
   </div>
   <div class="card">
     <h3>Review the AI</h3>
@@ -67,9 +68,9 @@ home = f"""
     passes; an exploit test proves the attack. Fix the contract.</p>
   </div>
   <div class="card">
-    <h3>Graduate on-chain</h3>
-    <p><code>sorolearn graduate</code> deploys your contract to testnet, where a registry contract examines it
-    with cross-contract calls and records you. <a href="graduates/">See the graduates.</a></p>
+    <h3>Deploy for real, then graduate</h3>
+    <p>Testnet labs deploy the contracts you wrote, call them from real accounts, watch their events and put
+    your own asset in them. Then <code>sorolearn graduate</code> takes an on-chain exam. <a href="graduates/">See the graduates.</a></p>
   </div>
   <div class="card">
     <h3>Offline or in the browser</h3>
@@ -163,7 +164,7 @@ usage = f"""
 
 <h2>Watch mode</h2>
 <pre><code>sorolearn</code></pre>
-<p>Sorolearn shows the current exercise, for example <code>exercises/07_storage/storage1.rs</code>. Open it in
+<p>Sorolearn shows the current exercise, for example <code>exercises/04_storage/storage1.rs</code>. Open it in
 your editor, read the comments, and make the code compile and the tests pass. Every time you save, Sorolearn
 re-runs the tests. When the exercise passes, type <code>n</code> + Enter for the next one.</p>
 <div class="table-wrap"><table>
@@ -183,13 +184,13 @@ re-runs the tests. When the exercise passes, type <code>n</code> + Enter for the
   <li>Reference solutions live in <code>solutions/</code>. Compare once you've passed, not before.</li>
 </ul>
 
-<h2>Three kinds of exercises</h2>
+<h2>Kinds of exercises</h2>
+<h3>Soroban contracts</h3>
+<p>Small <code>#![no_std]</code> contracts tested against Soroban's simulated environment: no network needed.</p>
 <h3>Stellar lessons</h3>
 <p>Plain Rust against the real Stellar types: derive keys and addresses, apply reserve and multisig rules,
 build, hash and sign transactions, parse assets. Expected values (like a transaction hash) were checked
 against the Stellar CLI.</p>
-<h3>Soroban contracts</h3>
-<p>Small <code>#![no_std]</code> contracts tested against Soroban's simulated environment: no network needed.</p>
 <h3>Security: review the AI</h3>
 <p>Each contract looks fine and its <code>happy_path</code> tests pass. An <code>exploit_</code> test reproduces
 a real attack. Fix the contract so the attack fails.</p>
@@ -229,33 +230,33 @@ write("usage/index.html", page("Usage", "How to use Sorolearn: watch mode, hints
 # ------------------------------------------------------------ curriculum
 topics = [
     ("Getting started", [
-        ("00", "intro", "00_intro", "intro1-2", "Your first contract: <code>#[contract]</code>, <code>#[contractimpl]</code>, <code>Env</code> and test clients."),
-    ]),
-    ("The Stellar network", [
-        ("01", "Accounts", "01_stellar_accounts", "accounts1-3", "Lumens and stroops, reserves, ed25519 keys, StrKeys (<code>G…</code> <code>S…</code> <code>C…</code> <code>M…</code>), multisig thresholds."),
-        ("02", "Transactions", "02_stellar_transactions", "transactions1-2", "Operations, sequence numbers, fees, memos, XDR, network-specific hashing and signing."),
-        ("03", "Assets", "03_stellar_assets", "assets1", "Classic assets: codes and issuers, trustlines, the <code>CODE:ISSUER</code> form."),
+        ("00", "Intro", "00_intro", "intro1-2", "Your first contract: <code>#[contract]</code>, <code>#[contractimpl]</code>, <code>Env</code> and test clients."),
     ]),
     ("Soroban smart contracts", [
-        ("04", "Functions", "04_functions", "functions1-2", "Exported functions and the types allowed across the contract boundary."),
-        ("05", "Types", "05_types", "symbols1, vecs1, maps1, bytes1", "<code>Symbol</code>, <code>Vec</code>, <code>Map</code>, <code>Bytes</code>, <code>String</code>."),
-        ("06", "Custom types", "06_custom_types", "types1-2", "<code>#[contracttype]</code> structs and enums."),
-        ("07", "Storage", "07_storage", "storage1-3", "Instance, persistent and temporary storage, <code>DataKey</code>, TTL."),
-        ("08", "Errors", "08_errors", "errors1-2", "<code>#[contracterror]</code>, <code>Result</code>, <code>panic_with_error!</code>, checked math."),
-        ("09", "Auth", "09_auth", "auth1-2", "<code>require_auth</code>, the admin pattern, constructors."),
-        ("10", "Events", "10_events", "events1", "<code>#[contractevent]</code>, topics and data."),
-        ("11", "Tokens", "11_tokens", "tokens1-2", "<code>TokenClient</code>, contracts holding funds, regulated classic assets via the Stellar Asset Contract."),
-        ("12", "Cross-contract", "12_cross_contract", "cross1", "Calling other contracts."),
-        ("13", "Time", "13_time", "time1", "Ledger timestamp vs sequence."),
+        ("01", "Functions", "01_functions", "functions1-2", "Exported functions and the types allowed across the contract boundary."),
+        ("02", "Types", "02_types", "symbols1, vecs1, maps1, bytes1", "<code>Symbol</code>, <code>Vec</code>, <code>Map</code>, <code>Bytes</code>, <code>String</code>."),
+        ("03", "Custom types", "03_custom_types", "types1-2", "<code>#[contracttype]</code> structs and enums."),
+        ("04", "Storage", "04_storage", "storage1-3", "Instance, persistent and temporary storage, <code>DataKey</code>, TTL."),
+        ("05", "Errors", "05_errors", "errors1-2", "<code>#[contracterror]</code>, <code>Result</code>, <code>panic_with_error!</code>, checked math."),
+        ("06", "Auth", "06_auth", "auth1-2", "<code>require_auth</code>, the admin pattern, constructors."),
+        ("07", "Events", "07_events", "events1", "<code>#[contractevent]</code>, topics and data."),
+        ("08", "Tokens", "08_tokens", "tokens1", "<code>TokenClient</code>, the Stellar Asset Contract, contracts holding funds."),
+        ("09", "Cross-contract", "09_cross_contract", "cross1", "Calling other contracts."),
+        ("10", "Time", "10_time", "time1", "Ledger timestamp vs sequence."),
         ("★", "Quizzes", "quizzes", "quiz1-2", "A poll and a time-locked token vault: everything together."),
+    ]),
+    ("The Stellar network underneath", [
+        ("11", "Accounts", "11_stellar_accounts", "accounts1-3", "Lumens and stroops, reserves, ed25519 keys, StrKeys (<code>G…</code> <code>S…</code> <code>C…</code> <code>M…</code>), multisig thresholds."),
+        ("12", "Transactions", "12_stellar_transactions", "transactions1-2", "Operations, sequence numbers, fees, memos, XDR, network-specific hashing and signing."),
+        ("13", "Assets", "13_stellar_assets", "assets1-2", "Classic assets: codes and issuers, trustlines, the <code>CODE:ISSUER</code> form, and a regulated asset paid out by a contract."),
     ]),
     ("Security: review the AI", [
         ("14", "Security", "14_security", "audit_auth, audit_init, audit_amount, audit_storage, audit_token",
          "Auth on the wrong address, re-callable initialize, negative amounts, expiring storage, trusting a caller's token."),
     ]),
-    ("On the network", [
-        ("15", "Testnet &amp; graduation", "15_testnet", "lab + <code>sorolearn graduate</code>",
-         "Issue an asset, open a trustline, pay, use the SAC from Soroban, deploy your contract, take the on-chain exam."),
+    ("Ship it on Stellar", [
+        ("15", "Deploy to testnet", "15_testnet", "4 labs + <code>sorolearn graduate</code>",
+         "Deploy your own contracts, call them from real accounts, watch events, issue an asset and hold it in your contract, then take the on-chain exam."),
     ]),
 ]
 sections = []
@@ -270,7 +271,7 @@ for group, rows in topics:
     sections.append(f'<h2>{group}</h2><div class="grid">{cards}</div>')
 curriculum = f"""
 <h1>Curriculum</h1>
-<p class="lede">35 exercises across 16 topics and two quizzes, plus a testnet lab. Each topic folder has a README with background reading
+<p class="lede">35 exercises across 16 topics and two quizzes, plus four testnet deployment labs. Each topic folder has a README with background reading
 and links to the Stellar docs.</p>
 {''.join(sections)}
 """
