@@ -151,13 +151,13 @@ Each exercise is a single `.rs` file. The CLI generates a hidden workspace in `.
 package per exercise (`[lib] path = "…/exercises/…"`), all sharing one target dir, so the SDK is
 built only once.
 
-## Contributing exercises
+## Contributing
 
-1. Write the solution in `solutions/<topic>/<name>.rs` (a `#![no_std]` contract + `#[cfg(test)] mod tests`).
-2. Copy it to `exercises/<topic>/<name>.rs` and break it in an instructive way.
-3. Add an `[[exercises]]` entry with a hint to `info.toml`.
-4. Run `cargo run -- dev check`: every solution must pass and every exercise must fail.
+Contributions are welcome: new exercises, better hints, fixes and website improvements. See
+[CONTRIBUTING.md](CONTRIBUTING.md) for setup, how to add an exercise, and the checks CI runs.
 
 All exercises target `soroban-sdk` 29.0.0 (protocol 29, which testnet and mainnet currently run).
-After changing the SDK version in `src/info.rs`, delete `exercises.lock`, run `sorolearn setup`, and copy
-`.sorolearn/exercises/Cargo.lock` back to `exercises.lock`.
+
+## License
+
+[MIT](LICENSE)
