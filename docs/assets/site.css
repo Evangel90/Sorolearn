@@ -290,18 +290,22 @@ td { color: var(--text-2); }
 
 /* ------------------------------------------------------------ copying */
 .code-block { position: relative; margin: 0 0 20px; }
-.code-block pre { margin: 0; padding-right: 92px; }
+.code-block pre { margin: 0; padding-right: 56px; }
+/* Icon-only button, vertically aligned with the first line of the command:
+   pre top padding (16px) + half a line (23px) - half the button (28px). */
 .copy-btn {
-  position: absolute; top: 9px; right: 9px; display: inline-flex; align-items: center; gap: 6px;
-  height: 28px; padding: 0 10px; border-radius: 7px; border: 1px solid var(--border-strong);
-  background: rgba(20, 21, 22, 0.9); color: var(--muted); font: 500 12px var(--sans); cursor: pointer;
-  opacity: 0; transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+  position: absolute; top: 13.5px; right: 12px; display: grid; place-items: center;
+  width: 28px; height: 28px; padding: 0; border-radius: 7px; border: 1px solid transparent;
+  background: transparent; color: var(--faint); cursor: pointer;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
 }
-.code-block:hover .copy-btn, .copy-btn:focus-visible, .copy-btn.copied { opacity: 1; }
-.copy-btn:hover { color: var(--text); border-color: rgba(255, 255, 255, 0.25); }
-.copy-btn.copied { color: var(--ok); border-color: rgba(76, 195, 138, 0.4); }
-.copy-btn .icon { display: inline-flex; }
-@media (hover: none) { .copy-btn { opacity: 1; } }
+.copy-btn:hover, .copy-btn:focus-visible { color: var(--text); background: rgba(255, 255, 255, 0.06); border-color: var(--border-strong); outline: none; }
+.copy-btn.copied { color: var(--ok); }
+.copy-btn.copied::after {
+  content: "Copied"; position: absolute; right: calc(100% + 8px); top: 50%; transform: translateY(-50%);
+  padding: 2px 8px; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border-strong);
+  color: var(--ok); font: 500 11px var(--sans); white-space: nowrap; pointer-events: none;
+}
 code.cmd { cursor: copy; position: relative; transition: border-color 0.15s, color 0.15s; }
 code.cmd:hover, code.cmd:focus-visible { border-color: var(--accent); color: var(--text); outline: none; }
 code.cmd.copied { border-color: rgba(76, 195, 138, 0.5); color: var(--ok); }
@@ -311,3 +315,5 @@ code.cmd.copied::after {
   color: var(--ok); font: 500 11px var(--sans); white-space: nowrap; pointer-events: none;
 }
 .install { max-width: 640px; margin: 0 auto 28px; text-align: left; }
+p code, li code, td code { white-space: nowrap; }
+.prose .buttons { margin: 18px 0 14px; }

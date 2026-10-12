@@ -63,17 +63,17 @@
     button.type = "button";
     button.className = "copy-btn";
     button.setAttribute("aria-label", "Copy command");
-    button.innerHTML = `<span class="icon">${COPY_ICON}</span><span class="text">Copy</span>`;
+    button.title = "Copy";
+    button.innerHTML = COPY_ICON;
     wrap.appendChild(button);
 
-    const label = button.querySelector(".text");
-    const icon = button.querySelector(".icon");
     button.addEventListener("click", async () => {
       if (await writeClipboard(commandText(pre.querySelector("code") || pre))) {
-        icon.innerHTML = CHECK_ICON;
-        flash(button, label, () => {
-          label.textContent = "Copy";
-          icon.innerHTML = COPY_ICON;
+        button.innerHTML = CHECK_ICON;
+        button.setAttribute("aria-label", "Copied");
+        flash(button, null, () => {
+          button.innerHTML = COPY_ICON;
+          button.setAttribute("aria-label", "Copy command");
         });
       }
     });
