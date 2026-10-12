@@ -3,43 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sorolearn Graduates</title>
+<title>Graduates · Sorolearn</title>
 <meta name="description" content="Learners who passed the Sorolearn on-chain exam on Stellar testnet.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
 <style>
-  :root {
-    --bg: #f7f7f4; --surface: #ffffff; --text: #1b1d21; --muted: #5d6470;
-    --border: #e3e3dc; --accent: #5b3df5; --accent-soft: #ece8ff; --ok: #12805c; --bad: #b42318;
-    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #101114; --surface: #17191d; --text: #eceef2; --muted: #9aa2ae;
-      --border: #2a2e35; --accent: #9b8cff; --accent-soft: #241f45; --ok: #3ecf9a; --bad: #ff7b72;
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #101114; --surface: #17191d; --text: #eceef2; --muted: #9aa2ae;
-    --border: #2a2e35; --accent: #9b8cff; --accent-soft: #241f45; --ok: #3ecf9a; --bad: #ff7b72;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; background: var(--bg); color: var(--text);
-    font: 16px/1.55 Inter, system-ui, -apple-system, Segoe UI, sans-serif;
-  }
-  main { max-width: 880px; margin: 0 auto; padding: 48px 16px 64px; }
-  h1 { font-size: clamp(28px, 5vw, 40px); line-height: 1.15; margin: 0 0 8px; letter-spacing: -0.02em; }
   .lede { color: var(--muted); margin: 0 0 28px; max-width: 60ch; }
   a { color: var(--accent); }
-  code, .mono { font-family: var(--mono); font-size: 0.88em; }
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
   .stats { display: flex; gap: 32px; flex-wrap: wrap; align-items: baseline; }
   .stat-num { font-size: 40px; font-weight: 700; line-height: 1; }
   .stat-label { color: var(--muted); font-size: 14px; }
   .registry { font-family: var(--mono); font-size: 13px; word-break: break-all; }
-  table { width: 100%; border-collapse: collapse; }
-  th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
   th { color: var(--muted); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; }
   tr:last-child td { border-bottom: none; }
   td.num { font-weight: 700; color: var(--accent); width: 3em; }
@@ -52,21 +29,27 @@
     background: var(--bg); color: var(--text); font-family: var(--mono); font-size: 14px;
   }
   button {
-    padding: 10px 16px; border-radius: 10px; border: none; background: var(--accent); color: #fff;
+    padding: 10px 16px; border-radius: 10px; border: none; background: var(--accent); color: var(--accent-text);
     font: inherit; font-weight: 600; cursor: pointer;
   }
   .verdict { margin-top: 12px; font-weight: 600; }
   .verdict.ok { color: var(--ok); }
   .verdict.no { color: var(--bad); }
-  pre { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 12px; overflow-x: auto; font-family: var(--mono); font-size: 13px; margin: 8px 0 0; }
-  h2 { font-size: 18px; margin: 0 0 12px; }
   .pill { display: inline-block; background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 2px 10px; font-size: 12px; font-weight: 600; margin-bottom: 14px; }
-  footer { color: var(--muted); font-size: 14px; margin-top: 32px; }
+  .card h2 { margin: 0 0 12px; font-size: 18px; }
+  .mono { font-family: var(--mono); font-size: 0.88em; }
 </style>
 </head>
 <body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="../"><img class="mark" src="../assets/favicon.svg" alt="" width="28" height="28">Sorolearn</a>
+    <nav class="site-nav" aria-label="Main"><a href="../setup/">Setup</a><a href="../usage/">Usage</a><a href="../curriculum/">Curriculum</a><a href="../graduates/" aria-current="page">Graduates</a><a href="https://github.com/Evangel90/Sorolearn">GitHub</a></nav>
+  </div>
+</header>
 <main>
-  <span class="pill">Stellar testnet · live on-chain data</span>
+
+  <span class="pill" style="display:inline-block;background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:3px 12px;font-size:13px;font-weight:600;margin-bottom:14px">Stellar testnet · live on-chain data</span>
   <h1>Sorolearn graduates</h1>
   <p class="lede">
     Every learner here deployed their own Soroban poll contract to Stellar testnet, where the Sorolearn
@@ -111,11 +94,15 @@
     </p>
   </section>
 
-  <footer>
-    Testnet is reset periodically; records live until the next reset.
-  </footer>
-</main>
+  <p class="muted">Testnet is reset periodically; records live until the next reset.</p>
 
+</main>
+<footer class="site-footer">
+  <div class="inner">
+    <span>Sorolearn: small exercises for Stellar &amp; Soroban. MIT licensed.</span>
+    <span><a href="https://github.com/Evangel90/Sorolearn">Source on GitHub</a> · Inspired by <a href="https://rustlings.rust-lang.org">Rustlings</a></span>
+  </div>
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/@stellar/stellar-sdk@17.1.0/dist/stellar-sdk.min.js"></script>
 <script>
   const S = window.StellarSdk;

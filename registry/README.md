@@ -25,4 +25,4 @@ stellar contract deploy --wasm target/wasm32v1-none/release/sorolearn_registry.w
   --source-account sorolearn-deployer --network testnet --alias sorolearn-registry
 ```
 
-Then update `REGISTRY_ID` in `src/graduate.rs`, the docs, and `docs/index.html`.
+Then update `REGISTRY_ID` in `src/graduate.rs`, the docs, and `docs/graduates/index.html`.
