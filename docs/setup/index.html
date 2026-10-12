@@ -5,24 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Setup · Sorolearn</title>
 <meta name="description" content="Install Sorolearn locally or open it in GitHub Codespaces.">
+<meta name="theme-color" content="#08090a">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
 <header class="site-header">
   <div class="inner">
-    <a class="brand" href="../"><img class="mark" src="../assets/favicon.svg" alt="" width="28" height="28">Sorolearn</a>
-    <nav class="site-nav" aria-label="Main"><a href="../setup/" aria-current="page">Setup</a><a href="../usage/">Usage</a><a href="../curriculum/">Curriculum</a><a href="../graduates/">Graduates</a><a href="https://github.com/Evangel90/Sorolearn">GitHub</a></nav>
+    <a class="brand" href="../"><img class="mark" src="../assets/favicon.svg" alt="" width="22" height="22">Sorolearn</a>
+    <nav class="site-nav" aria-label="Main"><a href="../curriculum/">Curriculum</a><a href="../setup/" aria-current="page">Setup</a><a href="../usage/">Usage</a><a href="../graduates/">Graduates</a></nav>
+    <div class="header-cta">
+      <a class="link" href="https://github.com/Evangel90/Sorolearn">GitHub</a>
+      <a class="btn small primary" href="../setup/">Get started</a>
+    </div>
   </div>
 </header>
 <main>
 
-<div class="prose">
-<h1>Setup</h1>
+<div class="page-head">
+<p class="eyebrow">Setup</p>
+<h1 class="gradient-text">Run it anywhere.</h1>
 <p class="lede">Two ways to run Sorolearn: in your browser with nothing to install, or locally, where it
 works fully offline after a one-time setup.</p>
+</div>
+<div class="prose">
 
 <h2>In the browser (GitHub Codespaces)</h2>
 <p>Click the button, wait for the codespace to open, then type <code>sorolearn</code> in the terminal.
@@ -76,8 +85,27 @@ rustup target add wasm32v1-none</code></pre>
 </main>
 <footer class="site-footer">
   <div class="inner">
-    <span>Sorolearn: small exercises for Stellar &amp; Soroban. MIT licensed.</span>
-    <span><a href="https://github.com/Evangel90/Sorolearn">Source on GitHub</a> · Inspired by <a href="https://rustlings.rust-lang.org">Rustlings</a></span>
+    <div>
+      <a class="brand" href="../"><img class="mark" src="../assets/favicon.svg" alt="" width="22" height="22">Sorolearn</a>
+      <p>Small exercises for Stellar and Soroban.<br>MIT licensed. Inspired by <a href="https://rustlings.rust-lang.org">Rustlings</a>.</p>
+    </div>
+    <div>
+      <h4>Learn</h4>
+      <a href="../curriculum/">Curriculum</a>
+      <a href="../setup/">Setup</a>
+      <a href="../usage/">Usage</a>
+    </div>
+    <div>
+      <h4>On-chain</h4>
+      <a href="../graduates/">Graduates</a>
+      <a href="https://stellar.expert/explorer/testnet/contract/CD23Z2JCHQHLJOXWAWOV4NFMAL3N5YRDCGLBGHLKD62X5QUCHDYPFWYY">Registry contract</a>
+    </div>
+    <div>
+      <h4>Project</h4>
+      <a href="https://github.com/Evangel90/Sorolearn">GitHub</a>
+      <a href="https://codespaces.new/Evangel90/Sorolearn">Open in Codespaces</a>
+      <a href="https://developers.stellar.org/docs/build/smart-contracts/overview">Soroban docs</a>
+    </div>
   </div>
 </footer>
 </body>

@@ -5,28 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Graduates · Sorolearn</title>
 <meta name="description" content="Learners who passed the Sorolearn on-chain exam on Stellar testnet.">
+<meta name="theme-color" content="#08090a">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
 <style>
-  .lede { color: var(--muted); margin: 0 0 28px; max-width: 60ch; }
-  a { color: var(--accent); }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
   .stats { display: flex; gap: 32px; flex-wrap: wrap; align-items: baseline; }
   .stat-num { font-size: 40px; font-weight: 700; line-height: 1; }
   .stat-label { color: var(--muted); font-size: 14px; }
   .registry { font-family: var(--mono); font-size: 13px; word-break: break-all; }
-  th { color: var(--muted); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; }
-  tr:last-child td { border-bottom: none; }
   td.num { font-weight: 700; color: var(--accent); width: 3em; }
-  .table-wrap { overflow-x: auto; }
   .empty, .status { color: var(--muted); }
   .error { color: var(--bad); }
   form { display: flex; gap: 8px; flex-wrap: wrap; }
   input {
     flex: 1 1 320px; min-width: 0; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border);
-    background: var(--bg); color: var(--text); font-family: var(--mono); font-size: 14px;
+    background: var(--bg-2); color: var(--text); font-family: var(--mono); font-size: 14px;
   }
   button {
     padding: 10px 16px; border-radius: 10px; border: none; background: var(--accent); color: var(--accent-text);
@@ -35,27 +31,36 @@
   .verdict { margin-top: 12px; font-weight: 600; }
   .verdict.ok { color: var(--ok); }
   .verdict.no { color: var(--bad); }
-  .pill { display: inline-block; background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 2px 10px; font-size: 12px; font-weight: 600; margin-bottom: 14px; }
   .card h2 { margin: 0 0 12px; font-size: 18px; }
   .mono { font-family: var(--mono); font-size: 0.88em; }
+  .stats { align-items: center; }
+  form input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  main .card { margin-bottom: 16px; }
+  .registry a { color: var(--accent); }
+  .card h2 { margin: 0 0 14px; font-size: 18px; letter-spacing: -0.02em; }
+  button { background: #f7f8f8 !important; color: #08090a !important; font-weight: 500 !important; }
 </style>
 </head>
 <body>
 <header class="site-header">
   <div class="inner">
-    <a class="brand" href="../"><img class="mark" src="../assets/favicon.svg" alt="" width="28" height="28">Sorolearn</a>
-    <nav class="site-nav" aria-label="Main"><a href="../setup/">Setup</a><a href="../usage/">Usage</a><a href="../curriculum/">Curriculum</a><a href="../graduates/" aria-current="page">Graduates</a><a href="https://github.com/Evangel90/Sorolearn">GitHub</a></nav>
+    <a class="brand" href="../"><img class="mark" src="../assets/favicon.svg" alt="" width="22" height="22">Sorolearn</a>
+    <nav class="site-nav" aria-label="Main"><a href="../curriculum/">Curriculum</a><a href="../setup/">Setup</a><a href="../usage/">Usage</a><a href="../graduates/" aria-current="page">Graduates</a></nav>
+    <div class="header-cta">
+      <a class="link" href="https://github.com/Evangel90/Sorolearn">GitHub</a>
+      <a class="btn small primary" href="../setup/">Get started</a>
+    </div>
   </div>
 </header>
 <main>
 
-  <span class="pill" style="display:inline-block;background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:3px 12px;font-size:13px;font-weight:600;margin-bottom:14px">Stellar testnet · live on-chain data</span>
-  <h1>Sorolearn graduates</h1>
-  <p class="lede">
-    Every learner here deployed their own Soroban poll contract to Stellar testnet, where the Sorolearn
+<div class="page-head">
+<p class="eyebrow">Stellar testnet · live on-chain data</p>
+<h1 class="gradient-text">Sorolearn graduates.</h1>
+<p class="lede">Every learner here deployed their own Soroban poll contract to Stellar testnet, where the Sorolearn
     registry contract examined it with real cross-contract calls before recording them. Nothing on this page
-    comes from a server: it is read directly from the registry contract.
-  </p>
+    comes from a server: it is read directly from the registry contract.</p>
+</div>
 
   <section class="card stats">
     <div><div class="stat-num" id="count">–</div><div class="stat-label">graduates</div></div>
@@ -96,11 +101,31 @@
 
   <p class="muted">Testnet is reset periodically; records live until the next reset.</p>
 
+
 </main>
 <footer class="site-footer">
   <div class="inner">
-    <span>Sorolearn: small exercises for Stellar &amp; Soroban. MIT licensed.</span>
-    <span><a href="https://github.com/Evangel90/Sorolearn">Source on GitHub</a> · Inspired by <a href="https://rustlings.rust-lang.org">Rustlings</a></span>
+    <div>
+      <a class="brand" href="../"><img class="mark" src="../assets/favicon.svg" alt="" width="22" height="22">Sorolearn</a>
+      <p>Small exercises for Stellar and Soroban.<br>MIT licensed. Inspired by <a href="https://rustlings.rust-lang.org">Rustlings</a>.</p>
+    </div>
+    <div>
+      <h4>Learn</h4>
+      <a href="../curriculum/">Curriculum</a>
+      <a href="../setup/">Setup</a>
+      <a href="../usage/">Usage</a>
+    </div>
+    <div>
+      <h4>On-chain</h4>
+      <a href="../graduates/">Graduates</a>
+      <a href="https://stellar.expert/explorer/testnet/contract/CD23Z2JCHQHLJOXWAWOV4NFMAL3N5YRDCGLBGHLKD62X5QUCHDYPFWYY">Registry contract</a>
+    </div>
+    <div>
+      <h4>Project</h4>
+      <a href="https://github.com/Evangel90/Sorolearn">GitHub</a>
+      <a href="https://codespaces.new/Evangel90/Sorolearn">Open in Codespaces</a>
+      <a href="https://developers.stellar.org/docs/build/smart-contracts/overview">Soroban docs</a>
+    </div>
   </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/@stellar/stellar-sdk@17.1.0/dist/stellar-sdk.min.js"></script>

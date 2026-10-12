@@ -26,73 +26,117 @@ PLAYER_HEAD = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/asciine
 PLAYER_JS = """<script src="https://cdn.jsdelivr.net/npm/asciinema-player@3.17.0/dist/bundle/asciinema-player.min.js"></script>
 <script>
   AsciinemaPlayer.create("assets/demo.cast", document.getElementById("demo"), {
-    cols: 100, rows: 30, idleTimeLimit: 2, poster: "npt:0:18.3", fit: "width", theme: "asciinema", preload: true
+    cols: 100, rows: 30, idleTimeLimit: 2, poster: "npt:0:16.9", fit: "width", theme: "asciinema", preload: true, terminalFontFamily: "JetBrains Mono, Menlo, monospace"
   });
 </script>
 """
 
 home = f"""
 <section class="hero">
-  <div class="hero-text">
-    <span class="pill">Stellar · Soroban · Rust</span>
-    <h1>Sorolearn</h1>
-    <p class="tagline">Small exercises to get you used to building on Stellar and writing Soroban smart contracts.</p>
-    <p class="lede">Every exercise is a tiny piece of broken code with tests. Fix it, save, and Sorolearn tells you
-    instantly whether you got it. Write contracts, learn the Stellar network underneath them, review AI-written code,
-    then deploy your own contracts to Stellar testnet.</p>
-    <div class="buttons">
-      <a class="btn primary" href="setup/">Get started</a>
-      <a class="btn" href="{CODESPACES}">Open in Codespaces</a>
-    </div>
-    <p class="muted"><strong>AI can write your Soroban contract. Sorolearn teaches you to tell when it's wrong.</strong></p>
+  <a class="badge" href="curriculum/"><span class="dot"></span>soroban-sdk 29 <span class="sep">·</span> Protocol 29 <span class="sep">·</span> 35 exercises <span class="arrow">→</span></a>
+  <h1 class="display gradient-text">Learn Soroban by fixing it.</h1>
+  <p class="sub">Small, broken smart contracts with tests. Fix them, save, and watch them turn green.
+  Then learn the Stellar network underneath, review AI-written code, and ship to testnet.</p>
+  <div class="buttons">
+    <a class="btn primary" href="setup/">Get started <span class="arrow">→</span></a>
+    <a class="btn" href="{CODESPACES}">Open in Codespaces</a>
   </div>
-  <div>
+  <p class="fineprint">Free and open source · Works offline after a one-time setup</p>
+
+  <div class="window">
+    <div class="window-bar"><i></i><i></i><i></i><span>sorolearn — watch mode</span></div>
     <div class="player" id="demo" aria-label="Terminal recording: Sorolearn watch mode catches an exploit, the fix is saved, the exercise passes"></div>
   </div>
 </section>
 
-<section class="grid" aria-label="Features">
-  <div class="card">
-    <h3>Soroban first</h3>
-    <p>Contract functions, types, storage and TTL, errors, auth, events, tokens, cross-contract calls and
-    ledger time. Each exercise compiles against <code>soroban-sdk</code> 29.</p>
+<section class="stats-strip" aria-label="Sorolearn in numbers">
+  <div><strong>35</strong><span>exercises</span></div>
+  <div><strong>16</strong><span>topics</span></div>
+  <div><strong>5</strong><span>security audits</span></div>
+  <div><strong>4</strong><span>testnet labs</span></div>
+  <div><strong>1</strong><span>on-chain exam</span></div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <p class="eyebrow">The course</p>
+    <h2>Four movements, one broken program at a time.</h2>
+    <p class="lede">Every exercise compiles against the real SDK and is checked by real tests. You always know
+    exactly what's wrong, and exactly when it's fixed.</p>
   </div>
-  <div class="card">
-    <h3>Then the Stellar network</h3>
-    <p>What your contracts run on: accounts, keys and StrKeys, reserves, multisig, transactions, network-specific signatures and
-    classic assets, built with the real Stellar types and checked against the Stellar CLI.</p>
-  </div>
-  <div class="card">
-    <h3>Review the AI</h3>
-    <p>A security track of plausible, AI-style contracts with one planted vulnerability each. The happy path
-    passes; an exploit test proves the attack. Fix the contract.</p>
-  </div>
-  <div class="card">
-    <h3>Deploy for real, then graduate</h3>
-    <p>Testnet labs deploy the contracts you wrote, call them from real accounts, watch their events and put
-    your own asset in them. Then <code>sorolearn graduate</code> takes an on-chain exam. <a href="graduates/">See the graduates.</a></p>
-  </div>
-  <div class="card">
-    <h3>Offline or in the browser</h3>
-    <p>Run it locally (fully offline after a one-time setup) or open it in GitHub Codespaces with Rust, the
-    Stellar CLI and a pre-built SDK ready to go.</p>
-  </div>
-  <div class="card">
-    <h3>Watch mode &amp; hints</h3>
-    <p>Sorolearn re-runs the tests every time you save. Stuck? Type <code>h</code> for a hint, read the topic
-    README, then compare with the reference solution once you pass.</p>
+  <div class="movements">
+    <div class="movement">
+      <span class="num">1.0</span>
+      <h3>Write contracts</h3>
+      <p>Functions, types, storage and TTL, errors, auth, events, tokens, cross-contract calls and time.</p>
+      <ul><li>01 → 10 · quizzes</li><li>23 exercises</li></ul>
+    </div>
+    <div class="movement">
+      <span class="num">2.0</span>
+      <h3>Understand Stellar</h3>
+      <p>The network underneath: accounts and keys, multisig, transactions and signatures, classic assets.</p>
+      <ul><li>11 → 13</li><li>checked against the Stellar CLI</li></ul>
+    </div>
+    <div class="movement">
+      <span class="num">3.0</span>
+      <h3>Review the AI</h3>
+      <p>Plausible, AI-style contracts with one planted vulnerability each. An exploit test proves the attack.</p>
+      <ul><li>14 · security</li><li>5 audits</li></ul>
+    </div>
+    <div class="movement">
+      <span class="num">4.0</span>
+      <h3>Ship to testnet</h3>
+      <p>Deploy what you wrote, call it from real accounts, watch its events, then pass the on-chain exam.</p>
+      <ul><li>15 · deploy</li><li>4 labs + graduation</li></ul>
+    </div>
   </div>
 </section>
 
-<section class="prose">
-  <h2>Quick start</h2>
-<pre><code>git clone {REPO}.git sorolearn
-cd sorolearn
-cargo install --path .
-sorolearn setup   <span class="comment"># once: downloads and pre-builds the SDK</span>
-sorolearn         <span class="comment"># start watch mode</span></code></pre>
-  <p>Need Rust? See <a href="setup/">Setup</a>. Want to skip installing anything?
-  <a href="{CODESPACES}">Open it in GitHub Codespaces</a>.</p>
+<section class="section">
+  <div class="section-head">
+    <p class="eyebrow">Why Sorolearn</p>
+    <h2>AI can write your contract.<br><span class="muted">Can you tell when it's wrong?</span></h2>
+  </div>
+  <div class="bento">
+    <div class="tile wide">
+      <span class="label">14_security/audit_auth.rs</span>
+      <h3>Review the AI</h3>
+      <p>It compiles. It calls <code>require_auth</code>. The happy path passes. And anyone can drain anyone,
+      because it asks the <em>recipient</em> to sign. Five audits like this, each with an exploit test.</p>
+      <div class="diff"><div class="dim">pub fn transfer(env: Env, from: Address, to: Address, amount: i128) {{</div><div class="del">-    to.require_auth();</div><div class="add">+    from.require_auth();</div><div class="dim">    let from_balance = Self::balance(env.clone(), from.clone());</div></div>
+    </div>
+    <div class="tile narrow">
+      <span class="label">watch mode</span>
+      <h3>One key away</h3>
+      <p>Save to re-run the tests. Keys work instantly.</p>
+      <div class="keys"><span class="key">n<small>next</small></span><span class="key">h<small>hint</small></span><span class="key">l<small>list</small></span><span class="key">q<small>quit</small></span></div>
+    </div>
+    <div class="tile narrow">
+      <span class="label">offline first</span>
+      <h3>No network needed</h3>
+      <p>One setup, then every build runs offline against a pinned lockfile. Or skip installing: open it in Codespaces.</p>
+      <div class="mini-term"><span class="p">$</span> sorolearn setup
+<span class="ok">done:</span> works fully offline</div>
+    </div>
+    <div class="tile wide">
+      <span class="label">registry · CD23Z2…FWYY</span>
+      <h3>Graduate on-chain</h3>
+      <p>A registry contract on Stellar testnet deploys a fresh copy of your contract, examines it with
+      cross-contract calls, and records you. Nobody self-reports. <a href="graduates/">See the graduates →</a></p>
+      <div class="mini-term"><span class="p">$</span> sorolearn graduate
+[6/6] Ask the registry to examine your contract and record you
+<span class="ok">✓ You are Sorolearn graduate #3!</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2 class="gradient-text" style="font-size:clamp(36px,6vw,56px)">Start fixing.</h2>
+  <p class="lede" style="margin:0 auto 32px">Clone it and run <code>sorolearn</code>, or open it in your browser.</p>
+  <div class="buttons">
+    <a class="btn primary" href="setup/">Get started <span class="arrow">→</span></a>
+    <a class="btn" href="{REPO}">View on GitHub</a>
+  </div>
 </section>
 """
 write("index.html", page("Sorolearn", "Small exercises to get you used to building on Stellar and writing Soroban smart contracts.",
@@ -100,10 +144,13 @@ write("index.html", page("Sorolearn", "Small exercises to get you used to buildi
 
 # ----------------------------------------------------------------- setup
 setup = f"""
-<div class="prose">
-<h1>Setup</h1>
+<div class="page-head">
+<p class="eyebrow">Setup</p>
+<h1 class="gradient-text">Run it anywhere.</h1>
 <p class="lede">Two ways to run Sorolearn: in your browser with nothing to install, or locally, where it
 works fully offline after a one-time setup.</p>
+</div>
+<div class="prose">
 
 <h2>In the browser (GitHub Codespaces)</h2>
 <p>Click the button, wait for the codespace to open, then type <code>sorolearn</code> in the terminal.
@@ -158,9 +205,12 @@ write("setup/index.html", page("Setup", "Install Sorolearn locally or open it in
 
 # ----------------------------------------------------------------- usage
 usage = f"""
+<div class="page-head">
+<p class="eyebrow">Usage</p>
+<h1 class="gradient-text">Read, fix, save, repeat.</h1>
+<p class="lede">Sorolearn takes care of compiling and testing. You fix the code.</p>
+</div>
 <div class="prose">
-<h1>Usage</h1>
-<p class="lede">Read, fix, save, repeat. Sorolearn takes care of compiling and testing.</p>
 
 <h2>Watch mode</h2>
 <pre><code>sorolearn</code></pre>
@@ -261,18 +311,23 @@ topics = [
 ]
 sections = []
 for group, rows in topics:
-    cards = "".join(
-        f'<div class="card"><div class="num">{num}</div><h3><a href="{TREE}/{folder}">{name}</a></h3>'
-        f'<p>{desc}</p><p class="muted"><code>{exs}</code></p></div>' if "<code>" not in exs else
-        f'<div class="card"><div class="num">{num}</div><h3><a href="{TREE}/{folder}">{name}</a></h3>'
-        f'<p>{desc}</p><p class="muted">{exs}</p></div>'
+    count = len(rows)
+    items = "".join(
+        f'<a class="row" href="{TREE}/{folder}"><span class="n">{num}</span><span class="name">{name}</span>'
+        f'<span class="desc">{desc}</span><span class="ex">{exs}</span></a>'
         for num, name, folder, exs, desc in rows
     )
-    sections.append(f'<h2>{group}</h2><div class="grid">{cards}</div>')
+    sections.append(
+        f'<section class="group"><div class="group-title"><h2>{group}</h2>'
+        f'<span>{count} topic{"s" if count != 1 else ""}</span></div><div class="rows">{items}</div></section>'
+    )
 curriculum = f"""
-<h1>Curriculum</h1>
-<p class="lede">35 exercises across 16 topics and two quizzes, plus four testnet deployment labs. Each topic folder has a README with background reading
-and links to the Stellar docs.</p>
+<div class="page-head">
+<p class="eyebrow">Curriculum</p>
+<h1 class="gradient-text">From your first contract to testnet.</h1>
+<p class="lede">35 exercises across 16 topics and two quizzes, plus four testnet deployment labs. Each topic folder
+has a README with background reading and links to the Stellar docs.</p>
+</div>
 {''.join(sections)}
 """
 write("curriculum/index.html", page("Curriculum", "Every Sorolearn topic, from Stellar accounts to an on-chain exam.", "Curriculum", "../", curriculum))
