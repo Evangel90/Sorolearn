@@ -113,6 +113,18 @@ hint = """
   then sha256 its XDR (`payload.to_xdr(Limits::none())`).
 - The hint is the *last* 4 bytes of the public key: `public_key[28..]`."""
 
+# --------------------------------------------------- stellar: assets
+
+[[exercises]]
+name = "assets1"
+dir = "03_stellar_assets"
+stellar = true
+hint = """
+- Codes may be up to 12 characters, letters and digits only:
+  `code.len() > 12 || !code.chars().all(|c| c.is_ascii_alphanumeric())`.
+- Codes of 5-12 characters become `Asset::CreditAlphanum12(AlphaNum12 { asset_code: AssetCode12(padded), issuer })`.
+- When printing, drop the zero padding: `.trim_end_matches('\\0')`."""
+
 # ------------------------------------------------------------ functions
 
 [[exercises]]
