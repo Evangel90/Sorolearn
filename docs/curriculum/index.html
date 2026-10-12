@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Curriculum · Sorolearn</title>
+<meta name="description" content="Every Sorolearn topic, from Stellar accounts to an on-chain exam.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="../"><img class="mark" src="../assets/favicon.svg" alt="" width="28" height="28">Sorolearn</a>
+    <nav class="site-nav" aria-label="Main"><a href="../setup/">Setup</a><a href="../usage/">Usage</a><a href="../curriculum/" aria-current="page">Curriculum</a><a href="../graduates/">Graduates</a><a href="https://github.com/Evangel90/Sorolearn">GitHub</a></nav>
+  </div>
+</header>
+<main>
+
+<h1>Curriculum</h1>
+<p class="lede">35 exercises across 16 topics and two quizzes, plus a testnet lab. Each topic folder has a README with background reading
+and links to the Stellar docs.</p>
+<h2>Getting started</h2><div class="grid"><div class="card"><div class="num">00</div><h3><a href="https://github.com/Evangel90/Sorolearn/tree/main/exercises/00_intro">intro</a></h3><p>Your first contract: <code>#[contract]</code>, <code>#[contractimpl]</code>, <code>Env</code> and test clients.</p><p class="muted"><code>intro1-2</code></p></div></div><h2>The Stellar network</h2><div class="grid"><div class="card"><div class="num">01</div><h3><a href="https://github.com/Evangel90/Sorolearn/tree/main/exercises/01_stellar_accounts">Accounts</a></h3><p>Lumens and stroops, reserves, ed25519 keys, StrKeys (<code>G…</code> <code>S…</code> <code>C…</code> <code>M…</code>), multisig thresholds.</p><p class="muted"><code>accounts1-3</code></p></div><div class="card"><div class="num">02</div><h3><a href="https://github.com/Evangel90/Sorolearn/tree/main/exercises/02_stellar_transactions">Transactions</a></h3><p>Operations, sequence numbers, fees, memos, XDR, network-specific hashing and signing.</p><p class="muted"><code>transactions1-2</code></p></div><div class="card"><div class="num">03</div><h3><a href="https://github.com/Evangel90/Sorolearn/tree/main/exercises/03_stellar_assets">Assets</a></h3><p>Classic assets: codes and issuers, trustlines, the <code>CODE:ISSUER</code> form.</p><p class="muted"><code>assets1</code></p></div></div><h2>Soroban smart contracts</h2><div class="grid"><div class="card"><div class="num">04</div><h3><a href="https://github.com/Evangel90/Sorolearn/tree/main/exercises/04_functions">Functions</a></h3><p>Exported functions and the types allowed across the contract boundary.</p><p class="muted"><code>functions1-2</code></p></div><div class="card"><div class="num">05</div><h3><a href="https://github.com/Evangel90/Sorolearn/tree/main/exercises/05_types">Types</a></h3><p><code>Symbol</code>, <code>Vec</code>, <code>Map</code>, <code>Bytes</code>, <code>String</code>.</p><p class="muted"><code>symbols1, vecs1, maps1, bytes1</code></p></div><div class="card"><div class="num">06</div><h3><a href="https://github.com/Evangel90/Sorolearn/tree/main/exercises/06_custom_types">Custom types</a></h3><p><code>#[contracttype]</code> structs and enums.</p><p class="muted"><code>types1-2</code></p></div><div class="card"><div class="num">07</div><h3><a href="https://github.com/Evangel90/Sorolearn/tree/main/exercises/07_storage">Storage</a></h3><p>Instance, persistent and temporary storage, <code>DataKey</code>, TTL.</p><p class="muted"><code>storage1-3</code></p></div><div class="card"><div class="num">08</div><h3><a href="https://github.com/Evangel90/Sorolearn/tree/main/exercises/08_errors">Errors</a></h3><p><code>#[contracterror]</code>, <code>Result</code>, <code>panic_with_error!</code>, checked math.</p><p class="muted"><code>errors1-2</code></p></div><div class="card"><div class="num">09</div><h3><a href="https://github.com/Evangel90/Sorolearn/tree/main/exercises/09_auth">Auth</a></h3><p><code>require_auth</code>, the admin pattern, constructors.</p><p class="muted"><code>auth1-2</code></p></div><div class="card"><div class="num">10</div><h3><a href="https://github.com/Evangel90/Sorolearn/tree/main/exercises/10_events">Events</a></h3><p><code>#[contractevent]</code>, topics and data.</p><p class="muted"><code>events1</code></p></div><div class="card"><div class="num">11</div><h3><a href="https://github.com/Evangel90/Sorolearn/tree/main/exercises/11_tokens">Tokens</a></h3><p><code>TokenClient</code>, contracts holding funds, regulated classic assets via the Stellar Asset Contract.</p><p class="muted"><code>tokens1-2</code></p></div><div class="card"><div class="num">12</div><h3><a href="https://github.com/Evangel90/Sorolearn/tree/main/exercises/12_cross_contract">Cross-contract</a></h3><p>Calling other contracts.</p><p class="muted"><code>cross1</code></p></div><div class="card"><div class="num">13</div><h3><a href="https://github.com/Evangel90/Sorolearn/tree/main/exercises/13_time">Time</a></h3><p>Ledger timestamp vs sequence.</p><p class="muted"><code>time1</code></p></div><div class="card"><div class="num">★</div><h3><a href="https://github.com/Evangel90/Sorolearn/tree/main/exercises/quizzes">Quizzes</a></h3><p>A poll and a time-locked token vault: everything together.</p><p class="muted"><code>quiz1-2</code></p></div></div><h2>Security: review the AI</h2><div class="grid"><div class="card"><div class="num">14</div><h3><a href="https://github.com/Evangel90/Sorolearn/tree/main/exercises/14_security">Security</a></h3><p>Auth on the wrong address, re-callable initialize, negative amounts, expiring storage, trusting a caller's token.</p><p class="muted"><code>audit_auth, audit_init, audit_amount, audit_storage, audit_token</code></p></div></div><h2>On the network</h2><div class="grid"><div class="card"><div class="num">15</div><h3><a href="https://github.com/Evangel90/Sorolearn/tree/main/exercises/15_testnet">Testnet &amp; graduation</a></h3><p>Issue an asset, open a trustline, pay, use the SAC from Soroban, deploy your contract, take the on-chain exam.</p><p class="muted">lab + <code>sorolearn graduate</code></p></div></div>
+
+</main>
+<footer class="site-footer">
+  <div class="inner">
+    <span>Sorolearn: small exercises for Stellar &amp; Soroban. MIT licensed.</span>
+    <span><a href="https://github.com/Evangel90/Sorolearn">Source on GitHub</a> · Inspired by <a href="https://rustlings.rust-lang.org">Rustlings</a></span>
+  </div>
+</footer>
+</body>
+</html>

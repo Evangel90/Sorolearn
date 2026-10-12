@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Usage · Sorolearn</title>
+<meta name="description" content="How to use Sorolearn: watch mode, hints, commands and graduation.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="../"><img class="mark" src="../assets/favicon.svg" alt="" width="28" height="28">Sorolearn</a>
+    <nav class="site-nav" aria-label="Main"><a href="../setup/">Setup</a><a href="../usage/" aria-current="page">Usage</a><a href="../curriculum/">Curriculum</a><a href="../graduates/">Graduates</a><a href="https://github.com/Evangel90/Sorolearn">GitHub</a></nav>
+  </div>
+</header>
+<main>
+
+<div class="prose">
+<h1>Usage</h1>
+<p class="lede">Read, fix, save, repeat. Sorolearn takes care of compiling and testing.</p>
+
+<h2>Watch mode</h2>
+<pre><code>sorolearn</code></pre>
+<p>Sorolearn shows the current exercise, for example <code>exercises/07_storage/storage1.rs</code>. Open it in
+your editor, read the comments, and make the code compile and the tests pass. Every time you save, Sorolearn
+re-runs the tests. When the exercise passes, type <code>n</code> + Enter for the next one.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td><code>n</code></td><td>next exercise (once the current one passes)</td></tr>
+<tr><td><code>h</code></td><td>show a hint</td></tr>
+<tr><td><code>l</code></td><td>list all exercises and your progress</td></tr>
+<tr><td><code>r</code></td><td>re-run the current exercise</td></tr>
+<tr><td><code>q</code></td><td>quit (progress is saved)</td></tr>
+</tbody></table></div>
+
+<h2>Rules of the game</h2>
+<ul>
+  <li><strong>Don't edit the tests</strong> at the bottom of each file. They are the spec.</li>
+  <li>Each topic folder has a <code>README.md</code> with the background you need.</li>
+  <li>Reference solutions live in <code>solutions/</code>. Compare once you've passed, not before.</li>
+</ul>
+
+<h2>Three kinds of exercises</h2>
+<h3>Stellar lessons</h3>
+<p>Plain Rust against the real Stellar types: derive keys and addresses, apply reserve and multisig rules,
+build, hash and sign transactions, parse assets. Expected values (like a transaction hash) were checked
+against the Stellar CLI.</p>
+<h3>Soroban contracts</h3>
+<p>Small <code>#![no_std]</code> contracts tested against Soroban's simulated environment: no network needed.</p>
+<h3>Security: review the AI</h3>
+<p>Each contract looks fine and its <code>happy_path</code> tests pass. An <code>exploit_</code> test reproduces
+a real attack. Fix the contract so the attack fails.</p>
+
+<h2>All commands</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Command</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><code>sorolearn</code></td><td>watch mode</td></tr>
+<tr><td><code>sorolearn list</code></td><td>all exercises and your progress</td></tr>
+<tr><td><code>sorolearn run [name]</code></td><td>compile and test one exercise</td></tr>
+<tr><td><code>sorolearn hint [name]</code></td><td>show a hint</td></tr>
+<tr><td><code>sorolearn reset &lt;name&gt;</code></td><td>restore an exercise to its original state</td></tr>
+<tr><td><code>sorolearn verify</code></td><td>check every exercise, in order</td></tr>
+<tr><td><code>sorolearn setup</code></td><td>one-time download and pre-build (enables offline use)</td></tr>
+<tr><td><code>sorolearn build-wasm &lt;name&gt;</code></td><td>compile an exercise to a deployable <code>.wasm</code></td></tr>
+<tr><td><code>sorolearn graduate [identity]</code></td><td>deploy your quiz1 poll to testnet and take the on-chain exam</td></tr>
+</tbody></table></div>
+
+<h2>Graduating</h2>
+<p>When you finish, run <code>sorolearn graduate</code>. It creates a funded testnet account, builds your
+<code>quiz1</code> poll to WebAssembly, uploads it, and calls the Sorolearn registry contract. The registry deploys
+a fresh copy, examines it with cross-contract calls, and records you as a graduate. Every Stellar CLI command
+is printed as it runs. Your record appears on the <a href="../graduates/">graduates page</a>.</p>
+
+<h2>Contributing exercises</h2>
+<ol>
+  <li>Write the solution in <code>solutions/&lt;topic&gt;/&lt;name&gt;.rs</code>.</li>
+  <li>Copy it to <code>exercises/&lt;topic&gt;/&lt;name&gt;.rs</code> and break it in an instructive way.</li>
+  <li>Add an entry with a hint to <code>info.toml</code>.</li>
+  <li>Run <code>sorolearn dev check</code>: every solution must pass and every exercise must fail.</li>
+</ol>
+</div>
+
+</main>
+<footer class="site-footer">
+  <div class="inner">
+    <span>Sorolearn: small exercises for Stellar &amp; Soroban. MIT licensed.</span>
+    <span><a href="https://github.com/Evangel90/Sorolearn">Source on GitHub</a> · Inspired by <a href="https://rustlings.rust-lang.org">Rustlings</a></span>
+  </div>
+</footer>
+</body>
+</html>

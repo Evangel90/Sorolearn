@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Setup · Sorolearn</title>
+<meta name="description" content="Install Sorolearn locally or open it in GitHub Codespaces.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="../"><img class="mark" src="../assets/favicon.svg" alt="" width="28" height="28">Sorolearn</a>
+    <nav class="site-nav" aria-label="Main"><a href="../setup/" aria-current="page">Setup</a><a href="../usage/">Usage</a><a href="../curriculum/">Curriculum</a><a href="../graduates/">Graduates</a><a href="https://github.com/Evangel90/Sorolearn">GitHub</a></nav>
+  </div>
+</header>
+<main>
+
+<div class="prose">
+<h1>Setup</h1>
+<p class="lede">Two ways to run Sorolearn: in your browser with nothing to install, or locally, where it
+works fully offline after a one-time setup.</p>
+
+<h2>In the browser (GitHub Codespaces)</h2>
+<p>Click the button, wait for the codespace to open, then type <code>sorolearn</code> in the terminal.
+Rust, the <code>sorolearn</code> command, the Stellar CLI and a pre-compiled Soroban SDK are already installed.</p>
+<div class="buttons"><a class="btn primary" href="https://codespaces.new/Evangel90/Sorolearn">Open in Codespaces</a></div>
+<p class="muted">A free GitHub account includes a monthly Codespaces allowance; Sorolearn's repo is public, so it
+runs on yours.</p>
+
+<h2>Locally</h2>
+<h3>1. Install Rust</h3>
+<p>You need Rust 1.91 or newer. Install it with <a href="https://rustup.rs">rustup</a>, or update an existing
+install:</p>
+<pre><code>rustup update stable</code></pre>
+
+<h3>2. Get Sorolearn</h3>
+<pre><code>git clone https://github.com/Evangel90/Sorolearn.git sorolearn
+cd sorolearn
+cargo install --path .</code></pre>
+<p>This installs the <code>sorolearn</code> command. Run it from inside the <code>sorolearn</code> folder.
+(<code>cargo run --release</code> works too, without installing.)</p>
+
+<h3>3. One-time setup</h3>
+<pre><code>sorolearn setup</code></pre>
+<p>Downloads and pre-compiles the Soroban SDK (a minute or two). It runs automatically the first time if you
+skip it. Afterwards every build uses <code>cargo --offline</code> against a pinned lockfile, so Sorolearn works on a
+plane or behind a firewall.</p>
+
+<h3>4. Start</h3>
+<pre><code>sorolearn</code></pre>
+<p>Then open the exercise it shows in your editor. See <a href="../usage/">Usage</a>.</p>
+
+<h2>Editor</h2>
+<p>Any editor works. In VS Code, install <strong>rust-analyzer</strong>: the repo's settings link the generated
+exercise workspace, so you get completions and inline errors inside exercise files. The repo also ships a
+<em>Dev Container</em>, so VS Code with Docker gives you the same environment as Codespaces.</p>
+
+<h2>Optional: the Stellar CLI</h2>
+<p>Only needed for the final topic: the testnet lab and <code>sorolearn graduate</code>. It's pre-installed in Codespaces.</p>
+<pre><code>brew install stellar-cli              <span class="comment"># macOS</span>
+cargo install --locked stellar-cli    <span class="comment"># anywhere else</span>
+rustup target add wasm32v1-none</code></pre>
+
+<h2>Troubleshooting</h2>
+<ul>
+  <li><strong>"soroban-sdk needs Rust 1.91 or newer"</strong>: run <code>rustup update stable</code>.</li>
+  <li><strong>"Could not find info.toml"</strong>: run <code>sorolearn</code> from the repository folder.</li>
+  <li><strong>Build cache deleted?</strong> Sorolearn notices and re-runs setup (this one needs internet).</li>
+</ul>
+</div>
+
+</main>
+<footer class="site-footer">
+  <div class="inner">
+    <span>Sorolearn: small exercises for Stellar &amp; Soroban. MIT licensed.</span>
+    <span><a href="https://github.com/Evangel90/Sorolearn">Source on GitHub</a> · Inspired by <a href="https://rustlings.rust-lang.org">Rustlings</a></span>
+  </div>
+</footer>
+</body>
+</html>
