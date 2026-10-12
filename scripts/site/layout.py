@@ -63,6 +63,7 @@ def page(title, description, active, root, body, head_extra="", scripts=""):
     </div>
   </div>
 </footer>
+<script src="{root}assets/copy.js" defer></script>
 {scripts}</body>
 </html>
 """

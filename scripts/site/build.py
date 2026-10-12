@@ -197,8 +197,11 @@ home = f"""
 
 <section class="cta">
   <h2 class="gradient-text" style="font-size:clamp(36px,6vw,56px)">Learn Soroban by fixing it.</h2>
-  <p class="lede" style="margin:0 auto 32px">Clone it and run <code>sorolearn</code>, or open it in your browser. Your first contract is
+  <p class="lede" style="margin:0 auto 24px">Clone it and run <code>sorolearn</code>, or open it in your browser. Your first contract is
   one save away.</p>
+  <div class="install">
+<pre><code>git clone {REPO}.git && cd Sorolearn && cargo install --path . && sorolearn</code></pre>
+  </div>
   <div class="buttons">
     <a class="btn primary" href="setup/">Start learning <span class="arrow">→</span></a>
     <a class="btn" href="{REPO}">View on GitHub</a>
@@ -255,13 +258,16 @@ exercise workspace, so you get completions and inline errors inside exercise fil
 
 <h2>Optional: the Stellar CLI</h2>
 <p>Only needed for the final topic: the testnet lab and <code>sorolearn graduate</code>. It's pre-installed in Codespaces.</p>
-<pre><code>brew install stellar-cli              <span class="comment"># macOS</span>
-cargo install --locked stellar-cli    <span class="comment"># anywhere else</span>
-rustup target add wasm32v1-none</code></pre>
+<p>On macOS:</p>
+<pre><code>brew install stellar-cli</code></pre>
+<p>Anywhere else:</p>
+<pre><code>cargo install --locked stellar-cli</code></pre>
+<p>Then add the WebAssembly target:</p>
+<pre><code>rustup target add wasm32v1-none</code></pre>
 
 <h2>Troubleshooting</h2>
 <ul>
-  <li><strong>"soroban-sdk needs Rust 1.91 or newer"</strong>: run <code>rustup update stable</code>.</li>
+  <li><strong>"soroban-sdk needs Rust 1.91 or newer"</strong>: run <code class="cmd">rustup update stable</code>.</li>
   <li><strong>"Could not find info.toml"</strong>: run <code>sorolearn</code> from the repository folder.</li>
   <li><strong>Build cache deleted?</strong> Sorolearn notices and re-runs setup (this one needs internet).</li>
 </ul>
@@ -313,17 +319,17 @@ a real attack. Fix the contract so the attack fails.</p>
 
 <h2>All commands</h2>
 <div class="table-wrap"><table>
-<thead><tr><th>Command</th><th>What it does</th></tr></thead>
+<thead><tr><th>Command <span class="muted" style="text-transform:none;letter-spacing:0">(click to copy)</span></th><th>What it does</th></tr></thead>
 <tbody>
-<tr><td><code>sorolearn</code></td><td>watch mode</td></tr>
-<tr><td><code>sorolearn list</code></td><td>all exercises and your progress</td></tr>
-<tr><td><code>sorolearn run [name]</code></td><td>compile and test one exercise</td></tr>
-<tr><td><code>sorolearn hint [name]</code></td><td>show a hint</td></tr>
-<tr><td><code>sorolearn reset &lt;name&gt;</code></td><td>restore an exercise to its original state</td></tr>
-<tr><td><code>sorolearn verify</code></td><td>check every exercise, in order</td></tr>
-<tr><td><code>sorolearn setup</code></td><td>one-time download and pre-build (enables offline use)</td></tr>
-<tr><td><code>sorolearn build-wasm &lt;name&gt;</code></td><td>compile an exercise to a deployable <code>.wasm</code></td></tr>
-<tr><td><code>sorolearn graduate [identity]</code></td><td>deploy your quiz1 poll to testnet and take the on-chain exam</td></tr>
+<tr><td><code class="cmd">sorolearn</code></td><td>watch mode</td></tr>
+<tr><td><code class="cmd">sorolearn list</code></td><td>all exercises and your progress</td></tr>
+<tr><td><code class="cmd">sorolearn run [name]</code></td><td>compile and test one exercise</td></tr>
+<tr><td><code class="cmd">sorolearn hint [name]</code></td><td>show a hint</td></tr>
+<tr><td><code class="cmd">sorolearn reset &lt;name&gt;</code></td><td>restore an exercise to its original state</td></tr>
+<tr><td><code class="cmd">sorolearn verify</code></td><td>check every exercise, in order</td></tr>
+<tr><td><code class="cmd">sorolearn setup</code></td><td>one-time download and pre-build (enables offline use)</td></tr>
+<tr><td><code class="cmd">sorolearn build-wasm &lt;name&gt;</code></td><td>compile an exercise to a deployable <code>.wasm</code></td></tr>
+<tr><td><code class="cmd">sorolearn graduate [identity]</code></td><td>deploy your quiz1 poll to testnet and take the on-chain exam</td></tr>
 </tbody></table></div>
 
 <h2>Graduating</h2>

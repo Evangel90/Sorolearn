@@ -191,8 +191,11 @@
 
 <section class="cta">
   <h2 class="gradient-text" style="font-size:clamp(36px,6vw,56px)">Learn Soroban by fixing it.</h2>
-  <p class="lede" style="margin:0 auto 32px">Clone it and run <code>sorolearn</code>, or open it in your browser. Your first contract is
+  <p class="lede" style="margin:0 auto 24px">Clone it and run <code>sorolearn</code>, or open it in your browser. Your first contract is
   one save away.</p>
+  <div class="install">
+<pre><code>git clone https://github.com/Evangel90/Sorolearn.git && cd Sorolearn && cargo install --path . && sorolearn</code></pre>
+  </div>
   <div class="buttons">
     <a class="btn primary" href="setup/">Start learning <span class="arrow">→</span></a>
     <a class="btn" href="https://github.com/Evangel90/Sorolearn">View on GitHub</a>
@@ -225,6 +228,7 @@
     </div>
   </div>
 </footer>
+<script src="assets/copy.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/asciinema-player@3.17.0/dist/bundle/asciinema-player.min.js"></script>
 <script>
   AsciinemaPlayer.create("assets/demo.cast", document.getElementById("demo"), {

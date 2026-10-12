@@ -70,13 +70,16 @@ exercise workspace, so you get completions and inline errors inside exercise fil
 
 <h2>Optional: the Stellar CLI</h2>
 <p>Only needed for the final topic: the testnet lab and <code>sorolearn graduate</code>. It's pre-installed in Codespaces.</p>
-<pre><code>brew install stellar-cli              <span class="comment"># macOS</span>
-cargo install --locked stellar-cli    <span class="comment"># anywhere else</span>
-rustup target add wasm32v1-none</code></pre>
+<p>On macOS:</p>
+<pre><code>brew install stellar-cli</code></pre>
+<p>Anywhere else:</p>
+<pre><code>cargo install --locked stellar-cli</code></pre>
+<p>Then add the WebAssembly target:</p>
+<pre><code>rustup target add wasm32v1-none</code></pre>
 
 <h2>Troubleshooting</h2>
 <ul>
-  <li><strong>"soroban-sdk needs Rust 1.91 or newer"</strong>: run <code>rustup update stable</code>.</li>
+  <li><strong>"soroban-sdk needs Rust 1.91 or newer"</strong>: run <code class="cmd">rustup update stable</code>.</li>
   <li><strong>"Could not find info.toml"</strong>: run <code>sorolearn</code> from the repository folder.</li>
   <li><strong>Build cache deleted?</strong> Sorolearn notices and re-runs setup (this one needs internet).</li>
 </ul>
@@ -108,5 +111,6 @@ rustup target add wasm32v1-none</code></pre>
     </div>
   </div>
 </footer>
+<script src="../assets/copy.js" defer></script>
 </body>
 </html>

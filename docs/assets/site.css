@@ -287,3 +287,27 @@ td { color: var(--text-2); }
 @media (max-width: 900px) {
   .pillars, .checks { grid-template-columns: 1fr; }
 }
+
+/* ------------------------------------------------------------ copying */
+.code-block { position: relative; margin: 0 0 20px; }
+.code-block pre { margin: 0; padding-right: 92px; }
+.copy-btn {
+  position: absolute; top: 9px; right: 9px; display: inline-flex; align-items: center; gap: 6px;
+  height: 28px; padding: 0 10px; border-radius: 7px; border: 1px solid var(--border-strong);
+  background: rgba(20, 21, 22, 0.9); color: var(--muted); font: 500 12px var(--sans); cursor: pointer;
+  opacity: 0; transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+}
+.code-block:hover .copy-btn, .copy-btn:focus-visible, .copy-btn.copied { opacity: 1; }
+.copy-btn:hover { color: var(--text); border-color: rgba(255, 255, 255, 0.25); }
+.copy-btn.copied { color: var(--ok); border-color: rgba(76, 195, 138, 0.4); }
+.copy-btn .icon { display: inline-flex; }
+@media (hover: none) { .copy-btn { opacity: 1; } }
+code.cmd { cursor: copy; position: relative; transition: border-color 0.15s, color 0.15s; }
+code.cmd:hover, code.cmd:focus-visible { border-color: var(--accent); color: var(--text); outline: none; }
+code.cmd.copied { border-color: rgba(76, 195, 138, 0.5); color: var(--ok); }
+code.cmd.copied::after {
+  content: "Copied"; position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translateX(-50%);
+  padding: 2px 8px; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border-strong);
+  color: var(--ok); font: 500 11px var(--sans); white-space: nowrap; pointer-events: none;
+}
+.install { max-width: 640px; margin: 0 auto 28px; text-align: left; }
