@@ -1,5 +1,6 @@
 mod graduate;
 mod info;
+mod keys;
 mod runner;
 mod state;
 mod ui;

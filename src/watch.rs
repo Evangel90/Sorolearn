@@ -1,14 +1,16 @@
 //! Watch mode: re-run the current exercise whenever its file is saved.
 //!
-//! File changes are detected by polling the modification time, and keyboard
-//! commands are read line-by-line from stdin on a background thread. This keeps
-//! the tool dependency-free and portable.
+//! File changes are detected by polling the modification time. Keyboard
+//! commands are read on a background thread: single keypresses in a terminal
+//! (see `keys`), or whole lines when stdin is piped or on platforms without
+//! single-key support.
 
 use crate::info::Info;
+use crate::keys::{KeyDecoder, KeyMode};
 use crate::runner::{self, Source};
 use crate::state::State;
 use crate::ui;
-use std::io::BufRead;
+use std::io::{BufRead, Read};
 use std::sync::mpsc;
 use std::time::{Duration, SystemTime};
 
@@ -18,12 +20,29 @@ enum Event {
 }
 
 pub fn watch(info: &Info, state: &mut State) -> bool {
+    // Restores the terminal when watch mode ends (including on `q` / Ctrl-C).
+    let key_mode = KeyMode::enable();
+    let single_keys = key_mode.is_some();
+
     let (tx, rx) = mpsc::channel();
     std::thread::spawn(move || {
-        for line in std::io::stdin().lock().lines() {
-            let Ok(line) = line else { break };
-            if tx.send(Event::Command(line.trim().to_lowercase())).is_err() {
-                return;
+        if single_keys {
+            let mut decoder = KeyDecoder::default();
+            let mut byte = [0u8; 1];
+            let mut stdin = std::io::stdin().lock();
+            while let Ok(1) = stdin.read(&mut byte) {
+                if let Some(cmd) = decoder.feed(byte[0]) {
+                    if tx.send(Event::Command(cmd)).is_err() {
+                        return;
+                    }
+                }
+            }
+        } else {
+            for line in std::io::stdin().lock().lines() {
+                let Ok(line) = line else { break };
+                if tx.send(Event::Command(line.trim().to_lowercase())).is_err() {
+                    return;
+                }
             }
         }
         let _ = tx.send(Event::StdinClosed);
@@ -32,14 +51,15 @@ pub fn watch(info: &Info, state: &mut State) -> bool {
     if state.done.is_empty() {
         ui::clear_screen();
         println!("{}\n", info.welcome_message.trim());
-        println!("{}", ui::dim("Press Enter to start..."));
+        let start = if single_keys { "Press any key to start..." } else { "Press Enter to start..." };
+        println!("{}", ui::dim(start));
         match rx.recv() {
             Ok(Event::Command(_)) => {}
             _ => return true,
         }
     }
 
-    let mut passed = check(info, state);
+    let mut passed = check(info, state, single_keys);
     let mut last_mtime = mtime(info, state);
 
     loop {
@@ -49,20 +69,20 @@ pub fn watch(info: &Info, state: &mut State) -> bool {
                 "h" | "hint" => {
                     println!();
                     crate::print_hint(&info.exercises[state.current]);
-                    prompt(passed);
+                    prompt(passed, single_keys);
                 }
                 "l" | "list" => {
                     println!();
                     crate::list(info, state);
-                    prompt(passed);
+                    prompt(passed, single_keys);
                 }
-                "r" | "run" => passed = check(info, state),
+                "r" | "run" => passed = check(info, state, single_keys),
                 "n" | "next" if passed => match state.next_pending(info, state.current) {
                     Some(next) => {
                         state.current = next;
                         state.save(info);
                         last_mtime = mtime(info, state);
-                        passed = check(info, state);
+                        passed = check(info, state, single_keys);
                     }
                     None => {
                         ui::clear_screen();
@@ -72,12 +92,14 @@ pub fn watch(info: &Info, state: &mut State) -> bool {
                 },
                 "n" | "next" => {
                     println!("{}", ui::yellow("Solve this exercise first (or press h for a hint)."));
-                    prompt(passed);
+                    prompt(passed, single_keys);
                 }
-                "" => prompt(passed),
+                "" => prompt(passed, single_keys),
+                // A stray key shouldn't print anything; a mistyped line deserves feedback.
+                _ if single_keys => {}
                 other => {
                     println!("{}", ui::yellow(&format!("Unknown command `{other}`.")));
-                    prompt(passed);
+                    prompt(passed, single_keys);
                 }
             },
             Ok(Event::StdinClosed) => return true,
@@ -85,7 +107,7 @@ pub fn watch(info: &Info, state: &mut State) -> bool {
                 let now = mtime(info, state);
                 if now != last_mtime {
                     last_mtime = now;
-                    passed = check(info, state);
+                    passed = check(info, state, single_keys);
                 }
             }
             Err(mpsc::RecvTimeoutError::Disconnected) => return true,
@@ -100,7 +122,7 @@ fn mtime(info: &Info, state: &State) -> Option<SystemTime> {
 }
 
 /// Run the current exercise, render the result and return whether it passed.
-fn check(info: &Info, state: &mut State) -> bool {
+fn check(info: &Info, state: &mut State, single_keys: bool) -> bool {
     let ex = &info.exercises[state.current];
     ui::clear_screen();
     println!("{} {}", ui::bold("Checking"), ui::cyan(&ex.path().display().to_string()));
@@ -125,11 +147,11 @@ fn check(info: &Info, state: &mut State) -> bool {
     println!("{}", ui::progress_bar(state.done.len(), info.exercises.len()));
     println!("Current exercise: {}", ui::cyan(&ex.path().display().to_string()));
     println!("Topic notes:      {}", ex.readme_path().display());
-    prompt(outcome.success);
+    prompt(outcome.success, single_keys);
     outcome.success
 }
 
-fn prompt(passed: bool) {
+fn prompt(passed: bool, single_keys: bool) {
     let next = if passed { format!("{}:next  ", ui::bold("n")) } else { String::new() };
     println!(
         "\n{next}{}:hint  {}:list  {}:rerun  {}:quit   {}",
@@ -137,6 +159,6 @@ fn prompt(passed: bool) {
         ui::bold("l"),
         ui::bold("r"),
         ui::bold("q"),
-        ui::dim("(type a letter + Enter)")
+        ui::dim(if single_keys { "(press a key)" } else { "(type a letter + Enter)" })
     );
 }
