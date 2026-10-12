@@ -1,4 +1,15 @@
 """Shared header and footer for the Sorolearn website pages."""
+import hashlib
+import os
+
+ASSETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "docs", "assets")
+
+
+def asset_version(name):
+    """Content hash for cache-busting: browsers refetch an asset whenever it changes."""
+    with open(os.path.join(ASSETS, name), "rb") as f:
+        return hashlib.sha256(f.read()).hexdigest()[:10]
+
 REPO = "https://github.com/Evangel90/Sorolearn"
 CODESPACES = "https://codespaces.new/Evangel90/Sorolearn"
 
@@ -22,7 +33,7 @@ def page(title, description, active, root, body, head_extra="", scripts=""):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{root}assets/site.css">
+<link rel="stylesheet" href="{root}assets/site.css?v={asset_version("site.css")}">
 {head_extra}</head>
 <body>
 <header class="site-header">
@@ -42,7 +53,7 @@ def page(title, description, active, root, body, head_extra="", scripts=""):
   <div class="inner">
     <div>
       <a class="brand" href="{root}"><img class="mark" src="{root}assets/favicon.svg" alt="" width="22" height="22">Sorolearn</a>
-      <p>Small exercises for Stellar and Soroban.<br>MIT licensed. Inspired by <a href="https://rustlings.rust-lang.org">Rustlings</a>.</p>
+      <p>Small exercises for Stellar and Soroban.<br><a href="{REPO}/blob/main/LICENSE" style="display:inline;margin:0">MIT licensed</a>. Inspired by <a href="https://rustlings.rust-lang.org" style="display:inline;margin:0">Rustlings</a>.</p>
     </div>
     <div>
       <h4>Learn</h4>
@@ -58,12 +69,13 @@ def page(title, description, active, root, body, head_extra="", scripts=""):
     <div>
       <h4>Project</h4>
       <a href="{REPO}">GitHub</a>
+      <a href="{REPO}/blob/main/CONTRIBUTING.md">Contributing</a>
       <a href="{CODESPACES}">Open in Codespaces</a>
       <a href="https://developers.stellar.org/docs/build/smart-contracts/overview">Soroban docs</a>
     </div>
   </div>
 </footer>
-<script src="{root}assets/copy.js" defer></script>
+<script src="{root}assets/copy.js?v={asset_version("copy.js")}" defer></script>
 {scripts}</body>
 </html>
 """

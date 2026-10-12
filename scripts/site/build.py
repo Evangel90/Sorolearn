@@ -338,6 +338,7 @@ a fresh copy, examines it with cross-contract calls, and records you as a gradua
 is printed as it runs. Your record appears on the <a href="../graduates/">graduates page</a>.</p>
 
 <h2>Contributing exercises</h2>
+<p>The full guide is in <a href="{REPO}/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>. In short:</p>
 <ol>
   <li>Write the solution in <code>solutions/&lt;topic&gt;/&lt;name&gt;.rs</code>.</li>
   <li>Copy it to <code>exercises/&lt;topic&gt;/&lt;name&gt;.rs</code> and break it in an instructive way.</li>
