@@ -9,7 +9,7 @@
 
   function commandText(el) {
     const clone = el.cloneNode(true);
-    clone.querySelectorAll(".comment").forEach((c) => c.remove());
+    clone.querySelectorAll(".comment, .code-buttons").forEach((c) => c.remove());
     return clone.textContent
       .split("\n")
       .map((line) => line.replace(/^\s*\$\s+/, "").replace(/\s+$/, ""))
@@ -51,31 +51,33 @@
     }, 1600);
   }
 
+  // Like mdBook (the Rust Book): the button lives inside the <pre> itself,
+  // top-right, and appears when the block is hovered.
   document.querySelectorAll("main pre").forEach((pre) => {
     // The asciinema player renders its terminal as a <pre>; it isn't a command.
     if (pre.closest(".player, .window")) return;
-    const wrap = document.createElement("div");
-    wrap.className = "code-block";
-    pre.parentNode.insertBefore(wrap, pre);
-    wrap.appendChild(pre);
 
+    const buttons = document.createElement("div");
+    buttons.className = "code-buttons";
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "copy-btn";
-    button.setAttribute("aria-label", "Copy command");
-    button.title = "Copy";
-    button.innerHTML = COPY_ICON;
-    wrap.appendChild(button);
+    button.className = "clip-button";
+    button.title = "Copy to clipboard";
+    button.setAttribute("aria-label", "Copy to clipboard");
+    button.innerHTML = `${COPY_ICON}<span class="tooltiptext" role="status"></span>`;
+    buttons.appendChild(button);
+    pre.insertBefore(buttons, pre.firstChild);
 
+    const tooltip = button.querySelector(".tooltiptext");
     button.addEventListener("click", async () => {
-      if (await writeClipboard(commandText(pre.querySelector("code") || pre))) {
-        button.innerHTML = CHECK_ICON;
-        button.setAttribute("aria-label", "Copied");
-        flash(button, null, () => {
-          button.innerHTML = COPY_ICON;
-          button.setAttribute("aria-label", "Copy command");
-        });
-      }
+      const ok = await writeClipboard(commandText(pre.querySelector("code") || pre));
+      tooltip.textContent = ok ? "Copied!" : "Copy failed";
+      button.classList.toggle("copied", ok);
+      button.firstElementChild.outerHTML = ok ? CHECK_ICON : COPY_ICON;
+      flash(button, null, () => {
+        tooltip.textContent = "";
+        button.firstElementChild.outerHTML = COPY_ICON;
+      });
     });
   });
 

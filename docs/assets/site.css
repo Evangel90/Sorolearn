@@ -289,21 +289,25 @@ td { color: var(--text-2); }
 }
 
 /* ------------------------------------------------------------ copying */
-.code-block { position: relative; margin: 0 0 20px; }
-.code-block pre { margin: 0; padding-right: 56px; }
-/* Icon-only button, vertically aligned with the first line of the command:
-   pre top padding (16px) + half a line (23px) - half the button (28px). */
-.copy-btn {
-  position: absolute; top: 13.5px; right: 12px; display: grid; place-items: center;
-  width: 28px; height: 28px; padding: 0; border-radius: 7px; border: 1px solid transparent;
-  background: transparent; color: var(--faint); cursor: pointer;
-  transition: color 0.15s, background 0.15s, border-color 0.15s;
+/* Copy button inside the code block, as in mdBook (the Rust Book). */
+pre { position: relative; padding-right: 52px; }
+pre > .code-buttons {
+  position: absolute; top: 13.5px; right: 10px; z-index: 1;
+  visibility: hidden; opacity: 0; transition: visibility 0.1s, opacity 0.1s;
 }
-.copy-btn:hover, .copy-btn:focus-visible { color: var(--text); background: rgba(255, 255, 255, 0.06); border-color: var(--border-strong); outline: none; }
-.copy-btn.copied { color: var(--ok); }
-.copy-btn.copied::after {
-  content: "Copied"; position: absolute; right: calc(100% + 8px); top: 50%; transform: translateY(-50%);
-  padding: 2px 8px; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border-strong);
+pre:hover > .buttons, pre > .code-buttons:focus-within { visibility: visible; opacity: 1; }
+@media (hover: none) { pre > .code-buttons { visibility: visible; opacity: 1; } }
+pre > .code-buttons .clip-button {
+  position: relative; display: grid; place-items: center; width: 28px; height: 28px; padding: 0;
+  border: 1px solid var(--border-strong); border-radius: 6px; background: var(--surface-2);
+  color: var(--muted); cursor: pointer; transition: color 0.1s, border-color 0.1s;
+}
+pre > .code-buttons .clip-button:hover, pre > .code-buttons .clip-button:focus-visible { color: var(--text); border-color: rgba(255, 255, 255, 0.28); outline: none; }
+pre > .code-buttons .clip-button.copied { color: var(--ok); border-color: rgba(76, 195, 138, 0.45); }
+pre > .code-buttons .tooltiptext:empty { display: none; }
+pre > .code-buttons .tooltiptext {
+  position: absolute; right: calc(100% + 8px); top: 50%; transform: translateY(-50%);
+  padding: 3px 8px; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border-strong);
   color: var(--ok); font: 500 11px var(--sans); white-space: nowrap; pointer-events: none;
 }
 code.cmd { cursor: copy; position: relative; transition: border-color 0.15s, color 0.15s; }

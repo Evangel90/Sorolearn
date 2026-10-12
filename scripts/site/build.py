@@ -34,7 +34,7 @@ PLAYER_JS = """<script src="https://cdn.jsdelivr.net/npm/asciinema-player@3.17.0
 home = f"""
 <section class="hero">
   <a class="badge" href="curriculum/"><span class="dot"></span>Built for Stellar <span class="sep">·</span> soroban-sdk 29 <span class="sep">·</span> Protocol 29 <span class="arrow">→</span></a>
-  <h1 class="display"><span class="gradient-text">When AI fails,</span><br><span class="second-line">can you fix it?</span></h1>
+  <h1 class="display"><span class="gradient-text">When AI fails,</span><br><span class="second-line">Can you fix it?</span></h1>
   <p class="sub">AI will write most Soroban code. Sorolearn gives beginners the foundation to catch its mistakes:
   35 hands-on exercises, from your first contract to an exam graded on Stellar testnet.</p>
   <div class="buttons">
@@ -207,7 +207,7 @@ home = f"""
   </div>
 </section>
 """
-write("index.html", page("Sorolearn", "When AI fails, can you fix it? AI will write most Soroban code. Sorolearn gives beginners the foundation to catch its mistakes: 35 hands-on exercises, from your first contract to an exam graded on Stellar testnet.",
+write("index.html", page("Sorolearn", "When AI fails, Can you fix it? AI will write most Soroban code. Sorolearn gives beginners the foundation to catch its mistakes: 35 hands-on exercises, from your first contract to an exam graded on Stellar testnet.",
                          None, "", home, PLAYER_HEAD, PLAYER_JS))
 
 # ----------------------------------------------------------------- setup
@@ -404,3 +404,18 @@ has a README with background reading and links to the Stellar docs.</p>
 """
 write("curriculum/index.html", page("Curriculum", "Every Sorolearn topic, from Stellar accounts to an on-chain exam.", "Curriculum", "../", curriculum))
 
+
+
+# ------------------------------------------- graduates (hand-written page)
+# Keep its asset links on the current content hashes too.
+import re
+from layout import asset_version
+
+grad = os.path.join(DOCS, "graduates", "index.html")
+with open(grad) as f:
+    html = f.read()
+html = re.sub(r'(\.\./assets/site\.css)(\?v=[0-9a-f]+)?', rf'\1?v={asset_version("site.css")}', html)
+html = re.sub(r'(\.\./assets/copy\.js)(\?v=[0-9a-f]+)?', rf'\1?v={asset_version("copy.js")}', html)
+with open(grad, "w") as f:
+    f.write(html)
+print("updated graduates/index.html asset versions")
