@@ -19,8 +19,11 @@ pub fn dim(s: &str) -> String {
     format!("\x1b[2m{s}\x1b[0m")
 }
 
+/// Clear the screen *and* the scrollback, so output from a previous exercise
+/// can't be scrolled back to and mistaken for the current one.
 pub fn clear_screen() {
-    print!("\x1b[2J\x1b[H");
+    print!("\x1b[H\x1b[2J\x1b[3J");
+    let _ = std::io::Write::flush(&mut std::io::stdout());
 }
 
 pub fn progress_bar(done: usize, total: usize) -> String {
