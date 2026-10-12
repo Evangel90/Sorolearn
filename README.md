@@ -11,15 +11,7 @@ where a registry contract examines it and records you as a graduate.
 
 **🎓 Graduates (live from testnet):** https://evangel90.github.io/Sorolearn/
 
-```
-✓ Exercise storage1 passed!
-
-Progress: [##############--------------------------] 11/28
-Current exercise: exercises/04_storage/storage2.rs
-Topic notes:      exercises/04_storage/README.md
-
-n:next  h:hint  l:list  r:rerun  q:quit
-```
+![Sorolearn demo: an AI-written contract fails its exploit test, a one-line fix, and it passes](docs/demo.gif)
 
 ## Two ways to run it
 
