@@ -5,7 +5,8 @@
 Small, hands-on exercises for [Stellar](https://stellar.org) and its
 [Soroban](https://developers.stellar.org/docs/build/smart-contracts/overview) smart contracts, inspired by [Rustlings](https://github.com/rust-lang/rustlings). Every exercise
 is a tiny piece of broken code with tests: fix it, save, and Sorolearn tells you instantly whether you got it.
-You start with the network itself (accounts, keys, transactions, signatures, assets), then write contracts.
+You start by writing contracts, then learn the Stellar network underneath them (accounts, keys,
+transactions, signatures, assets), and finish by deploying your own contracts to Stellar testnet.
 It ends with a **security track** where you review plausible, AI-style contracts with planted vulnerabilities
 and make the exploit tests fail, and an optional **on-chain graduation**: deploy your contract to Stellar testnet,
 where a registry contract examines it and records you as a graduate.
@@ -51,7 +52,7 @@ Sorolearn works on a plane, behind a firewall, or at a hackathon with flaky Wi-F
 
 ## How it works
 
-1. Sorolearn shows the current exercise, e.g. `exercises/07_storage/storage1.rs`.
+1. Sorolearn shows the current exercise, e.g. `exercises/04_storage/storage1.rs`.
 2. Open it in your editor. Read the comments, make it compile and the tests pass.
 3. Save. Sorolearn re-runs the tests automatically.
 4. When it passes, type `n` + Enter to move on.
@@ -78,26 +79,28 @@ Each topic folder has a `README.md` with the background you need, plus links to 
 | # | Topic | Exercises | You'll learn |
 |---|---|---|---|
 | 00 | Intro | intro1-2 | `#[contract]`, `#[contractimpl]`, `Env`, test clients |
-| 01 | **Stellar: accounts** | accounts1-3 | lumens & stroops, reserves, ed25519 keys, StrKeys (`G…`/`S…`/`C…`/`M…`), multisig thresholds |
-| 02 | **Stellar: transactions** | transactions1-2 | operations, sequence numbers, fees, memos, XDR, network-specific hashing, signing |
-| 03 | **Stellar: assets** | assets1 | classic assets, codes & issuers, trustlines, the `CODE:ISSUER` text form |
-| 04 | Functions | functions1-2 | exported functions, allowed argument types |
-| 05 | Types | symbols1, vecs1, maps1, bytes1 | `Symbol`, `Vec`, `Map`, `Bytes`, `String` |
-| 06 | Custom types | types1-2 | `#[contracttype]` structs and enums |
-| 07 | Storage | storage1-3 | instance / persistent / temporary storage, `DataKey`, TTL |
-| 08 | Errors | errors1-2 | `#[contracterror]`, `Result`, `panic_with_error!`, checked math |
-| 09 | Auth | auth1-2 | `require_auth`, admin pattern, `__constructor` |
-| 10 | Events | events1 | `#[contractevent]`, topics vs data |
-| 11 | Tokens | tokens1-2 | `TokenClient`, contracts holding funds, regulated classic assets (AUTH_REQUIRED) via the SAC |
-| 12 | Cross-contract | cross1 | calling other contracts |
-| 13 | Time | time1 | ledger timestamp vs sequence |
+| 01 | Functions | functions1-2 | exported functions, allowed argument types |
+| 02 | Types | symbols1, vecs1, maps1, bytes1 | `Symbol`, `Vec`, `Map`, `Bytes`, `String` |
+| 03 | Custom types | types1-2 | `#[contracttype]` structs and enums |
+| 04 | Storage | storage1-3 | instance / persistent / temporary storage, `DataKey`, TTL |
+| 05 | Errors | errors1-2 | `#[contracterror]`, `Result`, `panic_with_error!`, checked math |
+| 06 | Auth | auth1-2 | `require_auth`, admin pattern, `__constructor` |
+| 07 | Events | events1 | `#[contractevent]`, topics vs data |
+| 08 | Tokens | tokens1 | `TokenClient`, Stellar Asset Contract, contracts holding funds |
+| 09 | Cross-contract | cross1 | calling other contracts |
+| 10 | Time | time1 | ledger timestamp vs sequence |
 | ⭐ | Quizzes | quiz1 (poll), quiz2 (time-locked vault) | putting it all together |
+| 11 | **Stellar: accounts** | accounts1-3 | lumens & stroops, reserves, ed25519 keys, StrKeys (`G…`/`S…`/`C…`/`M…`), multisig thresholds |
+| 12 | **Stellar: transactions** | transactions1-2 | operations, sequence numbers, fees, memos, XDR, network-specific hashing, signing |
+| 13 | **Stellar: assets** | assets1-2 | classic assets, codes & issuers, trustlines, regulated assets (AUTH_REQUIRED) through the SAC |
 | 14 | **Security: review the AI** | audit_auth, audit_init, audit_amount, audit_storage, audit_token | spotting and fixing the bugs AI-generated contracts actually ship with |
-| 15 | **Testnet & graduation** | `sorolearn graduate` + a classic Stellar lab | issue an asset, trustlines, payments, the SAC, Wasm deploys, an on-chain exam |
+| 15 | **Deploy to testnet** | 4 labs + `sorolearn graduate` | deploy your own contracts, call them from real accounts, watch events, issue an asset and hold it in your contract, then the on-chain exam |
 
-The Stellar lessons (`01`-`03`) are plain Rust against the real Stellar types (`soroban_sdk::xdr`,
-`stellar-strkey`, `ed25519-dalek`). Their expected values, such as a derived address and a
-transaction hash, were checked against the Stellar CLI.
+Soroban comes first because that's what you're here to build. The Stellar lessons (`11`-`13`) then
+explain the network underneath your contracts. They are plain Rust against the real Stellar types
+(`soroban_sdk::xdr`, `stellar-strkey`, `ed25519-dalek`), and their expected values, such as a
+derived address and a transaction hash, were checked against the Stellar CLI. Topic `15` puts it
+all on the real network: every lab command in it was run on testnet.
 
 ### On-chain graduation
 
