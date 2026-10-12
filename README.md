@@ -10,7 +10,7 @@ It ends with a **security track** where you review plausible, AI-style contracts
 and make the exploit tests fail, and an optional **on-chain graduation**: deploy your contract to Stellar testnet,
 where a registry contract examines it and records you as a graduate.
 
-**🎓 Graduates (live from testnet):** https://evangel90.github.io/Sorolearn/
+**🌐 Website:** https://evangel90.github.io/Sorolearn/ · **🎓 Graduates (live from testnet):** https://evangel90.github.io/Sorolearn/graduates/
 
 ![Sorolearn demo: an AI-written contract fails its exploit test, a one-line fix, and it passes](docs/demo.gif)
 
@@ -106,7 +106,7 @@ to WebAssembly, uploads it to **Stellar testnet** and calls the **Sorolearn regi
 (`CD23Z2JCHQHLJOXWAWOV4NFMAL3N5YRDCGLBGHLKD62X5QUCHDYPFWYY`). The registry deploys a fresh copy of your code,
 **examines it with cross-contract calls** (votes, tries to double-vote, checks the tally), and only then records
 you and emits a `Graduated` event. Anyone can verify a graduate on-chain or on the
-[graduates page](https://evangel90.github.io/Sorolearn/). The command prints every Stellar CLI step it runs;
+[graduates page](https://evangel90.github.io/Sorolearn/graduates/). The command prints every Stellar CLI step it runs;
 `exercises/15_testnet/README.md` walks through doing them by hand. The registry's source and tests are in
 `registry/`.
 
@@ -136,7 +136,7 @@ solutions/<topic>/   reference solutions
 src/                 the sorolearn CLI
 exercises.lock       pinned dependency versions for the exercise crates
 registry/            the on-chain graduation registry contract (+ tests)
-docs/                the graduates page (GitHub Pages, reads testnet directly)
+docs/                the website (GitHub Pages); docs/graduates/ reads testnet directly
 .devcontainer/       Codespaces / Dev Containers setup
 .sorolearn/          generated Cargo workspace, build cache and progress (git-ignored)
 ```
