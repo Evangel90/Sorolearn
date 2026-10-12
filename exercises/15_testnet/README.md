@@ -126,7 +126,7 @@ When you call `graduate`, the registry:
 3. if it passes, records your address as a graduate and emits a `Graduated` event.
 
 Completion is checked on-chain by a contract, not self-reported. Graduates appear on the
-[graduates page](https://evangel90.github.io/Sorolearn/graduates/).
+[graduates page](https://sorolearn-app.vercel.app/graduates/).
 
 ### The quick way
 

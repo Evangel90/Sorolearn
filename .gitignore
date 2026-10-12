@@ -3,3 +3,5 @@
 /registry/target
 /registry/test_snapshots
 __pycache__/
+.vercel
+.env*
