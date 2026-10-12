@@ -1,6 +1,6 @@
 # Sorolearn 🦀✨
 
-**AI can write the code. Can you fix it when it fails?**
+**AI writes it. Can you fix it?**
 
 Most Soroban code will be written with AI. Sorolearn gives beginners the foundation to understand it,
 review it and catch its mistakes, by fixing small, broken contracts until the tests pass.

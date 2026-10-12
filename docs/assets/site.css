@@ -120,7 +120,7 @@ td { color: var(--text-2); }
 }
 .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 10px var(--ok); }
 .badge .sep { color: var(--faint); }
-.display { font-size: clamp(40px, 7vw, 76px); line-height: 1.04; letter-spacing: -0.045em; margin: 0 auto 24px; max-width: 18ch; font-weight: 600; }
+.display { font-size: clamp(48px, 9vw, 92px); line-height: 1.0; letter-spacing: -0.045em; margin: 0 auto 24px; max-width: 14ch; font-weight: 600; }
 .display .second-line { color: var(--muted); }
 .hero .sub { color: var(--muted); font-size: clamp(17px, 2vw, 20px); line-height: 1.55; max-width: 620px; margin: 0 auto 36px; }
 .hero .buttons { justify-content: center; }
