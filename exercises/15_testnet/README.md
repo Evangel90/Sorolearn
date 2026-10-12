@@ -1,7 +1,7 @@
 # Graduation: Stellar testnet
 
-Everything so far ran in Soroban's simulated environment. Now put your code on a real network
-and earn an **on-chain graduation record**.
+Everything so far ran offline. Now use the real network: issue an asset with classic Stellar
+operations, then deploy your contract and earn an **on-chain graduation record**.
 
 The Sorolearn **registry** contract lives on testnet at:
 
@@ -74,6 +74,35 @@ stellar contract invoke --id CD23Z2JCHQHLJOXWAWOV4NFMAL3N5YRDCGLBGHLKD62X5QUCHDY
   --source-account me --network testnet \
   -- graduate --learner me --wasm_hash $HASH
 ```
+
+## Lab: classic Stellar on testnet
+
+Put the Stellar lessons (`01`-`03`) into practice. Issue your own asset, hold it, then use the
+same asset from Soroban:
+
+```bash
+# Two funded accounts: an issuer and a holder
+stellar keys generate issuer --network testnet --fund
+stellar keys generate holder --network testnet --fund
+ISSUER=$(stellar keys address issuer)
+
+# The holder opens a trustline to SORO issued by ISSUER
+stellar tx new change-trust --source-account holder --line "SORO:$ISSUER" --network testnet
+
+# The issuer pays 100 SORO (amounts are in stroops: 100 × 10,000,000)
+stellar tx new payment --source-account issuer --destination holder \
+  --asset "SORO:$ISSUER" --amount 1000000000 --network testnet
+
+# Deploy the asset's Stellar Asset Contract and read the same balance from Soroban
+stellar contract asset deploy --asset "SORO:$ISSUER" --source-account issuer \
+  --network testnet --alias soro
+stellar contract invoke --id soro --source-account holder --network testnet \
+  -- balance --id holder
+# => "1000000000"
+```
+
+Look the accounts up on [stellar.expert](https://stellar.expert/explorer/testnet) to see the
+trustline, the payment and the contract.
 
 ## Exam error codes
 
