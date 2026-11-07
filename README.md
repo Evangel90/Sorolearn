@@ -50,7 +50,7 @@ sorolearn                  # start learning, works offline from here on
 (`cargo run --release` works too, without installing anything.)
 
 After `setup`, every build runs with `cargo --offline` against a committed lockfile (`exercises.lock`), so
-Sorolearn works on a plane, behind a firewall, or at a hackathon with flaky Wi-Fi. If you skip
+Sorolearn works on a plane, behind a firewall, or anywhere with unreliable Wi-Fi. If you skip
 `setup`, it runs automatically the first time you start Sorolearn.
 
 ## How it works
